@@ -6,15 +6,16 @@
   <style type="text/css">
 
   #map-container{
+    float: left;
     width: 600px;
-    height: 380px;
+    height: 450px;
   }
   #map {
     height: 380px;
     overflow: visible;
   }
-  section {
-    //width: 600px;
+  #controls {
+    margin-left: 600px;
     height: 50px;
     margin: auto;
     padding: 10px;
@@ -92,19 +93,21 @@
   </style>
 </head>
 <body>
-  <div id="map-container">
-    <svg id="map"></svg>
-    <section class="controls">
-      <div id="play">Play</div>
-      <div id="slider"></div>
-    </section>
-  </div>
-  <div id="options">
-    Selecciona la variable
-    <form id="">
-      <input type="radio" name="cartogram-value" value="cantidad" checked>Cantidad de desaparecidos<br>
-      <input type="radio" name="cartogram-value" value="tasa">Tasa de desaparecidos
-    </form>
+  <div id="wrapper">
+    <div id="map-container">
+      <svg id="map"></svg>
+      <div id="controls">
+        <div id="play">Play</div>
+        <div id="slider"></div>
+      </div>
+    </div>
+    <div id="options">
+      Selecciona la variable
+      <form id="">
+        <input type="radio" name="cartogram-value" value="cantidad" checked>Cantidad de desaparecidos<br>
+        <input type="radio" name="cartogram-value" value="tasa">Tasa de desaparecidos
+      </form>
+    </div>
   </div>
 
   <div id="parallelPlot"></div>
