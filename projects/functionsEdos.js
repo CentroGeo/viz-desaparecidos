@@ -7,9 +7,8 @@ function ready(error,topo,csv){
     thisRate = [];
     csv.forEach(function(element){
       thisYear.push(parseInt(element[y]));
-      var rate = (parseFloat(element[y])/parseFloat(element['POB1']))*100000
-      thisRate.push(rate)
-
+      var rate = (parseFloat(element[y])/parseFloat(element['POB1']))*100000;
+      thisRate.push(rate);
     })
     maxPerYear[y] = d3.max(thisYear);
     maxRatePerYear[y] = d3.max(thisRate);
@@ -48,21 +47,19 @@ function doUpdate(year) {
     // mapped from 0 to max+1.
     // Otherwise I get an ERROR when the propertie has 0s...
 
-
     carto.value(function (d) {
       if (cartoValue === 'cantidad'){
         var scale = d3.scale.linear()
-        .domain([0, maxPerYear[year]])
-        .range([1, 1000]);
+          .domain([0, maxPerYear[year]])
+          .range([1, 1000]);
         return +scale(d.properties[year]);
       }else{
         var scale = d3.scale.linear()
-        .domain([0, maxRatePerYear[year]])
-        .range([1, 1000]);
-        var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]))
+          .domain([0, maxRatePerYear[year]])
+          .range([1, 1000]);
+        var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
         return +scale(rate);
       }
-
     });
 
     if (carto_features == undefined)
@@ -73,7 +70,7 @@ function doUpdate(year) {
     edos.data(carto_features)
         .select("title")
         .text(function (d) {
-            return d.properties.estado+ ': '+d.properties[year];
+          return d.properties.estado+ ': '+d.properties[year];
         });
 
     edos.transition()
@@ -83,7 +80,7 @@ function doUpdate(year) {
         })
         .attr("d", carto.path)
         .call(endAll, function () {
-          carto_features = undefined
+          carto_features = undefined;
         });
 }
 
@@ -100,7 +97,6 @@ function makeMap(data){
   edos = edos.data(features)
       .enter()
       .append("path")
-      .attr("class", "edos")
       .attr("id", function (d) {
           return d.properties.estado;
       })
@@ -109,13 +105,26 @@ function makeMap(data){
       })
       .attr("d", path);
 
+  // darle a los estados borde de color on hover
+  edos.on('mouseover', function(d,i){
+    edos.style("stroke", function(d,j){
+      return j != i ? "black" : colors[d.id];
+    })
+    .style("stroke-width", function(d,j){
+      return j != i ? ".5" : 2.5;
+    })
+  });
+  edos.on('mouseout', function(){
+    edos.style("stroke", "black")
+    .style("stroke-width", ".5")
+  });
+
   edos.append("title")
-      .text(function (d) {
-          return d.properties.estado;
-      });
+    .text(function (d) {
+      return d.properties.estado;
+    });
 
   d3.select("#click_to_run").text("Haz cartograma");
-
 }
 
 function doAnimation(startYear){
@@ -175,8 +184,6 @@ function makeParallelPlot(dataEdos){
       .attr("d", path);
 
   // Add colored foreground lines for focus.
-
-  var colors = ["#058cfe", "#0cc402", "#ff1902", "#7d6b48", "#fd01af", "#8b35ff", "#08b9d1", "#e79805", "#d992c6", "#079a5c", "#cb2e4f", "#889d05", "#944cc0", "#546e9a", "#f08f6b", "#fe08fb", "#055ffb", "#88b296", "#bf4403", "#bb3a84", "#a15763", "#c5a555", "#fc71f9", "#bca2a5", "#18b3fd", "#258c05", "#58762b", "#b498fc", "#34777a", "#9b6004", "#fd829a", "#ff067d"];
   foreground = svg.append("g")
       .attr("class", "foreground")
     .selectAll("path")
@@ -315,6 +322,8 @@ function makeParallelPlot(dataEdos){
 
 //Every year
 var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"]
+// colores para los 32 estados
+var colors = ["#058cfe", "#0cc402", "#ff1902", "#7d6b48", "#fd01af", "#8b35ff", "#08b9d1", "#e79805", "#d992c6", "#079a5c", "#cb2e4f", "#889d05", "#944cc0", "#546e9a", "#f08f6b", "#fe08fb", "#055ffb", "#88b296", "#bf4403", "#bb3a84", "#a15763", "#c5a555", "#fc71f9", "#bca2a5", "#18b3fd", "#258c05", "#58762b", "#b498fc", "#34777a", "#9b6004", "#fd829a", "#ff067d"];
 var map = d3.select("#map");
 i = 0;//year counter
 var edos = map.append("g")
