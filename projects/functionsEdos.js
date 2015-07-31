@@ -232,7 +232,6 @@ function makeParallelPlot(dataEdos){
 
   svg.selectAll(".foreground path")
     .on("mouseover", function(d, i) {
-      console.log(i);
       hoverLinesOn(d, i);
       hoverLegendOn(d, i);
     })
@@ -249,11 +248,11 @@ function makeParallelPlot(dataEdos){
       if (a.id != d.id) return -1;               // a is not the hovered element, send "a" to the back
       else return 1;                             // a is the hovered element, bring "a" to the front
     })
-    .style("stroke", function(d, j) {
+    /*.style("stroke", function(d, j) {
       return j != i ? colors[d.id] : 'red';
-    })
+    })*/
     .style("stroke-width", function(d, j) {
-      return j != i ? '1' : '2';
+      return j != i ? '1' : '2.5';
     })
     .style("opacity", function(d, j) {
       return j != i ? .3 : 1;
