@@ -23,7 +23,8 @@ d3.legend = function(g) {
         }
       })
 
-    items = d3.entries(items).sort(function(a,b) { return a.value.pos-b.value.pos})
+    // commented code sorts legend itemb by their position in the plot
+    items = d3.entries(items)//.sort(function(a,b) { return a.value.pos-b.value.pos})
 
 
     li.selectAll("text")
@@ -32,6 +33,8 @@ d3.legend = function(g) {
         .call(function(d) { d.exit().remove()})
         .attr("y",function(d,i) { return i+"em"})
         .attr("x","1em")
+        .attr("id", function(d) {return d.key;})
+        .attr("class", "legend-text")
         .text(function(d) { ;return d.key})
 
     li.selectAll("circle")
@@ -41,7 +44,9 @@ d3.legend = function(g) {
         .attr("cy",function(d,i) { return i-0.25+"em"})
         .attr("cx",0)
         .attr("r","0.4em")
-        .style("fill",function(d) { console.log(d.value.color);return d.value.color})
+        .attr("id", function(d) {return d.key;})
+        .attr("class", "legend-bullet")
+        .style("fill",function(d) { return d.value.color})
 
     // Reposition and resize the box
     var lbbox = li[0][0].getBBox()
