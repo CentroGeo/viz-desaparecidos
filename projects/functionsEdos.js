@@ -114,6 +114,7 @@ function makeMap(data){
       return j != i ? ".5" : 2.5;
     })
   });
+  // TODO: ligar el on hover de aqui con los de la grafica y leyenda
   edos.on('mouseout', function(){
     edos.style("stroke", "black")
     .style("stroke-width", ".5")
@@ -246,6 +247,13 @@ function makeParallelPlot(dataEdos){
   });
 
   function actionHoverIn(d, i){
+    // acciones on hover in de los poligonos de estados
+    edos.style("stroke", function(d,j){
+      return j != i ? "black" : colors[d.id];
+    })
+    .style("stroke-width", function(d,j){
+      return j != i ? ".5" : 2.5;
+    })
     // accion on hover in de las lineas del parallel plot
     svg.selectAll(".linea")
     .transition()
@@ -280,6 +288,10 @@ function makeParallelPlot(dataEdos){
   }
 
   function actionHoverOut(d, i){
+    // acciones on hover out de los poligonos de estados
+    edos.style("stroke", "black")
+    .style("stroke-width", ".5")
+
     // accion on hover out de las lineas del parallel plot
     svg.selectAll(".linea")
      .transition()
