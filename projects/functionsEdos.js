@@ -188,6 +188,7 @@ function makeParallelPlot(dataEdos){
       .data(dataEdos)
     .enter().append("path")
       .attr("class", "linea")
+      .attr("id", function(d){ return d.id;})
       .attr("d", path);
 
   // Add a group element for each dimension.
@@ -220,6 +221,10 @@ function makeParallelPlot(dataEdos){
       svg.selectAll(".linea")
       .transition()
       .duration(100)
+      .sort(function (a, b) { // select the parent and sort the path's
+        if (a.id != d.id) return -1;               // a is not the hovered element, send "a" to the back
+        else return 1;                             // a is the hovered element, bring "a" to the front
+      })
       .style("stroke", function(d, j) {
         return j != i ? 'steelblue' : 'red';
       })
@@ -315,7 +320,9 @@ function main(){
       d.estado = 'BCS';
     } else if (d.estado === 'Baja California'){
       d.estado = 'BC';
-    } else {
+    } else if (d.estado === 'San Luis Potosí'){
+      d.estado = 'SLP';
+    }else {
       d.estado = d.estado.split(' ')[0];
     }
     return d;
