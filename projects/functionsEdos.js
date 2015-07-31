@@ -16,7 +16,7 @@ function ready(error,topo,csv){
   });
 
   //nest values under state key
-  byState = d3.nest().key(function(d){return d.estado}).map(csv)
+  byState = d3.nest().key(function(d){return d.estado}).map(csv);
 
   //make map
   makeMap(topo);
@@ -137,7 +137,7 @@ function makeParallelPlot(dataEdos){
   /* TODO: ordenar columnas. Que aparezcan como
   // en el csv */
 
-  var margin = {top: 30, right: 10, bottom: 10, left: 10},
+  var margin = {top: 30, right: 10, bottom: 10, left: 35},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
@@ -156,7 +156,7 @@ function makeParallelPlot(dataEdos){
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Extract the list of dimensions and create a scale for each.
-  x.domain(dimensions = d3.keys(dataEdos[0]).filter(function(d) {
+  var dimensions = d3.keys(dataEdos[0]).filter(function(d) {
     if (d === "POB1" || d === "id") {
       //continue;
     } else if (d === "estado") {
@@ -168,7 +168,10 @@ function makeParallelPlot(dataEdos){
       return (y[d] = d3.scale.linear()
         .domain(d3.extent(dataEdos, function(p) { return +p[d]; }))
         .range([height, 0]));
-  }));
+  });
+  var tmp = dimensions.splice(dimensions.length-1,1);
+  dimensions.splice(0,0,tmp[0])
+  x.domain(dimensions);
 
   // Add grey background lines for context.
   background = svg.append("g")
@@ -184,6 +187,7 @@ function makeParallelPlot(dataEdos){
     .selectAll("path")
       .data(dataEdos)
     .enter().append("path")
+      .attr("class", "linea")
       .attr("d", path);
 
   // Add a group element for each dimension.
@@ -210,6 +214,27 @@ function makeParallelPlot(dataEdos){
     .selectAll("rect")
       .attr("x", -8)
       .attr("width", 16);
+
+  svg.selectAll(".foreground path")
+    .on("mouseover", function(d, i) {
+      svg.selectAll(".linea")
+      .transition()
+      .duration(100)
+      .style("stroke", function(d, j) {
+        return j != i ? 'steelblue' : 'red';
+      })
+      .style("stroke-width", function(d, j) {
+        return j != i ? '1' : '2';
+      });
+  })
+
+    .on("mouseout", function(d, i) {
+     svg.selectAll(".linea")
+      .transition()
+      .duration(100)
+      .style({"stroke": "steelblue"})
+      .style({"stroke-width": "1.5"})
+  });
 
   // Returns the path for a given data point.
   function path(d) {
@@ -286,6 +311,13 @@ function main(){
   queue()
   .defer(d3.json, 'data/des_estado_simple.json')
   .defer(d3.csv, 'data/desaparecidos_estatal.csv', function(d) {
+    if (d.estado === 'Baja California Sur'){
+      d.estado = 'BCS';
+    } else if (d.estado === 'Baja California'){
+      d.estado = 'BC';
+    } else {
+      d.estado = d.estado.split(' ')[0];
+    }
     return d;
   })
   .await(ready);
