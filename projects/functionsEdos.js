@@ -193,7 +193,17 @@ function makeParallelPlot(dataEdos){
       .attr("class","legend")
       .attr("transform","translate("+width+",50)")
       .style("font-size","12px")
-      .call(d3.legend)
+      .call(d3.legend);
+
+    svg.selectAll(".legend-text")
+      .on("mouseover", function(d, i) {
+        hoverLegendOn(d, i);
+        hoverLinesOn(d, i);
+      })
+      .on("mouseout", function(d, i) {
+        hoverLegendOut(d, i);
+        hoverLinesOut(d, i);
+      })
 
   // Add a group element for each dimension.
   var g = svg.selectAll(".dimension")
@@ -222,28 +232,67 @@ function makeParallelPlot(dataEdos){
 
   svg.selectAll(".foreground path")
     .on("mouseover", function(d, i) {
-      svg.selectAll(".linea")
-      .transition()
-      .duration(100)
-      .sort(function (a, b) { // select the parent and sort the path's
-        if (a.id != d.id) return -1;               // a is not the hovered element, send "a" to the back
-        else return 1;                             // a is the hovered element, bring "a" to the front
-      })
-      .style("stroke", function(d, j) {
-        return j != i ? colors[d.id] : 'red';
-      })
-      .style("stroke-width", function(d, j) {
-        return j != i ? '1' : '2';
-      });
-  })
-
+      console.log(i);
+      hoverLinesOn(d, i);
+      hoverLegendOn(d, i);
+    })
     .on("mouseout", function(d, i) {
-     svg.selectAll(".linea")
-      .transition()
-      .duration(100)
-      .style("stroke", function(d) {return colors[d.id];})
-      .style({"stroke-width": "1.5"})
+      hoverLinesOut(d, i)
+      hoverLegendOut();
   });
+
+  function hoverLinesOn(d, i){
+    svg.selectAll(".linea")
+    .transition()
+    .duration(100)
+    .sort(function (a, b) { // select the parent and sort the path's
+      if (a.id != d.id) return -1;               // a is not the hovered element, send "a" to the back
+      else return 1;                             // a is the hovered element, bring "a" to the front
+    })
+    .style("stroke", function(d, j) {
+      return j != i ? colors[d.id] : 'red';
+    })
+    .style("stroke-width", function(d, j) {
+      return j != i ? '1' : '2';
+    })
+    .style("opacity", function(d, j) {
+      return j != i ? .3 : 1;
+    });
+  }
+  function hoverLinesOut(d) {
+    svg.selectAll(".linea")
+     .transition()
+     .duration(100)
+     .style("stroke", function(d) {return colors[d.id];})
+     .style({"stroke-width": "1.5"})
+     .style({"opacity": 1});
+  }
+
+  function hoverLegendOn(d, i) {
+    svg.selectAll(".legend-text")
+    .transition()
+    .duration(100)
+    .style("opacity", function(d, j) {
+      return j != i ? 0.25 : 1;
+    });
+    svg.selectAll(".legend-bullet")
+    .transition()
+    .duration(100)
+    .style("opacity", function(d, j) {
+      return j != i ? 0.25 : 1;
+    });
+  }
+
+  function hoverLegendOut() {
+    svg.selectAll(".legend-text")
+    .transition()
+    .duration(100)
+    .style("opacity", "1");
+    svg.selectAll(".legend-bullet")
+    .transition()
+    .duration(100)
+    .style("opacity", "1");
+  }
 
   // Returns the path for a given data point.
   function path(d) {
