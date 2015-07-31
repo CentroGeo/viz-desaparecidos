@@ -113,6 +113,8 @@ function makeMap(data){
     .style("stroke-width", function(d,j){
       return j != i ? ".5" : 2.5;
     })
+    var sel = d3.select(this);
+    sel.moveToFront();
   });
   // TODO: ligar el on hover de aqui con los de la grafica y leyenda
   edos.on('mouseout', function(){
@@ -331,6 +333,14 @@ function makeParallelPlot(dataEdos){
 //////////
 //Globals
 //////////
+
+
+/*Extiende d3.selection para poder mover objetos al frente*/
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
 
 //Every year
 var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"]
