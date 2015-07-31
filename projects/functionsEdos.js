@@ -195,14 +195,13 @@ function makeParallelPlot(dataEdos){
       .style("font-size","12px")
       .call(d3.legend);
 
+    // acciones de hover en la leyenda
     svg.selectAll(".legend-text")
       .on("mouseover", function(d, i) {
-        hoverLegendOn(d, i);
-        hoverLinesOn(d, i);
+        actionHoverIn(d, i);
       })
       .on("mouseout", function(d, i) {
-        hoverLegendOut(d, i);
-        hoverLinesOut(d, i);
+        actionHoverOut(d, i);
       })
 
   // Add a group element for each dimension.
@@ -230,17 +229,17 @@ function makeParallelPlot(dataEdos){
       .attr("x", -8)
       .attr("width", 16);
 
+  //  acciones de hover en el parallel plot
   svg.selectAll(".foreground path")
     .on("mouseover", function(d, i) {
-      hoverLinesOn(d, i);
-      hoverLegendOn(d, i);
+      actionHoverIn(d, i);
     })
     .on("mouseout", function(d, i) {
-      hoverLinesOut(d, i)
-      hoverLegendOut();
+      actionHoverOut(d, i)
   });
 
-  function hoverLinesOn(d, i){
+  function actionHoverIn(d, i){
+    // accion on hover in de las lineas del parallel plot
     svg.selectAll(".linea")
     .transition()
     .duration(100)
@@ -257,40 +256,40 @@ function makeParallelPlot(dataEdos){
     .style("opacity", function(d, j) {
       return j != i ? .3 : 1;
     });
+
+    // accion on hover in de la leyenda
+    svg.selectAll(".legend-text")
+    .transition()
+    .duration(100)
+    .style("opacity", function(d, j) {
+      return j != i ? 0.25 : 1;
+    });
+    svg.selectAll(".legend-bullet")
+    .transition()
+    .duration(100)
+    .style("opacity", function(d, j) {
+      return j != i ? 0.25 : 1;
+    });
   }
-  function hoverLinesOut(d) {
+
+  function actionHoverOut(d, i){
+    // accion on hover out de las lineas del parallel plot
     svg.selectAll(".linea")
      .transition()
      .duration(100)
      .style("stroke", function(d) {return colors[d.id];})
      .style({"stroke-width": "1.5"})
      .style({"opacity": 1});
-  }
 
-  function hoverLegendOn(d, i) {
-    svg.selectAll(".legend-text")
-    .transition()
-    .duration(100)
-    .style("opacity", function(d, j) {
-      return j != i ? 0.25 : 1;
-    });
-    svg.selectAll(".legend-bullet")
-    .transition()
-    .duration(100)
-    .style("opacity", function(d, j) {
-      return j != i ? 0.25 : 1;
-    });
-  }
-
-  function hoverLegendOut() {
-    svg.selectAll(".legend-text")
-    .transition()
-    .duration(100)
-    .style("opacity", "1");
-    svg.selectAll(".legend-bullet")
-    .transition()
-    .duration(100)
-    .style("opacity", "1");
+     // accion on hover out de la leyenda
+     svg.selectAll(".legend-text")
+     .transition()
+     .duration(100)
+     .style("opacity", "1");
+     svg.selectAll(".legend-bullet")
+     .transition()
+     .duration(100)
+     .style("opacity", "1");
   }
 
   // Returns the path for a given data point.
