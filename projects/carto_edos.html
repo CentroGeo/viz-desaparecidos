@@ -3,6 +3,7 @@
   <title>Cartograms with d3 &amp; TopoJSON</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="lib/d3.slider/d3.slider.css" />
+  <link rel="stylesheet" href="lib/colorbrewer.css" />
   <style type="text/css">
 
   #map-container{
@@ -35,11 +36,11 @@
   }
   #parallelPlot {
     position: absolute;
-    top: 500px;
+    top: 450px;
   }
 
   body {
-    padding: 2em;
+    //padding: 2em;
   }
 
   /*Map style*/
@@ -75,7 +76,7 @@
 
   .foreground path {
     fill: none;
-    stroke: steelblue;
+    //stroke: steelblue;
     stroke-width: 1.5;
   }
 
@@ -94,6 +95,12 @@
 
   .axis text {
     text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  }
+
+  .legend rect {
+    fill:white;
+    stroke:black;
+    opacity:0.8;
   }
 
   </style>
@@ -124,5 +131,6 @@
   <script src="lib/d3-cartogram/lib/topojson.js"></script>
   <script src="lib/d3-cartogram/cartogram.js"></script>
   <script src="lib/d3.slider/d3.slider.js"></script>
+  <script src="lib/d3.legend.js"></script>
   <script src="functionsEdos.js"></script>
 </body>

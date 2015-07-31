@@ -137,7 +137,7 @@ function makeParallelPlot(dataEdos){
   /* TODO: ordenar columnas. Que aparezcan como
   // en el csv */
 
-  var margin = {top: 30, right: 10, bottom: 10, left: 35},
+  var margin = {top: 30, right: 0, bottom: 10, left: 10},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
@@ -150,27 +150,20 @@ function makeParallelPlot(dataEdos){
       foreground;
 
   var svg = d3.select("#parallelPlot").append("svg")
-      .attr("width", width + margin.left + margin.right)
+      .attr("width", width + margin.left + margin.right + 110)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Extract the list of dimensions and create a scale for each.
   var dimensions = d3.keys(dataEdos[0]).filter(function(d) {
-    if (d === "POB1" || d === "id") {
+    if (d === "POB1" || d === "id" || d === "estado")  {
       //continue;
-    } else if (d === "estado") {
-      var labels = [];
-      return (y[d] = d3.scale.ordinal()
-          .domain(d3.keys(byState))
-          .rangePoints([height, 0]));
     } else
       return (y[d] = d3.scale.linear()
         .domain(d3.extent(dataEdos, function(p) { return +p[d]; }))
         .range([height, 0]));
   });
-  var tmp = dimensions.splice(dimensions.length-1,1);
-  dimensions.splice(0,0,tmp[0])
   x.domain(dimensions);
 
   // Add grey background lines for context.
@@ -181,7 +174,9 @@ function makeParallelPlot(dataEdos){
     .enter().append("path")
       .attr("d", path);
 
-  // Add blue foreground lines for focus.
+  // Add colored foreground lines for focus.
+
+  var colors = ["#058cfe", "#0cc402", "#ff1902", "#7d6b48", "#fd01af", "#8b35ff", "#08b9d1", "#e79805", "#d992c6", "#079a5c", "#cb2e4f", "#889d05", "#944cc0", "#546e9a", "#f08f6b", "#fe08fb", "#055ffb", "#88b296", "#bf4403", "#bb3a84", "#a15763", "#c5a555", "#fc71f9", "#bca2a5", "#18b3fd", "#258c05", "#58762b", "#b498fc", "#34777a", "#9b6004", "#fd829a", "#ff067d"];
   foreground = svg.append("g")
       .attr("class", "foreground")
     .selectAll("path")
@@ -189,7 +184,16 @@ function makeParallelPlot(dataEdos){
     .enter().append("path")
       .attr("class", "linea")
       .attr("id", function(d){ return d.id;})
+      .attr("data-legend",function(d) { return d.estado })
+      .style("stroke", function(d) {return colors[d.id];})
       .attr("d", path);
+
+    // add legend
+    legend = svg.append("g")
+      .attr("class","legend")
+      .attr("transform","translate("+width+",50)")
+      .style("font-size","12px")
+      .call(d3.legend)
 
   // Add a group element for each dimension.
   var g = svg.selectAll(".dimension")
@@ -226,7 +230,7 @@ function makeParallelPlot(dataEdos){
         else return 1;                             // a is the hovered element, bring "a" to the front
       })
       .style("stroke", function(d, j) {
-        return j != i ? 'steelblue' : 'red';
+        return j != i ? colors[d.id] : 'red';
       })
       .style("stroke-width", function(d, j) {
         return j != i ? '1' : '2';
@@ -237,7 +241,7 @@ function makeParallelPlot(dataEdos){
      svg.selectAll(".linea")
       .transition()
       .duration(100)
-      .style({"stroke": "steelblue"})
+      .style("stroke", function(d) {return colors[d.id];})
       .style({"stroke-width": "1.5"})
   });
 
@@ -322,7 +326,13 @@ function main(){
       d.estado = 'BC';
     } else if (d.estado === 'San Luis Potosí'){
       d.estado = 'SLP';
-    }else {
+    } else if (d.estado === 'Distrito Federal'){
+      d.estado = 'DF';
+    } else if (d.estado === 'Nuevo León'){
+      d.estado = 'Nuevo León';
+    } else if (d.estado === 'Quintana Roo'){
+      d.estado = 'Quintana Roo';
+    } else {
       d.estado = d.estado.split(' ')[0];
     }
     return d;
