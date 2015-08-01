@@ -1,3 +1,122 @@
+
+
+
+/*
+##############################
+Variables y funciones globales
+##############################
+*/
+
+/*Extiende d3.selection para poder mover objetos al frente*/
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
+//Every year
+var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"]
+// colores para los 32 estados
+var colors = ["#058cfe", "#0cc402", "#ff1902", "#7d6b48", "#fd01af", "#8b35ff",
+              "#08b9d1", "#e79805", "#d992c6", "#079a5c", "#cb2e4f", "#889d05",
+               "#944cc0", "#546e9a", "#f08f6b", "#fe08fb", "#055ffb", "#88b296",
+               "#bf4403", "#bb3a84", "#a15763", "#c5a555", "#fc71f9", "#bca2a5",
+               "#18b3fd", "#258c05", "#58762b", "#b498fc", "#34777a", "#9b6004",
+               "#fd829a", "#ff067d"];
+
+var map = d3.select("#map");
+i = 0;//year counter
+var edos = map.append("g")
+    .attr("id", "edos")
+    .selectAll("path");
+
+var proj =  d3.geo.mercator()
+  .center([-97.16, 21.411])
+  .scale(1000)
+//  .translate([300,300]);//TODO: set this value
+
+var quantize = d3.scale.quantize()
+  .domain([0, 16000000])
+  .range(d3.range(5).map(function(i) { return "q" + i; }));
+
+var topology,
+    geometries,
+    carto_features,
+    maxPerYear,
+    maxRatePerYear,
+    byState,
+    mySlider,
+    cartoValue = 'cantidad';
+
+//Insnantiate the cartogram with desired projection
+var carto = d3.cartogram()
+    .projection(proj)
+    .properties(function (d) {
+        // this add the "properties" properties to the geometries
+        return d.properties;
+    });
+
+function main(){
+
+  //Slider
+  var axis = d3.svg.axis().orient("bottom").ticks(8)
+  axis.tickFormat(d3.format("d"))
+  mySlider = d3.slider()
+  .axis(axis)
+  .min(2006)
+  .max(2014)
+  .step(1)
+  .on("slide", function(evt, value) {
+    doUpdate(value);
+  });
+  d3.select('#slider').call(mySlider);
+
+  //Build a queue to load all data files
+  queue()
+  .defer(d3.json, 'data/des_estado_simple.json')
+  .defer(d3.csv, 'data/desaparecidos_estatal.csv', function(d) {
+    if (d.estado === 'Baja California Sur'){
+      d.estado = 'BCS';
+    } else if (d.estado === 'Baja California'){
+      d.estado = 'BC';
+    } else if (d.estado === 'San Luis Potosí'){
+      d.estado = 'SLP';
+    } else if (d.estado === 'Distrito Federal'){
+      d.estado = 'DF';
+    } else if (d.estado === 'Nuevo León'){
+      d.estado = 'Nuevo León';
+    } else if (d.estado === 'Quintana Roo'){
+      d.estado = 'Quintana Roo';
+    } else {
+      d.estado = d.estado.split(' ')[0];
+    }
+    return d;
+  })
+  .await(ready);
+
+  //Add listener to radio buttons and set cartogram variable
+  d3.selectAll('input[name="cartogram-value"]')
+    .on("change", function(event,data){
+        if (data === 0){
+          cartoValue = 'cantidad';
+        }else{
+          cartoValue = 'tasa';
+        }
+        doUpdate(mySlider.value());
+      });
+
+  d3.select('#play')
+  .on("click", function(evt) {
+    doAnimation(mySlider.value());
+  });
+
+}
+
+window.onload = main
+
+
+
+
 function ready(error,topo,csv){
   //Compute max values for each year and store it in maxPerYear
   maxPerYear = {}
@@ -329,110 +448,3 @@ function makeParallelPlot(dataEdos){
     });
   }
 }
-
-//////////
-//Globals
-//////////
-
-
-/*Extiende d3.selection para poder mover objetos al frente*/
-d3.selection.prototype.moveToFront = function() {
-  return this.each(function(){
-    this.parentNode.appendChild(this);
-  });
-};
-
-//Every year
-var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"]
-// colores para los 32 estados
-var colors = ["#058cfe", "#0cc402", "#ff1902", "#7d6b48", "#fd01af", "#8b35ff", "#08b9d1", "#e79805", "#d992c6", "#079a5c", "#cb2e4f", "#889d05", "#944cc0", "#546e9a", "#f08f6b", "#fe08fb", "#055ffb", "#88b296", "#bf4403", "#bb3a84", "#a15763", "#c5a555", "#fc71f9", "#bca2a5", "#18b3fd", "#258c05", "#58762b", "#b498fc", "#34777a", "#9b6004", "#fd829a", "#ff067d"];
-var map = d3.select("#map");
-i = 0;//year counter
-var edos = map.append("g")
-    .attr("id", "edos")
-    .selectAll("path");
-
-var proj =  d3.geo.mercator()
-  .center([-97.16, 21.411])
-  .scale(1000)
-//  .translate([300,300]);//TODO: set this value
-
-var quantize = d3.scale.quantize()
-  .domain([0, 16000000])
-  .range(d3.range(5).map(function(i) { return "q" + i; }));
-
-var topology,
-    geometries,
-    carto_features,
-    maxPerYear,
-    maxRatePerYear,
-    byState,
-    mySlider,
-    cartoValue = 'cantidad';
-
-//Insnantiate the cartogram with desired projection
-var carto = d3.cartogram()
-    .projection(proj)
-    .properties(function (d) {
-        // this add the "properties" properties to the geometries
-        return d.properties;
-    });
-
-
-function main(){
-
-  //Slider
-  var axis = d3.svg.axis().orient("bottom").ticks(8)
-  axis.tickFormat(d3.format("d"))
-  mySlider = d3.slider()
-  .axis(axis)
-  .min(2006)
-  .max(2014)
-  .step(1)
-  .on("slide", function(evt, value) {
-    doUpdate(value);
-  });
-  d3.select('#slider').call(mySlider);
-
-  //Build a queue to load all data files
-  queue()
-  .defer(d3.json, 'data/des_estado_simple.json')
-  .defer(d3.csv, 'data/desaparecidos_estatal.csv', function(d) {
-    if (d.estado === 'Baja California Sur'){
-      d.estado = 'BCS';
-    } else if (d.estado === 'Baja California'){
-      d.estado = 'BC';
-    } else if (d.estado === 'San Luis Potosí'){
-      d.estado = 'SLP';
-    } else if (d.estado === 'Distrito Federal'){
-      d.estado = 'DF';
-    } else if (d.estado === 'Nuevo León'){
-      d.estado = 'Nuevo León';
-    } else if (d.estado === 'Quintana Roo'){
-      d.estado = 'Quintana Roo';
-    } else {
-      d.estado = d.estado.split(' ')[0];
-    }
-    return d;
-  })
-  .await(ready);
-
-  //Add listener to radio buttons and set cartogram variable
-  d3.selectAll('input[name="cartogram-value"]')
-    .on("change", function(event,data){
-        if (data === 0){
-          cartoValue = 'cantidad';
-        }else{
-          cartoValue = 'tasa';
-        }
-        doUpdate(mySlider.value());
-      });
-
-  d3.select('#play')
-  .on("click", function(evt) {
-    doAnimation(mySlider.value());
-  });
-
-}
-
-window.onload = main
