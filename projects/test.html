@@ -1,0 +1,107 @@
+<html>
+<head>
+  <title>Cartograms with d3 &amp; TopoJSON</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="lib/d3.slider/d3.slider.css" />
+  <link rel="stylesheet" href="lib/colorbrewer.css" />
+  <style type="text/css">
+
+
+  svg {
+    font: 10px sans-serif;
+  }
+
+  .background path {
+    fill: none;
+    stroke: #ddd;
+    shape-rendering: crispEdges;
+  }
+
+  .foreground path {
+    fill: none;
+    //stroke: steelblue;
+    stroke-width: 1.5;
+  }
+
+  .brush .extent {
+    fill-opacity: .3;
+    stroke: #fff;
+    shape-rendering: crispEdges;
+  }
+
+  .axis line,
+  .axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .axis text {
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  }
+
+  .legend rect {
+    fill:white;
+    stroke:black;
+    opacity:0.8;
+  }
+
+  </style>
+</head>
+<body>
+
+  <div id="parallelPlot"></div>
+
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/queue.v1.min.js"></script>
+  <script src="lib/d3.legend.js"></script>
+  <script src="lib/d3.parallelplot.js"></script>
+  <script>
+  queue()
+  //.defer(d3.json, 'data/des_estado_simple.json')
+  .defer(d3.csv, 'data/desaparecidos_estatal.csv', function(d) {
+    if (d.estado === 'Baja California Sur'){
+      d.estado = 'BCS';
+    } else if (d.estado === 'Baja California'){
+      d.estado = 'BC';
+    } else if (d.estado === 'San Luis Potosí'){
+      d.estado = 'SLP';
+    } else if (d.estado === 'Distrito Federal'){
+      d.estado = 'DF';
+    } else if (d.estado === 'Nuevo León'){
+      d.estado = 'Nuevo León';
+    } else if (d.estado === 'Quintana Roo'){
+      d.estado = 'Quintana Roo';
+    } else {
+      d.estado = d.estado.split(' ')[0];
+    }
+    return d;
+  })
+  .await(ready);
+
+  function ready(error,csv){
+    //Compute max values for each year and store it in maxPerYear
+    filtered = csv.filter(function(d){
+      delete d["POB1"];
+      delete d["estado"];
+      //delete d["id"];
+      return d;
+      //console.log(d);
+      // if (d === "POB1" || d === "id" || d === "estado")  {
+      //   //continue;
+      // } else return d
+    })
+    var colors = ["#058cfe", "#0cc402", "#ff1902", "#7d6b48", "#fd01af", "#8b35ff",
+                  "#08b9d1", "#e79805", "#d992c6", "#079a5c", "#cb2e4f", "#889d05",
+                   "#944cc0", "#546e9a", "#f08f6b", "#fe08fb", "#055ffb", "#88b296",
+                   "#bf4403", "#bb3a84", "#a15763", "#c5a555", "#fc71f9", "#bca2a5",
+                   "#18b3fd", "#258c05", "#58762b", "#b498fc", "#34777a", "#9b6004",
+                   "#fd829a", "#ff067d"];
+    var pplot = parallelPlot()
+    pplot.colors = colors
+    d3.select("#parallelPlot")
+    .datum(filtered)
+    .call(pplot)
+  }
+  </script>
+</body>
