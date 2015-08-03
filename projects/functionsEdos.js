@@ -46,7 +46,8 @@ var topology,
     maxRatePerYear,
     byState,
     mySlider,
-    cartoValue = 'cantidad';
+    cartoValue = 'cantidad',
+    pplot;
 
 //Insnantiate the cartogram with desired projection
 var carto = d3.cartogram()
@@ -136,9 +137,101 @@ function ready(error,topo,csv){
   //nest values under state key
   byState = d3.nest().key(function(d){return d.estado}).map(csv);
 
+  //parallel plot
+  pplot = parallelPlot()
+  //pplot.containerWidth(200);
+  pplot.colors(colors)
+    .filterColumns(["POB1",'estado'])
+  d3.select("#parallelPlot")
+  .datum(csv)
+  .call(pplot)
+  var legend = pplot.svg().append("g")
+    .attr("class","legend")
+    .attr("transform","translate(" + pplot.containerWidth() + ",50)")
+    .style("font-size","12px")
+    .call(d3.legend);
+
+  //Aquí definimos las funciones a ejecutar en los mouse in/out de la
+  //gráfica
+  function actionHoverIn(d, i){
+    // acciones on hover in de los poligonos de estados
+    edos.style("stroke", function(d,j){
+      return j != i ? "black" : colors[d.id];
+    })
+    .style("stroke-width", function(d,j){
+      return j != i ? ".5" : 2.5;
+    })
+    // accion on hover in de las lineas del parallel plot
+    pplot.svg().selectAll(".linea")
+    .transition()
+    .duration(100)
+    .sort(function (a, b) { // select the parent and sort the path's
+      if (a.id != d.id) return -1;               // a is not the hovered element, send "a" to the back
+      else return 1;                             // a is the hovered element, bring "a" to the front
+    })
+    /*.style("stroke", function(d, j) {
+      return j != i ? colors[d.id] : 'red';
+    })*/
+    .style("stroke-width", function(d, j) {
+      return j != i ? '1' : '2.5';
+    })
+    .style("opacity", function(d, j) {
+      return j != i ? .3 : 1;
+    });
+
+    // accion on hover in de la leyenda
+    pplot.svg().selectAll(".legend-text")
+    .transition()
+    .duration(100)
+    .style("opacity", function(d, j) {
+      return j != i ? 0.25 : 1;
+    });
+    pplot.svg().selectAll(".legend-bullet")
+    .transition()
+    .duration(100)
+    .style("opacity", function(d, j) {
+      return j != i ? 0.25 : 1;
+    });
+  }
+
+  function actionHoverOut(d, i){
+    // acciones on hover out de los poligonos de estados
+    edos.style("stroke", "black")
+    .style("stroke-width", ".5")
+
+    // accion on hover out de las lineas del parallel plot
+    pplot.svg().selectAll(".linea")
+     .transition()
+     .duration(100)
+     .style("stroke", function(d) {return colors[d.id];})
+     .style({"stroke-width": "1.5"})
+     .style({"opacity": 1});
+
+     // accion on hover out de la leyenda
+     pplot.svg().selectAll(".legend-text")
+     .transition()
+     .duration(100)
+     .style("opacity", "1");
+     pplot.svg().selectAll(".legend-bullet")
+     .transition()
+     .duration(100)
+     .style("opacity", "1");
+  }
+
+  //Aquí le peganmos las funciones anteriores a los eventos correspondientes
+  pplot.actionHoverIn(actionHoverIn)
+    .actionHoverOut(actionHoverOut);
+
+  // acciones de hover en la leyenda
+  pplot.svg().selectAll(".legend-text")
+    .on("mouseover", function(d, i) {
+      actionHoverIn(d, i);
+    })
+    .on("mouseout", function(d, i) {
+      actionHoverOut(d, i);
+    })
   //make map
   makeMap(topo);
-  makeParallelPlot(csv);
 }
 
 //Triggers a callback at the end of the last transition
@@ -234,11 +327,15 @@ function makeMap(data){
     })
     var sel = d3.select(this);
     sel.moveToFront();
+    //LLamamos la acción de hover de la gráfica;
+    (pplot.actionHoverIn())(d,i);
   });
   // TODO: ligar el on hover de aqui con los de la grafica y leyenda
-  edos.on('mouseout', function(){
+  edos.on('mouseout', function(d,i){
     edos.style("stroke", "black")
-    .style("stroke-width", ".5")
+    .style("stroke-width", ".5");
+    //LLamamos la acción de hover de la gráfica;
+    (pplot.actionHoverOut())(d,i);
   });
 
   edos.append("title")

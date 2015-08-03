@@ -11,12 +11,41 @@ function parallelPlot(){
     //Configuración:
     var containerWidth = 960,
         containerHeight = 500,
+        svg, //el svg donde se renderea la gráfica (se puede consultar pero no modificar)
         margin = {top: 30, right: 0, bottom: 10, left: 10},
-        colors = null;
+        colors = 'steelblue', //opciones válidas: 'random', array de colores o 'string';
+        filterColumns = undefined, //Qué columnas no hay que desplegar (array)
+        idColumn = 'id', //Columna para usarse como identificador
+        actionHoverIn = function(d,i) {
+          svg.selectAll(".linea")
+          .transition()
+          .duration(100)
+          .sort(function (a, b) { // select the parent and sort the path's
+            if (a.id != d.id) return -1;               // a is not the hovered element, send "a" to the back
+            else return 1;                             // a is the hovered element, bring "a" to the front
+          })
+          /*.style("stroke", function(d, j) {
+            return j != i ? colors[d.id] : 'red';
+          })*/
+          .style("stroke-width", function(d, j) {
+            return j != i ? '1' : '2.5';
+          })
+          .style("opacity", function(d, j) {
+            return j != i ? .3 : 1;
+          });
+
+        },
+        actionHoverOut = function(d,i) {
+          svg.selectAll(".linea")
+           .transition()
+           .duration(100)
+           .style("stroke", function(d) {return colors[d.id];})
+           .style({"stroke-width": "1.5"})
+           .style({"opacity": 1});
+        }
 
     function plot(selection){
-        console.log(selection);
-        console.log(this);
+
         var width = containerWidth - margin.left - margin.right,
             height = containerHeight - margin.top - margin.bottom;
 
@@ -30,21 +59,35 @@ function parallelPlot(){
         //this es la selección que llama a parallelPlot
         selection.each(function(data,i){
             //this es la selección que llama a parallelPlot,data son los datos
-            var svg = selection.append("svg")
+
+            svg = selection.append("svg")
                 .attr("width", width + margin.left + margin.right + 110)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            var dimensions = d3.keys(data[0]).filter(function(p) {
-                //Aquí el extent de los ejes se ajusta al máximo de cada variable
-                //TODO: opción para usar un único extent para todas las dimensiones
-                return (y[p] = d3.scale.linear()
-                  .domain(d3.extent(data, function(d) {return +d[p];}))
-                  .range([height, 0]));
-              });
-            x.domain(dimensions);
-            //console.log(y);
 
+            if (filterColumns !== undefined){
+              var dimensions = []
+              d3.keys(data[0]).forEach(function(col){
+                if (filterColumns.indexOf(col) === -1 && col !== 'id'){
+                  dimensions.push(col)
+                }
+              })
+              // filterColumns.forEach(function(col){
+              //   if(d3.keys(data[0]).indexOf(col) !== -1){
+              //     dimensions.push(col)
+              //   }
+              // })
+            }else{
+              dimensions = d3.keys(data[0])
+            };
+            dimensions.forEach(function(el){
+              //TODO: opción para usar un único extent para todas las dimensiones
+              y[el] = d3.scale.linear()
+                .domain(d3.extent(data, function(d) {return +d[el];}))
+                .range([height, 0]);
+            })
+            x.domain(dimensions);
             // Add grey background lines for context.
             background = svg.append("g")
                 .attr("class", "background")
@@ -60,16 +103,20 @@ function parallelPlot(){
                 .data(data)
               .enter().append("path")
                 .attr("class", "linea")
-                //.attr("id", function(data){ return data.id;})
-                //.attr("data-legend",function(data) { return data.estado })
+                .attr("id", function(d){ return d.id;}) //TODO:checar que haya id
+                .attr("data-legend",function(d) { return d.estado }) //TODO: configurar variable de leyenda
                 .style("stroke", function(data) {
-                    if (colors !== null){
-                        return colors[data.id];
+                  if (colors instanceof Array){
+                    //TODO: checar que el array sea del tamaño de los datos.
+                    //TODO: checar cuál es el identificador
+                    return colors[data.id];
+                  }else{
+                    if (colors == 'random'){
+                      //TODO: llamar a un random color generator
                     }else{
-                        //console.log('hey');
-                        return 'blue';
+                      return colors
                     }
-
+                  }
                 })
                 .attr("d", path);
             // Add a group element for each dimension.
@@ -100,7 +147,6 @@ function parallelPlot(){
             // Returns the path for a given data point.
             function path(data) {
               return line(dimensions.map(function(p) {
-                  //console.log(y[p]);
                   return [x(p), y[p](data[p])];
                   }));
             }
@@ -116,6 +162,15 @@ function parallelPlot(){
               });
             }
 
+            //  acciones de hover en el parallel plot
+            svg.selectAll(".foreground path")
+              .on("mouseover", function(d, i) {
+                actionHoverIn(d, i);
+              })
+              .on("mouseout", function(d, i) {
+                actionHoverOut(d, i)
+            });
+
         });
 
 
@@ -124,15 +179,49 @@ function parallelPlot(){
     }
 
     plot.containerWidth = function(value) {
-        if (!arguments.length) return width;
-        width = value;
-        return plot;
-    };
-    plot.containerHeight = function(value) {
-        if (!arguments.length) return height;
-        height = value;
+        if (!arguments.length) return containerWidth;
+        containerWidth = value;
         return plot;
     };
 
-    return plot;
+    plot.containerHeight = function(value) {
+        if (!arguments.length) return containerHeight;
+        containerHeight = value;
+        return plot;
+    };
+
+    plot.svg = function() {
+        return svg;
+    };
+
+    plot.colors = function(value) {
+      if (!arguments.length) return colors;
+      colors = value;
+      return plot;
+    }
+
+    plot.filterColumns = function(value) {
+      if (!arguments.length) return filterColumns;
+      filterColumns = value;
+      return plot;
+    }
+
+    plot.idColumn = function(value) {
+      if (!arguments.length) return idColumn;
+      idColumn = value;
+      return plot;
+    }
+
+    plot.actionHoverIn = function(value) {
+      if (!arguments.length) return actionHoverIn;
+      actionHoverIn = value;
+      return plot;
+    }
+
+    plot.actionHoverOut = function(value) {
+      if (!arguments.length) return actionHoverOut;
+      actionHoverOut = value;
+      return plot;
+    }
+    return plot
 }
