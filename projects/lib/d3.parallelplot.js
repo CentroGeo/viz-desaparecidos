@@ -1,10 +1,31 @@
 /*
 Implementación reusable de parallelPlot
-uso:
+Uso básico:
+pplot = parallelPlot()
 d3.select("#container")
 .datum(dataObject)
-.call(parallelPlot)
+.call(pplot)
 
+--Configuración--
+pplot.containerWidth(value) -fija el ancho del contenedor
+pplot.containerHeight(value) -fija el alto del contenedor
+pplot.colors(value) - puede ser un string que represente el color para todas las líneas
+                    - o un array con un color para cada linea (tantos colores como series)
+pplot.filterColumns(array) - array con los nombres de las columnas que no se quieren graficar
+pplot.idColumn(value) - nombre de la columna que sirve como id
+
+--Configuración de los eventos mouseover y mouseout--
+1.- Crear función para manejar el evento
+function actionMouseIn(d,i){
+    //d,i son los datos y el número de linea, respectivamente.
+    //El svg de la gráfica lo obtienes con pplot.svg()
+}
+2.- Pegar la función al evento:
+pplot.actionHoverIn(actionMouseIn)
+pplot.actionHoverOut(actionMouseOut)
+3.- Para llamar las acciones desde otro componente:
+(pplot.actionHoverIn())(d,i)
+d,i tienen que ser comunes entre los dos componentes
 */
 
 function parallelPlot(){
@@ -24,9 +45,6 @@ function parallelPlot(){
             if (a.id != d.id) return -1;               // a is not the hovered element, send "a" to the back
             else return 1;                             // a is the hovered element, bring "a" to the front
           })
-          /*.style("stroke", function(d, j) {
-            return j != i ? colors[d.id] : 'red';
-          })*/
           .style("stroke-width", function(d, j) {
             return j != i ? '1' : '2.5';
           })
@@ -59,7 +77,6 @@ function parallelPlot(){
         //this es la selección que llama a parallelPlot
         selection.each(function(data,i){
             //this es la selección que llama a parallelPlot,data son los datos
-
             svg = selection.append("svg")
                 .attr("width", width + margin.left + margin.right + 110)
                 .attr("height", height + margin.top + margin.bottom)
@@ -73,11 +90,6 @@ function parallelPlot(){
                   dimensions.push(col)
                 }
               })
-              // filterColumns.forEach(function(col){
-              //   if(d3.keys(data[0]).indexOf(col) !== -1){
-              //     dimensions.push(col)
-              //   }
-              // })
             }else{
               dimensions = d3.keys(data[0])
             };
@@ -170,12 +182,7 @@ function parallelPlot(){
               .on("mouseout", function(d, i) {
                 actionHoverOut(d, i)
             });
-
         });
-
-
-
-
     }
 
     plot.containerWidth = function(value) {
@@ -190,6 +197,7 @@ function parallelPlot(){
         return plot;
     };
 
+    //TODO: getter/setter para los márgenes
     plot.svg = function() {
         return svg;
     };
