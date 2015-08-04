@@ -137,6 +137,9 @@ function ready(error,topo,csv){
   //nest values under state key
   byState = d3.nest().key(function(d){return d.estado}).map(csv);
 
+  //make map
+  makeMap(topo);
+  
   //parallel plot
   pplot = parallelPlot()
   //pplot.containerWidth(200);
@@ -230,8 +233,6 @@ function ready(error,topo,csv){
     .on("mouseout", function(d, i) {
       actionHoverOut(d, i);
     })
-  //make map
-  makeMap(topo);
 }
 
 //Triggers a callback at the end of the last transition
