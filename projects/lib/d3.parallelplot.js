@@ -73,15 +73,23 @@ function parallelPlot(){
         var line = d3.svg.line(),
             axis = d3.svg.axis().orient("left"),
             background,
-            foreground;
+            foreground,
+            foregroundPath,
+            backgroundPath;
         //this es la selección que llama a parallelPlot
         selection.each(function(data,i){
             //this es la selección que llama a parallelPlot,data son los datos
-            svg = selection.append("svg")
-                .attr("width", width + margin.left + margin.right + 110)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            plotSvg = d3.select("#pplot-svg")
+            if (plotSvg.empty()){
+                //Sólo creamos el svg si no existe
+                svg = selection.append("svg")
+                    .attr("id","pplot-svg")
+                    .attr("width", width + margin.left + margin.right + 110)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            }
+
 
             if (filterColumns !== undefined){
               var dimensions = []
@@ -101,21 +109,36 @@ function parallelPlot(){
             })
             x.domain(dimensions);
             // Add grey background lines for context.
-            background = svg.append("g")
-                .attr("class", "background")
-              .selectAll("path")
-                .data(data)
-              .enter().append("path")
-                .attr("d", path);
+            if (d3.select(".background").empty()){
+                //Solo se crea si no existe
+                background = svg.append("g")
+                    .attr("class", "background");
+            }else{
+                background = d3.selectAll(".background");
+            }
+
+            backgroundPath = background.selectAll("path")
+                .data(data);
+            backgroundPath.enter().append("path");
+                //.attr("d", path);
+            backgroundPath.exit().remove();
+            backgroundPath.attr("d", path);
 
             // Add colored foreground lines for focus.
-            foreground = svg.append("g")
-                .attr("class", "foreground")
-              .selectAll("path")
-                .data(data)
-              .enter().append("path")
-                .attr("class", "linea")
-                .attr("id", function(d){ return d.id;}) //TODO:checar que haya id
+            if (d3.select(".foreground").empty()){
+                foreground = svg.append("g")
+                    .attr("class", "foreground");
+            }else{
+                foreground = d3.selectAll(".foreground");
+            }
+
+            foregroundPath = foreground.selectAll("path")
+                .data(data);
+            //console.log(data);
+            foregroundPath.enter().append("path")
+                .attr("class", "linea");
+
+            foregroundPath.attr("id", function(d){ return d.id;}) //TODO:checar que haya id
                 .attr("data-legend",function(d) { return d.estado }) //TODO: configurar variable de leyenda
                 .style("stroke", function(data) {
                   if (colors instanceof Array){
@@ -125,27 +148,45 @@ function parallelPlot(){
                   }else{
                     if (colors == 'random'){
                       //TODO: llamar a un random color generator
+                      return colors;
                     }else{
-                      return colors
+                      return colors;
                     }
                   }
                 })
                 .attr("d", path);
-            // Add a group element for each dimension.
-            var g = svg.selectAll(".dimension")
-                .data(dimensions)
-              .enter().append("g")
-                .attr("class", "dimension")
-                .attr("transform", function(d) { return "translate(" + x(d) + ")"; });
+            //console.log(foregroundPath.exit());
+            foregroundPath.exit().remove();
 
-            // Add an axis and title.
-            g.append("g")
-                .attr("class", "axis")
-                .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
-              .append("text")
-                .style("text-anchor", "middle")
-                .attr("y", -9)
-                .text(function(d) { return d; });
+            // Add a group element for each dimension.
+            if (svg.selectAll(".dimension").empty()){
+                //Solo se crea si no existe
+                var g = svg.selectAll(".dimension")
+                    .data(dimensions)
+                g.enter().append("g")
+                    .attr("class", "dimension");
+                g.exit().remove();
+                g.attr("transform", function(d) { return "translate(" + x(d) + ")"; });
+                // Add an axis and title.
+                g.append("g")
+                    .attr("class", "axis")
+                    .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
+                  .append("text")
+                    .style("text-anchor", "middle")
+                    .attr("y", -9)
+                    .text(function(d) { return d; });
+            }else{
+                //si ya existe sólo se ectualiza
+                var g = svg.selectAll(".dimension")
+                var a = g.selectAll(".axis")
+                .each(function(d) {
+                    d3.select(this).call(axis.scale(y[d]));
+                    })
+                //.call(axis.scale(y[d]))
+            }
+
+
+
 
             // Add and store a brush for each axis.
             g.append("g")
@@ -167,7 +208,7 @@ function parallelPlot(){
             function brush() {
               var actives = dimensions.filter(function(p) { return !y[p].brush.empty(); }),
                   extents = actives.map(function(p) { return y[p].brush.extent(); });
-              foreground.style("display", function(d) {
+              foregroundPath.style("display", function(d) {
                 return actives.every(function(p, i) {
                   return extents[i][0] <= d[p] && d[p] <= extents[i][1];
                 }) ? null : "none";
