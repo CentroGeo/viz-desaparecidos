@@ -44,6 +44,8 @@ var topology,
     carto_features,
     maxPerYear,
     maxRatePerYear,
+    rates, //datos por tasa para el plot
+    cantidad, //datos por cantidad para el plot
     byState,
     mySlider,
     cartoValue = 'cantidad',
@@ -91,6 +93,9 @@ function main(){
     } else {
       d.estado = d.estado.split(' ')[0];
     }
+    years.forEach(function(y){
+      d[y] = +d[y]
+    })
     return d;
   })
   .await(ready);
@@ -100,10 +105,15 @@ function main(){
     .on("change", function(event,data){
         if (data === 0){
           cartoValue = 'cantidad';
+          var pplotData = cantidad;
         }else{
           cartoValue = 'tasa';
+          var pplotData = rates;
         }
         doUpdate(mySlider.value());
+        d3.select("#parallelPlot")
+        .datum(pplotData)
+        .call(pplot)
       });
 
   d3.select('#play')
@@ -134,12 +144,23 @@ function ready(error,topo,csv){
     maxRatePerYear[y] = d3.max(thisRate);
   });
 
+  rates = csv.map(function(obj){
+    rObj = {};
+    years.forEach(function(y){
+      rObj[y] = (+obj[y]/+obj["POB1"])*100000;
+    })
+    rObj["id"] = obj["id"];
+    rObj["estado"] = obj["estado"];
+    rObj["POB1"] = obj["POB1"];
+    return rObj;
+  })
+  cantidad = csv;
   //nest values under state key
   byState = d3.nest().key(function(d){return d.estado}).map(csv);
 
   //make map
   makeMap(topo);
-  
+
   //parallel plot
   pplot = parallelPlot()
   //pplot.containerWidth(200);
