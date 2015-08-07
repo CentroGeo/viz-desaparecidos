@@ -122,7 +122,10 @@ function parallelPlot(){
             backgroundPath.enter().append("path");
                 //.attr("d", path);
             backgroundPath.exit().remove();
-            backgroundPath.attr("d", path);
+            backgroundPath.transition()
+                .duration(750)
+                .ease("linear")
+                .attr("d", path);
 
             // Add colored foreground lines for focus.
             if (d3.select(".foreground").empty()){
@@ -138,8 +141,9 @@ function parallelPlot(){
             foregroundPath.enter().append("path")
                 .attr("class", "linea");
 
-            foregroundPath.attr("id", function(d){ return d.id;}) //TODO:checar que haya id
-                .attr("data-legend",function(d) { return d.estado }) //TODO: configurar variable de leyenda
+            foregroundPath.attr("data-legend",function(d) { return d.estado }) //TODO: configurar variable de leyenda
+                .attr("id", function(d){ return d.id;}) //TODO:checar que haya id
+                //
                 .style("stroke", function(data) {
                   if (colors instanceof Array){
                     //TODO: checar que el array sea del tamaño de los datos.
@@ -154,8 +158,11 @@ function parallelPlot(){
                     }
                   }
                 })
+            foregroundPath.transition()
+                .duration(750)
+                .ease("linear")
+
                 .attr("d", path);
-            //console.log(foregroundPath.exit());
             foregroundPath.exit().remove();
 
             // Add a group element for each dimension.
@@ -181,8 +188,7 @@ function parallelPlot(){
                 var a = g.selectAll(".axis")
                 .each(function(d) {
                     d3.select(this).call(axis.scale(y[d]));
-                    })
-                //.call(axis.scale(y[d]))
+                });
             }
 
 
