@@ -111,8 +111,12 @@ function main(){
           var pplotData = rates;
         }
         doUpdate(mySlider.value());
-        d3.select("#parallelPlot")
-        .datum(pplotData)
+        //d3.select('#chart').transition().duration(750).call(chart);
+        ch = d3.select("#parallelPlot");
+        ch.datum(pplotData);
+        ch.transition()
+        .duration(750)
+        .ease("linear")
         .call(pplot)
       });
 
@@ -173,7 +177,10 @@ function ready(error,topo,csv){
     .attr("class","legend")
     .attr("transform","translate(" + pplot.containerWidth() + ",50)")
     .style("font-size","12px")
-    .call(d3.legend);
+    .call(d3.legend)
+
+
+
 
   //Aquí definimos las funciones a ejecutar en los mouse in/out de la
   //gráfica
