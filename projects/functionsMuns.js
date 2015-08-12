@@ -162,7 +162,7 @@ function doUpdate(year) {
     muns.data(carto_features)
         .select("title")
         .text(function (d) {
-          return d.properties.estado+ ': '+d.properties[year];
+          return d.properties.nom_mun+ ': '+d.properties[year];
         });
 
     muns.transition()
