@@ -15,41 +15,74 @@ d3.selection.prototype.moveToFront = function() {
 };
 
 //Every year
-var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"]
-var map = d3.select("#map");
-
-i = 0;//year counter
-var muns = map.append("g")
-    .attr("id", "edos")
-    .selectAll("path");
-
-var proj_NE =  d3.geo.mercator()
-  .center([-102.2, 25.75])
-  .scale(2000)
-  .translate([100,150]);
-
-var quantize = d3.scale.quantize()
-  .domain([0, 1200000])
-  .range(d3.range(5).map(function(i) { return "q" + i; }));
-
+var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"];
 var topology,
     geometries,
     carto_features,
     maxPerYear,
     maxRatePerYear,
     mySlider,
-    cartoValue = 'cantidad';
+    cartoValue = 'cantidad',
+    projections,
+    cartos;
 
-//Insnantiate the cartogram with desired projection
-var carto = d3.cartogram()
-    .projection(proj_NE)
+
+var quantize = d3.scale.quantize()
+  .domain([0, 1200000])
+  .range(d3.range(5).map(function(i) { return "q" + i; }));
+
+//Las proyecciones para los 4 mapas
+var proj_NO =  d3.geo.mercator()
+  .center([-107.1, 27.57])
+  .scale(2000)
+  .translate([-70,150]);
+
+var proj_NE =  d3.geo.mercator()
+  .center([-102.2, 25.75])
+  .scale(1500)
+  .translate([350,250]);
+
+var proj_Oeste =  d3.geo.mercator()
+  .center([-102.11, 19.17])
+  .scale(2400)
+  .translate([200,200]);
+
+var proj_Centro =  d3.geo.mercator()
+  .center([-98.62, 19.42])
+  .scale(4000)
+  .translate([200,175]);
+
+//Insnantiate the cartograms with desired projections
+var cartoNO = d3.cartogram()
+    .projection(proj_NO)
     .properties(function (d) {
-        // this add the "properties" properties to the geometries
         return d.properties;
     });
 
-function main(){
+var cartoNE = d3.cartogram()
+    .projection(proj_NE)
+    .properties(function (d) {
+        return d.properties;
+    });
 
+var cartoOeste = d3.cartogram()
+    .projection(proj_Oeste)
+    .properties(function (d) {
+        return d.properties;
+    });
+
+var cartoCentro = d3.cartogram()
+    .projection(proj_Centro)
+    .properties(function (d) {
+        return d.properties;
+    });
+
+//arrays con todas las proyecciones y los cartogramas
+projections = [proj_NO,proj_NE,proj_Oeste,proj_Centro]
+cartos = [cartoNO,cartoNE,cartoOeste,cartoCentro]
+
+
+function main(){
   //Slider
   var axis = d3.svg.axis().orient("bottom").ticks(8)
   axis.tickFormat(d3.format("d"))
@@ -66,7 +99,13 @@ function main(){
   //Build a queue to load all data files
   queue()
   .defer(d3.json, 'data/desaparecidos_NE.json')
+  .defer(d3.json, 'data/desaparecidos_NO.json')
+  .defer(d3.json, 'data/desaparecidos_Oeste.json')
+  .defer(d3.json, 'data/desaparecidos_Centro.json')
   .defer(d3.csv, 'data/ne.csv')
+  .defer(d3.csv, 'data/no.csv')
+  .defer(d3.csv, 'data/oeste.csv')
+  .defer(d3.csv, 'data/centro.csv')
   .await(ready);
 
   //Add listener to radio buttons and set cartogram variable
@@ -92,24 +131,15 @@ window.onload = main
 
 
 
-function ready(error,topo,csv){
+function ready(error,topoNE,csvNE,topoNO,csvNO){
   //Compute max values for each year and store it in maxPerYear
-  maxPerYear = {}
-  maxRatePerYear = {}
-  years.forEach(function(y){
-    thisYear = [];
-    thisRate = [];
-    csv.forEach(function(element){
-      thisYear.push(parseInt(element[y]));
-      var rate = (parseFloat(element[y])/parseFloat(element['POB1']))*100000;
-      thisRate.push(rate);
-    })
-    maxPerYear[y] = d3.max(thisYear);
-    maxRatePerYear[y] = d3.max(thisRate);
-  });
-
+  if (error) {return error;}
+  //esta linea convierte al objeto arguments en un array normal
+  arguments = [].slice.call(arguments)
+  topologies = arguments.slice(1,5)//aquí guardamos las topologías
+  csvs = arguments.slice(5)//aquí guardamos los datos
   //make map
-  makeMap(topo);
+  makeMaps(topologies);
 
 }
 
@@ -177,48 +207,37 @@ function doUpdate(year) {
 }
 
 //Draws original map
-function makeMap(data){
-  topology = data;
-  geometries = topology.objects.desaparecidos_NE.geometries;
+function makeMaps(data){
+  var mapsWrapper = d3.select('#maps');
 
-  //these 2 below create the map and are based on the topojson implementation
-  var features = carto.features(topology, geometries),
-      path = d3.geo.path()
-          .projection(proj_NE);
+  data.forEach(function(topoJSON,i){
+    // mapsWrapper.append("div")
+    //   .style({
+    //     width: "300px",
+    //     heigth: "300px"
+    //   });
+    var svg = mapsWrapper.append('svg')
+        .attr({
+            width: "350px",
+            height: "350px"
+        });
+    var muns = svg.append("g")
+        .attr("id", "muns")
+        .selectAll("path");
+    //var topology = topoJSON;
+    var layer = Object.keys(topoJSON.objects)[0]
+    var geometry = topoJSON.objects[layer].geometries;
+    var carto = cartos[i]
+    var features = carto.features(topoJSON, geometry),
+        path = d3.geo.path()
+          .projection(projections[i]);
 
-  muns = muns.data(features)
-      .enter()
-      .append("path")
-      .attr("id", function (d) {
-          return d.properties.nom_mun;
-      })
-      .attr("class", function(d) {
-        return quantize(d.properties['POB1']);
-      })
-      .attr("d", path);
+    muns.data(features)
+        .enter()
+        .append("path")
+        .attr("d", path);
 
-  // darle a los muns borde de color on hover
-  muns.on('mouseover', function(d,i){
-    muns.style("stroke", function(d,j){
-      return j != i ? "black" : "steelblue";
-    })
-    .style("stroke-width", function(d,j){
-      return j != i ? ".5" : 2.5;
-    })
-    var sel = d3.select(this);
-    sel.moveToFront();
   });
-  // TODO: ligar el on hover de aqui con los de la grafica y leyenda
-  muns.on('mouseout', function(d,i){
-    muns.style("stroke", "black")
-    .style("stroke-width", ".5");
-  });
-
-  muns.append("title")
-    .text(function (d) {
-      return d.properties.nom_mun;
-    });
-
 }
 
 function doAnimation(startYear){
@@ -233,4 +252,22 @@ function doAnimation(startYear){
     },frameCount*1500,i);
     frameCount ++;
   }
+}
+
+
+function computeMax(data){
+  maxPerYear = {}
+  maxRatePerYear = {}
+  years.forEach(function(y){
+    thisYear = [];
+    thisRate = [];
+    csv.forEach(function(element){
+      thisYear.push(parseInt(element[y]));
+      var rate = (parseFloat(element[y])/parseFloat(element['POB1']))*100000;
+      thisRate.push(rate);
+    })
+    maxPerYear[y] = d3.max(thisYear);
+    maxRatePerYear[y] = d3.max(thisRate);
+  });
+  return [maxPerYear,maxRatePerYear];
 }

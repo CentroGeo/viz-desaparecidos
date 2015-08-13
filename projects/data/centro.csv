@@ -1,0 +1,536 @@
+POB1,nom_estado,nom_mun,2006,2007,2008,2009,2010,2011,2012,2013,2014
+20077,Hidalgo,Acatlán,0,0,2,0,0,0,0,0,0
+40583,Hidalgo,Acaxochitlán,0,0,1,0,0,1,0,1,0
+54299,Hidalgo,Actopan,0,0,0,0,0,0,1,0,0
+8994,Hidalgo,Agua Blanca de Iturbide,0,0,0,0,0,0,0,0,0
+17055,Hidalgo,Ajacuba,0,0,0,0,0,0,0,0,0
+18879,Hidalgo,Alfajayucan,0,0,0,0,0,0,0,0,0
+11294,Hidalgo,Almoloya,0,0,0,0,0,0,0,0,0
+42563,Hidalgo,Apan,1,0,0,0,0,1,0,0,0
+17374,Hidalgo,El Arenal,0,0,0,0,0,0,0,0,0
+26904,Hidalgo,Atitalaquia,0,0,0,2,0,0,0,0,0
+19452,Hidalgo,Atlapexco,0,0,0,0,0,0,0,0,0
+26940,Hidalgo,Atotonilco el Grande,0,0,0,0,0,1,0,0,0
+31078,Hidalgo,Atotonilco de Tula,0,0,0,0,0,0,0,0,0
+16962,Hidalgo,Calnali,0,0,0,0,0,0,0,0,0
+18427,Hidalgo,Cardonal,0,0,0,1,0,0,0,0,0
+54500,Hidalgo,Cuautepec de Hinojosa,0,2,0,2,0,0,0,0,0
+12271,Hidalgo,Chapantongo,0,0,0,0,0,0,0,0,0
+22402,Hidalgo,Chapulhuacán,0,0,0,0,0,0,0,0,0
+17436,Hidalgo,Chilcuautla,0,0,0,1,0,0,0,0,0
+2800,Hidalgo,Eloxochitlán,0,0,0,0,0,0,0,0,0
+13357,Hidalgo,Emiliano Zapata,0,0,0,0,0,0,0,0,0
+13830,Hidalgo,Epazoyucan,0,0,0,0,1,1,2,1,0
+33901,Hidalgo,Francisco I. Madero,0,0,0,0,0,0,0,1,0
+17182,Hidalgo,Huasca de Ocampo,0,0,0,0,0,0,1,1,0
+22621,Hidalgo,Huautla,0,0,0,0,0,1,0,0,0
+12779,Hidalgo,Huazalingo,0,0,0,0,0,0,0,0,0
+23563,Hidalgo,Huehuetla,1,0,0,0,0,1,0,0,0
+122905,Hidalgo,Huejutla de Reyes,0,0,0,3,1,0,0,0,0
+44253,Hidalgo,Huichapan,0,0,0,0,0,0,0,0,0
+86363,Hidalgo,Ixmiquilpan,0,0,0,2,2,2,1,0,0
+12804,Hidalgo,Jacala de Ledezma,0,0,0,0,0,0,0,0,0
+10933,Hidalgo,Jaltocán,0,0,0,0,0,0,0,0,0
+3193,Hidalgo,Juárez Hidalgo,0,0,0,0,0,0,0,2,0
+9843,Hidalgo,Lolotla,0,0,0,0,0,0,0,0,0
+11429,Hidalgo,Metepec,0,0,0,0,0,0,0,0,0
+9364,Hidalgo,San Agustín Metzquititlán,0,0,0,0,0,1,0,0,0
+21623,Hidalgo,Metztitlán,0,0,0,0,0,0,0,1,0
+7980,Hidalgo,Mineral del Chico,0,0,0,0,0,1,1,0,0
+13864,Hidalgo,Mineral del Monte,0,0,0,0,0,0,1,0,0
+10452,Hidalgo,La Misión,0,0,0,0,0,0,0,0,0
+42834,Hidalgo,Mixquiahuala de Juárez,0,0,0,0,0,0,0,0,0
+11209,Hidalgo,Molango de Escamilla,0,0,0,0,0,0,0,0,0
+6614,Hidalgo,Nicolás Flores,0,0,0,0,0,0,0,0,0
+15666,Hidalgo,Nopala de Villagrán,0,0,0,0,0,0,0,0,0
+8963,Hidalgo,Omitlán de Juárez,0,0,0,0,0,0,0,0,0
+39181,Hidalgo,San Felipe Orizatlán,0,0,0,0,0,0,0,0,0
+5049,Hidalgo,Pacula,0,0,0,0,0,1,0,0,0
+267862,Hidalgo,Pachuca de Soto,1,1,8,5,11,59,13,2,0
+18244,Hidalgo,Pisaflores,0,0,0,0,0,0,0,0,0
+22217,Hidalgo,Progreso de Obregón,0,0,0,0,0,0,0,0,0
+127404,Hidalgo,Mineral de la Reforma,0,0,0,1,2,6,6,0,1
+32057,Hidalgo,San Agustín Tlaxiaca,0,0,0,0,0,0,0,0,0
+18137,Hidalgo,San Bartolo Tutotepec,0,0,0,0,0,0,0,0,0
+32773,Hidalgo,San Salvador,0,0,0,0,0,0,1,0,0
+16014,Hidalgo,Santiago de Anaya,0,0,0,0,0,0,1,2,0
+33495,Hidalgo,Santiago Tulantepec de Lugo Guerre,0,0,0,0,1,2,0,0,0
+14851,Hidalgo,Singuilucan,0,0,0,0,1,1,0,0,0
+16865,Hidalgo,Tasquillo,0,0,0,0,0,0,0,0,0
+35067,Hidalgo,Tecozautla,0,0,0,0,0,0,0,0,1
+17206,Hidalgo,Tenango de Doria,0,0,0,0,0,0,0,0,0
+51664,Hidalgo,Tepeapulco,0,0,0,0,0,0,0,0,0
+29125,Hidalgo,Tepehuacán de Guerrero,0,0,0,0,0,0,0,0,0
+80612,Hidalgo,Tepeji del Río de Ocampo,0,0,0,0,0,0,0,0,0
+9940,Hidalgo,Tepetitlán,0,0,0,0,0,0,0,0,0
+11112,Hidalgo,Tetepango,0,0,0,0,0,0,0,0,0
+11654,Hidalgo,Villa de Tezontepec,0,0,0,0,0,1,1,0,0
+48025,Hidalgo,Tezontepec de Aldama,0,0,0,0,0,0,0,0,0
+14037,Hidalgo,Tianguistengo,0,0,0,0,0,0,0,0,0
+97461,Hidalgo,Tizayuca,0,1,0,0,3,4,2,2,0
+17153,Hidalgo,Tlahuelilpan,0,0,0,0,0,0,0,0,0
+9753,Hidalgo,Tlahuiltepa,0,0,0,0,0,0,0,0,0
+10248,Hidalgo,Tlanalapa,0,0,0,0,0,0,0,0,0
+36382,Hidalgo,Tlanchinol,0,2,0,0,0,2,0,0,0
+26758,Hidalgo,Tlaxcoapan,0,0,0,0,0,0,0,0,0
+13228,Hidalgo,Tolcayuca,0,0,0,0,0,0,0,0,0
+103919,Hidalgo,Tula de Allende,0,0,0,1,0,0,0,0,0
+151584,Hidalgo,Tulancingo de Bravo,0,3,6,10,4,7,2,2,0
+19067,Hidalgo,Xochiatipan,0,0,0,0,0,0,0,1,0
+7320,Hidalgo,Xochicoatlán,0,0,0,0,0,0,0,0,0
+23607,Hidalgo,Yahualica,0,0,0,0,0,0,0,0,0
+32437,Hidalgo,Zacualtipán de Ángeles,0,0,0,0,0,0,0,0,0
+18036,Hidalgo,Zapotlán de Juárez,0,1,0,0,0,0,0,0,0
+39143,Hidalgo,Zempoala,0,0,0,0,0,1,1,0,0
+38516,Hidalgo,Zimapán,0,0,0,0,1,3,0,0,0
+60918,México,Acambay,0,0,0,0,1,0,2,0,0
+136558,México,Acolman,0,0,0,0,0,2,1,0,1
+44823,México,Aculco,0,0,0,0,0,0,0,0,0
+14856,México,Almoloya de Alquisiras,0,0,0,0,0,0,0,1,0
+147653,México,Almoloya de Juárez,0,0,0,0,0,1,1,2,4
+10886,México,Almoloya del Río,0,0,0,0,0,1,0,0,0
+22868,México,Amanalco,0,0,0,0,0,0,1,0,0
+26334,México,Amatepec,0,0,0,0,0,0,0,0,0
+48421,México,Amecameca,0,0,1,0,0,4,1,3,30
+27521,México,Apaxco,0,0,0,0,0,0,0,1,0
+56243,México,Atenco,0,0,0,0,0,0,2,0,0
+10299,México,Atizapán,0,1,0,0,0,0,1,0,0
+489937,México,Atizapán de Zaragoza,0,0,0,0,3,6,3,4,4
+93718,México,Atlacomulco,0,1,0,0,0,0,0,1,10
+27663,México,Atlautla,0,1,0,0,0,0,0,0,0
+25559,México,Axapusco,0,0,0,0,0,0,0,0,0
+8864,México,Ayapango,0,0,0,0,0,0,0,0,0
+47033,México,Calimaya,0,0,0,0,0,0,0,1,1
+34101,México,Capulhuac,0,0,0,1,0,1,0,0,0
+278064,México,Coacalco de Berriozábal,0,1,0,3,4,2,3,1,5
+36174,México,Coatepec Harinas,0,1,0,1,0,0,0,0,0
+12142,México,Cocotitlán,0,0,0,0,0,0,0,0,0
+39030,México,Coyotepec,0,0,1,0,2,0,1,0,0
+140059,México,Cuautitlán,0,7,1,5,4,5,4,10,34
+310130,México,Chalco,0,6,3,10,3,6,5,4,7
+27551,México,Chapa de Mota,0,0,0,0,0,0,0,0,0
+9676,México,Chapultepec,0,0,0,0,0,0,0,0,0
+26191,México,Chiautla,0,0,0,0,0,0,0,0,0
+175053,México,Chicoloapan,0,1,1,0,0,2,0,3,2
+22819,México,Chiconcuac,0,0,0,0,0,0,0,1,0
+614453,México,Chimalhuacán,1,5,5,7,3,9,4,6,6
+33455,México,Donato Guerra,0,0,0,0,0,0,1,0,1
+1656107,México,Ecatepec de Morelos,0,5,3,15,12,13,6,12,50
+9369,México,Ecatzingo,0,0,0,0,0,0,0,0,0
+100023,México,Huehuetoca,0,1,0,3,1,0,2,3,2
+39864,México,Hueypoxtla,0,0,0,0,0,1,0,1,0
+242167,México,Huixquilucan,0,2,0,3,1,4,2,0,2
+10308,México,Isidro Fabela,0,0,0,0,0,0,0,1,0
+467361,México,Ixtapaluca,1,1,6,4,4,5,7,12,5
+33541,México,Ixtapan de la Sal,0,0,0,2,0,0,0,2,1
+6629,México,Ixtapan del Oro,0,0,0,0,0,0,0,0,0
+141482,México,Ixtlahuaca,0,0,0,0,0,6,0,0,2
+26865,México,Xalatlaco,0,0,0,0,0,0,0,1,0
+26328,México,Jaltenco,0,0,0,0,0,0,0,0,0
+83755,México,Jilotepec,0,0,0,0,0,0,0,0,0
+17970,México,Jilotzingo,0,2,0,0,1,0,0,1,1
+69031,México,Jiquipilco,0,0,0,0,0,0,0,1,2
+61204,México,Jocotitlán,0,0,0,0,1,0,0,0,0
+12840,México,Joquicingo,0,0,0,0,0,0,0,0,0
+23497,México,Juchitepec,0,0,0,0,0,0,1,1,0
+134799,México,Lerma,1,0,0,2,0,5,2,2,2
+25624,México,Malinalco,0,0,0,1,0,0,0,0,0
+50240,México,Melchor Ocampo,0,0,0,0,1,0,2,3,0
+214162,México,Metepec,0,2,2,2,1,1,6,4,8
+11712,México,Mexicaltzingo,0,0,0,0,0,0,0,1,0
+28426,México,Morelos,0,0,0,0,0,0,0,0,0
+833779,México,Naucalpan de Juárez,1,9,4,4,10,8,10,6,10
+1110565,México,Nezahualcóyotl,5,9,6,5,8,13,10,26,81
+31691,México,Nextlalpan,0,0,0,0,1,0,0,0,1
+366602,México,Nicolás Romero,0,3,0,2,3,2,8,1,9
+8895,México,Nopaltepec,0,0,0,0,0,0,0,0,0
+61805,México,Ocoyoacac,0,0,0,0,0,1,1,3,0
+31803,México,Ocuilan,1,1,0,0,0,0,0,1,1
+34446,México,El Oro,0,1,0,0,0,1,0,0,0
+34232,México,Otumba,0,0,0,0,0,0,2,0,0
+4864,México,Otzoloapan,0,0,0,0,0,0,0,0,0
+78146,México,Otzolotepec,0,0,0,0,0,1,1,4,0
+27207,México,Ozumba,0,0,0,0,0,1,0,1,0
+4147,México,Papalotla,0,0,0,0,0,0,0,0,0
+253845,México,La Paz,0,5,1,2,1,4,2,2,7
+13002,México,Polotitlán,0,0,0,0,0,0,0,0,0
+12748,México,Rayón,0,0,0,0,0,0,0,0,0
+22152,México,San Antonio la Isla,0,0,0,0,0,0,0,1,1
+121396,México,San Felipe del Progreso,0,0,0,0,0,1,1,0,2
+24851,México,San Martín de las Pirámid,0,0,0,0,0,0,0,0,0
+72579,México,San Mateo Atenco,0,0,0,0,1,1,0,2,3
+6272,México,San Simón de Guerrero,0,0,0,0,0,0,0,0,0
+9111,México,Santo Tomás,0,0,0,0,0,0,0,0,0
+11798,México,Soyaniquilpan de Juárez,0,0,0,0,0,0,0,0,0
+25809,México,Sultepec,0,0,0,0,0,0,0,0,0
+364579,México,Tecámac,0,3,1,3,1,2,3,2,2
+71077,México,Tejupilco,0,0,0,1,0,0,3,1,0
+11206,México,Temamatla,0,1,0,0,0,0,0,0,0
+35987,México,Temascalapa,0,0,0,0,0,1,1,1,0
+62695,México,Temascalcingo,0,0,0,0,0,0,0,0,0
+32870,México,Temascaltepec,0,0,0,0,0,0,0,0,0
+90010,México,Temoaya,0,1,0,1,0,0,0,1,1
+90946,México,Tenancingo,1,1,0,3,0,2,3,4,3
+10578,México,Tenango del Aire,0,0,0,0,0,0,0,0,0
+77965,México,Tenango del Valle,0,0,0,1,0,0,2,0,1
+63115,México,Teoloyucán,0,0,0,1,2,0,2,2,0
+53010,México,Teotihuacán,0,0,0,0,0,0,0,1,0
+27944,México,Tepetlaoxtoc,0,0,0,0,0,0,0,0,0
+18327,México,Tepetlixpa,0,0,0,1,0,0,0,0,0
+88559,México,Tepotzotlán,0,0,0,1,0,3,2,1,0
+33907,México,Tequixquiac,0,0,0,0,0,0,0,0,0
+17390,México,Texcaltitlán,0,0,0,0,0,0,0,0,0
+5111,México,Texcalyacac,0,0,0,0,0,0,0,0,0
+235151,México,Texcoco,0,0,0,0,3,3,1,1,9
+35199,México,Tezoyuca,0,0,0,0,1,0,0,0,1
+70682,México,Tianguistenco,0,0,2,1,0,1,1,3,0
+15391,México,Timilpan,0,0,0,0,0,0,1,0,0
+46130,México,Tlalmanalco,0,0,0,0,0,2,0,0,0
+664225,México,Tlalnepantla de Baz,3,8,3,4,4,10,15,3,35
+32997,México,Tlatlaya,0,0,2,0,0,0,0,1,0
+819561,México,Toluca,1,6,5,15,8,36,23,58,50
+12099,México,Tonatico,0,0,0,0,0,0,0,0,0
+131567,México,Tultepec,0,0,0,2,0,0,1,3,1
+486998,México,Tultitlán,0,3,3,3,3,4,6,3,11
+61599,México,Valle de Bravo,0,2,0,0,0,0,3,3,1
+47709,México,Villa de Allende,0,0,0,0,0,0,1,2,0
+44881,México,Villa del Carbón,0,0,0,0,0,0,0,0,3
+59991,México,Villa Guerrero,0,0,0,0,0,1,0,0,0
+94369,México,Villa Victoria,0,0,0,1,0,1,0,1,2
+46331,México,Xonacatlán,0,0,0,0,0,0,0,4,0
+4051,México,Zacazonapan,0,0,0,0,0,0,0,0,0
+15121,México,Zacualpan,0,0,0,0,0,1,0,0,0
+167759,México,Zinacantepec,0,0,0,0,1,1,1,7,3
+16365,México,Zumpahuacán,0,0,1,0,0,0,0,0,0
+159647,México,Zumpango,0,0,1,1,1,0,1,3,2
+511675,México,Cuautitlán Izcalli,0,0,0,0,0,0,0,0,2
+357645,México,Valle de Chalco Solidarid,3,5,2,3,5,8,4,3,3
+27781,México,Luvianos,0,0,0,1,0,0,0,0,0
+91345,México,San José del Rincón,0,0,0,0,0,0,0,0,0
+10216,México,Tonanitla,0,0,0,0,0,0,1,0,0
+17021,Morelos,Amacuzac,0,0,0,0,0,0,0,0,1
+18895,Morelos,Atlatlahucan,0,0,0,0,0,0,0,0,0
+33695,Morelos,Axochiapan,0,0,0,0,0,0,0,0,0
+78866,Morelos,Ayala,0,0,0,0,0,0,0,1,0
+9471,Morelos,Coatlán del Río,0,0,0,0,0,0,0,0,0
+175207,Morelos,Cuautla,0,0,0,0,1,0,0,0,0
+365168,Morelos,Cuernavaca,0,0,0,1,0,1,1,10,14
+83485,Morelos,Emiliano Zapata,0,0,0,0,0,0,0,2,1
+17340,Morelos,Huitzilac,0,0,0,0,0,0,0,0,0
+15646,Morelos,Jantetelco,0,0,0,0,0,0,0,0,0
+196953,Morelos,Jiutepec,0,0,0,0,0,0,1,1,6
+55115,Morelos,Jojutla,0,0,0,0,0,0,1,1,1
+14604,Morelos,Jonacatepec,0,0,0,0,0,0,0,0,0
+9456,Morelos,Mazatepec,0,0,0,0,0,0,0,1,0
+24990,Morelos,Miacatlán,0,0,0,0,0,0,0,0,0
+16858,Morelos,Ocuituco,0,0,0,0,0,0,0,0,0
+61585,Morelos,Puente de Ixtla,0,0,0,0,0,0,0,2,0
+108126,Morelos,Temixco,0,0,0,0,0,0,0,1,9
+25346,Morelos,Tepalcingo,0,0,0,0,0,0,0,0,0
+41629,Morelos,Tepoztlán,0,0,0,0,0,0,0,0,3
+7441,Morelos,Tetecala,0,0,0,0,0,0,0,0,0
+19138,Morelos,Tetela del Volcán,0,0,0,0,0,0,0,0,0
+6636,Morelos,Tlalnepantla,0,0,0,0,0,0,0,0,0
+48881,Morelos,Tlaltizapán,0,0,0,0,0,0,0,0,0
+31534,Morelos,Tlaquiltenango,0,0,0,0,0,0,0,2,0
+16543,Morelos,Tlayacapan,0,0,0,0,0,0,0,0,0
+10789,Morelos,Totolapan,0,0,0,0,0,0,0,0,0
+63382,Morelos,Xochitepec,0,0,0,0,1,0,1,3,2
+97827,Morelos,Yautepec,0,0,0,0,0,3,0,1,0
+46809,Morelos,Yecapixtla,0,0,0,0,0,0,0,0,0
+35063,Morelos,Zacatepec de Hidalgo,0,0,0,0,0,0,1,2,0
+9087,Morelos,Zacualpan de Amilpas,0,0,0,0,0,0,0,0,0
+14641,Morelos,Temoac,0,0,0,0,0,0,0,0,0
+60353,Puebla,Acajete,0,0,0,0,0,0,1,0,0
+8916,Puebla,Acateno,0,0,0,0,0,0,0,0,0
+33865,Puebla,Acatlán,0,0,0,0,0,0,0,0,3
+52078,Puebla,Acatzingo,0,0,0,0,0,0,2,0,0
+2881,Puebla,Acteopan,0,0,0,0,0,0,0,0,0
+14754,Puebla,Ahuacatlán,0,0,0,0,0,0,0,0,0
+3403,Puebla,Ahuatlán,0,0,0,0,0,0,0,0,0
+10457,Puebla,Ahuazotepec,0,0,0,0,0,0,0,0,0
+2008,Puebla,Ahuehuetitla,0,0,0,0,0,0,0,0,0
+60621,Puebla,Ajalpan,0,0,0,0,0,0,0,0,0
+1770,Puebla,Albino Zertuche,0,0,0,0,0,0,0,0,0
+6288,Puebla,Aljojuca,0,0,0,0,0,0,0,0,0
+18920,Puebla,Altepexi,0,0,0,0,0,0,0,0,0
+5004,Puebla,Amixtlán,0,0,0,0,0,0,0,0,0
+100964,Puebla,Amozoc,0,0,0,0,0,0,1,3,0
+7848,Puebla,Aquixtla,0,0,0,0,0,0,0,0,0
+25386,Puebla,Atempan,0,0,0,0,0,0,0,0,0
+3734,Puebla,Atexcal,0,0,0,0,0,0,0,0,0
+127062,Puebla,Atlixco,0,0,0,0,1,0,3,1,6
+6426,Puebla,Atoyatempan,0,0,1,0,0,0,0,0,0
+1228,Puebla,Atzala,0,0,0,0,0,0,0,0,0
+11684,Puebla,Atzitzihuacán,0,0,0,0,0,0,0,0,0
+8408,Puebla,Atzitzintla,0,0,0,0,0,0,0,0,0
+947,Puebla,Axutla,0,0,0,0,0,0,0,0,0
+8153,Puebla,Ayotoxco de Guerrero,0,0,0,0,0,0,0,0,0
+13730,Puebla,Calpan,0,0,0,0,0,0,0,0,0
+4177,Puebla,Caltepec,0,0,0,0,0,0,0,0,0
+2476,Puebla,Camocuautla,0,0,0,0,0,0,0,0,0
+3791,Puebla,Caxhuacan,0,0,0,0,0,0,0,0,1
+758,Puebla,Coatepec,0,0,0,0,0,0,0,0,0
+2964,Puebla,Coatzingo,0,0,0,0,0,0,0,0,0
+1283,Puebla,Cohetzala,0,0,0,0,0,0,0,0,0
+4763,Puebla,Cohuecan,0,0,0,0,0,0,0,0,0
+34596,Puebla,Coronango,0,0,0,0,0,0,0,0,0
+19639,Puebla,Coxcatlán,0,0,0,0,0,0,0,0,0
+14205,Puebla,Coyomeapan,0,0,0,0,0,0,0,0,0
+2339,Puebla,Coyotepec,0,0,0,0,0,0,0,0,0
+8709,Puebla,Cuapiaxtla de Madero,0,0,0,0,0,0,0,0,0
+9212,Puebla,Cuautempan,0,0,0,0,0,0,0,0,0
+9538,Puebla,Cuautinchán,0,0,0,0,0,0,0,0,0
+79153,Puebla,Cuautlancingo,0,0,0,0,0,0,0,0,0
+3062,Puebla,Cuayuca de Andrade,0,0,0,0,0,0,0,0,0
+47433,Puebla,Cuetzalan del Progreso,0,0,0,0,0,0,0,3,1
+15367,Puebla,Cuyoaco,0,0,0,0,0,0,0,0,0
+43882,Puebla,Chalchicomula de Sesma,0,0,0,0,0,0,0,1,5
+6992,Puebla,Chapulco,0,0,0,0,0,0,0,0,0
+19037,Puebla,Chiautla,0,0,0,0,0,0,0,0,0
+18762,Puebla,Chiautzingo,0,0,0,0,0,0,0,0,0
+15767,Puebla,Chiconcuautla,0,0,0,0,0,0,0,0,0
+24148,Puebla,Chichiquila,0,0,0,0,0,0,0,0,0
+33935,Puebla,Chietla,0,0,0,0,0,0,0,0,0
+1227,Puebla,Chigmecatitlán,0,0,0,0,0,0,0,0,0
+57909,Puebla,Chignahuapan,0,0,0,0,0,0,0,0,5
+30254,Puebla,Chignautla,0,0,0,0,0,0,1,0,0
+4699,Puebla,Chila,0,0,0,0,0,0,0,0,0
+1237,Puebla,Chila de la Sal,0,0,0,0,0,0,0,0,0
+7463,Puebla,Honey,0,0,0,0,0,0,0,0,0
+19257,Puebla,Chilchotla,0,0,0,0,0,0,0,0,0
+2468,Puebla,Chinantla,0,0,0,0,0,0,0,0,0
+6946,Puebla,Domingo Arenas,0,0,0,0,0,0,0,0,0
+12575,Puebla,Eloxochitlán,0,0,0,0,0,0,0,0,0
+4594,Puebla,Epatlán,0,0,0,0,0,0,0,0,0
+13785,Puebla,Esperanza,0,0,0,0,0,0,0,0,1
+16270,Puebla,Francisco Z. Mena,0,0,0,0,0,0,0,0,0
+19040,Puebla,General Felipe Ángeles,0,0,0,0,0,0,0,0,0
+6276,Puebla,Guadalupe,0,0,0,0,0,0,0,0,0
+16551,Puebla,Guadalupe Victoria,0,0,0,0,0,0,0,0,0
+7718,Puebla,Hermenegildo Galeana,0,0,0,0,0,0,0,0,0
+25373,Puebla,Huaquechula,0,0,0,0,0,0,0,0,0
+6643,Puebla,Huatlatlauca,0,0,0,0,0,0,0,0,0
+97753,Puebla,Huauchinango,0,0,2,0,0,2,3,3,6
+15689,Puebla,Huehuetla,0,0,0,0,0,0,0,0,0
+8679,Puebla,Huehuetlán el Chico,0,0,0,0,0,0,0,0,0
+63457,Puebla,Huejotzingo,0,0,0,0,0,0,3,3,6
+11868,Puebla,Hueyapan,0,0,0,0,0,0,0,0,0
+26689,Puebla,Hueytamalco,0,0,0,0,0,0,0,0,0
+5734,Puebla,Hueytlalpan,0,0,0,0,0,0,0,0,0
+13982,Puebla,Huitzilan de Serdán,0,0,0,0,0,0,0,0,0
+5306,Puebla,Huitziltepec,0,0,0,0,0,0,0,0,0
+2833,Puebla,Atlequizayán,0,0,0,0,0,0,0,0,0
+3695,Puebla,Ixcamilpa de Guerrero,0,0,0,0,0,0,0,0,0
+8093,Puebla,Ixcaquixtla,0,0,0,0,0,0,0,0,0
+25326,Puebla,Ixtacamaxtitlán,0,0,0,0,0,0,0,0,0
+6811,Puebla,Ixtepec,0,0,0,0,0,0,0,0,0
+72799,Puebla,Izúcar de Matamoros,0,0,0,0,0,1,3,2,9
+12547,Puebla,Jalpan,0,0,0,0,0,0,0,0,0
+12662,Puebla,Jolalpan,0,0,0,0,0,0,0,0,0
+4598,Puebla,Jonotla,0,0,0,0,0,0,0,0,0
+12997,Puebla,Jopala,0,0,0,0,0,0,0,0,0
+18540,Puebla,Juan C. Bonilla,0,0,0,0,0,0,0,0,0
+10213,Puebla,Juan Galindo,0,0,0,0,0,0,0,0,0
+5223,Puebla,Juan N. Méndez,0,0,0,0,0,0,0,0,0
+7767,Puebla,Lafragua,0,0,0,0,0,0,0,0,0
+31532,Puebla,Libres,0,0,1,0,0,0,0,0,0
+484,Puebla,La Magdalena Tlatlauquitepec,0,0,0,0,0,0,0,0,0
+2633,Puebla,Mazapiltepec de Juárez,0,0,0,0,0,0,0,0,0
+2216,Puebla,Mixtla,0,0,0,0,0,0,0,0,0
+6218,Puebla,Molcaxac,0,0,0,0,0,0,0,0,0
+18954,Puebla,Cañada Morelos,0,0,0,0,0,0,0,0,0
+9707,Puebla,Naupan,0,0,1,0,0,0,0,0,0
+3598,Puebla,Nauzontla,0,0,0,0,0,0,0,0,0
+12011,Puebla,Nealtican,0,0,0,0,0,0,0,0,0
+6009,Puebla,Nicolás Bravo,0,0,0,0,1,0,0,0,0
+27292,Puebla,Nopalucan,0,0,0,0,0,0,0,0,0
+4825,Puebla,Ocotepec,0,0,0,0,0,0,0,0,0
+25720,Puebla,Ocoyucan,0,0,0,0,0,0,0,0,0
+11641,Puebla,Olintla,0,0,0,0,0,0,0,0,0
+16575,Puebla,Oriental,0,0,0,0,0,0,0,2,2
+20618,Puebla,Pahuatlán,0,0,0,0,0,0,0,0,0
+42887,Puebla,Palmar de Bravo,0,0,0,0,0,0,0,0,1
+18435,Puebla,Pantepec,0,0,0,0,0,0,0,1,0
+9382,Puebla,Petlalcingo,0,0,0,0,0,0,0,0,0
+4585,Puebla,Piaxtla,0,0,0,0,0,0,0,0,0
+1539819,Puebla,Puebla,0,3,11,42,37,42,34,65,174
+47281,Puebla,Quecholac,0,0,0,0,0,0,0,0,0
+21275,Puebla,Quimixtlán,0,0,0,0,0,0,0,0,0
+14052,Puebla,Rafael Lara Grajales,0,0,0,0,0,0,1,1,0
+25553,Puebla,Los Reyes de Juárez,0,0,0,0,0,0,1,0,0
+100439,Puebla,San Andrés Cholula,0,0,0,0,0,0,1,2,2
+5110,Puebla,San Antonio Cañada,0,0,1,0,0,0,0,0,0
+1132,Puebla,San Diego la Mesa Tochimiltzin,0,0,0,0,0,0,0,0,0
+9426,Puebla,San Felipe Teotlalcingo,0,0,0,0,0,0,1,0,0
+4120,Puebla,San Felipe Tepatlán,0,0,0,0,0,0,0,0,0
+14454,Puebla,San Gabriel Chilac,0,0,0,0,0,0,0,0,0
+8170,Puebla,San Gregorio Atzompa,0,0,0,0,0,0,0,0,0
+5826,Puebla,San Jerónimo Tecuanipan,0,0,0,0,0,0,0,0,0
+3777,Puebla,San Jerónimo Xayacatlán,0,0,0,0,0,0,0,0,0
+8087,Puebla,San José Chiapa,0,0,0,0,0,0,0,0,0
+12699,Puebla,San José Miahuatlán,0,0,0,0,0,0,0,0,0
+3416,Puebla,San Juan Atenco,0,0,0,0,0,0,0,0,0
+872,Puebla,San Juan Atzompa,0,0,0,0,0,0,0,0,0
+141112,Puebla,San Martín Texmelucan,0,0,0,0,0,0,6,9,10
+651,Puebla,San Martín Totoltepec,0,0,0,0,0,0,0,0,0
+19310,Puebla,San Matías Tlalancaleca,0,0,0,0,0,0,0,0,0
+586,Puebla,San Miguel Ixitlán,0,0,0,0,0,0,0,0,0
+11598,Puebla,San Miguel Xoxtla,0,0,0,0,0,1,0,0,0
+9185,Puebla,San Nicolás Buenos Aires,0,0,0,0,0,0,0,0,0
+10777,Puebla,San Nicolás de los Ranchos,0,0,0,0,0,0,0,0,0
+3554,Puebla,San Pablo Anicano,0,0,0,0,0,0,0,0,0
+120459,Puebla,San Pedro Cholula,0,0,0,0,0,3,5,4,10
+3395,Puebla,San Pedro Yeloixtlahuaca,0,0,0,0,0,0,0,0,0
+27622,Puebla,San Salvador el Seco,0,0,0,0,0,0,0,0,0
+28419,Puebla,San Salvador el Verde,0,0,0,0,0,0,0,0,0
+13541,Puebla,San Salvador Huixcolotla,0,0,0,0,0,0,0,0,0
+13534,Puebla,San Sebastián Tlacotepec,0,0,0,0,0,0,0,0,0
+874,Puebla,Santa Catarina Tlaltempan,0,0,0,0,0,0,0,0,0
+5944,Puebla,Santa Inés Ahuatempan,0,0,0,1,0,0,0,0,0
+8040,Puebla,Santa Isabel Cholula,0,0,0,0,0,0,0,0,0
+21993,Puebla,Santiago Miahuatlán,0,0,0,0,0,1,0,0,0
+7060,Puebla,Huehuetlán el Grande,0,0,0,0,0,0,0,0,0
+8016,Puebla,Santo Tomás Hueyotlipan,0,0,0,0,0,0,0,0,0
+11706,Puebla,Soltepec,0,0,0,0,0,0,0,0,0
+20267,Puebla,Tecali de Herrera,0,0,0,0,0,0,0,0,0
+71571,Puebla,Tecamachalco,0,0,0,0,0,0,0,1,18
+5420,Puebla,Tecomatlán,0,0,0,0,0,0,0,0,0
+274906,Puebla,Tehuacán,0,0,9,1,0,1,6,15,38
+11328,Puebla,Tehuitzingo,0,0,0,0,0,0,0,0,0
+6772,Puebla,Tenampulco,0,0,0,0,0,0,0,0,0
+4024,Puebla,Teopantlán,0,0,0,0,0,0,0,0,0
+3121,Puebla,Teotlalco,0,0,0,0,0,0,0,0,0
+19002,Puebla,Tepanco de López,0,0,0,0,0,0,0,0,0
+4244,Puebla,Tepango de Rodríguez,0,0,0,0,0,0,0,0,0
+16275,Puebla,Tepatlaxco de Hidalgo,0,0,0,0,0,0,1,0,0
+74708,Puebla,Tepeaca,0,0,0,0,0,2,2,11,50
+1141,Puebla,Tepemaxalco,0,0,0,0,0,0,0,0,0
+8056,Puebla,Tepeojuma,0,0,0,0,0,0,0,0,0
+10240,Puebla,Tepetzintla,0,0,0,0,0,0,0,0,0
+6580,Puebla,Tepexco,0,0,0,0,0,0,0,0,0
+20478,Puebla,Tepexi de Rodríguez,0,0,0,0,0,0,0,1,0
+16390,Puebla,Tepeyahualco,0,0,0,0,0,0,0,0,0
+3365,Puebla,Tepeyahualco de Cuauhtémoc,0,0,0,0,0,0,0,0,0
+25793,Puebla,Tetela de Ocampo,0,0,0,0,0,1,2,1,2
+5689,Puebla,Teteles de Ávila Castillo,0,0,0,0,0,0,0,0,1
+92246,Puebla,Teziutlán,0,0,1,0,0,1,1,3,5
+9807,Puebla,Tianguismanalco,0,0,0,0,0,0,0,0,0
+8401,Puebla,Tilapa,0,0,0,0,0,0,0,0,0
+48268,Puebla,Tlacotepec de Benito Juárez,0,0,0,0,0,0,0,0,0
+17115,Puebla,Tlacuilotepec,0,0,0,0,0,0,0,0,1
+28568,Puebla,Tlachichuca,0,0,0,0,0,0,0,0,0
+36518,Puebla,Tlahuapan,0,0,0,0,0,0,0,0,0
+6269,Puebla,Tlaltenango,0,0,0,0,0,0,0,0,0
+4833,Puebla,Tlanepantla,0,0,0,0,0,0,0,0,0
+19826,Puebla,Tlaola,0,0,0,0,0,0,0,0,0
+6406,Puebla,Tlapacoya,0,0,0,0,0,0,0,0,0
+8404,Puebla,Tlapanalá,0,0,0,0,0,0,0,0,0
+51495,Puebla,Tlatlauquitepec,0,0,0,0,0,0,0,0,1
+5415,Puebla,Tlaxco,0,0,0,0,0,0,0,0,0
+17028,Puebla,Tochimilco,0,0,0,0,0,1,0,0,0
+19701,Puebla,Tochtepec,0,0,0,0,0,0,0,0,0
+1155,Puebla,Totoltepec de Guerrero,0,0,0,0,0,0,0,0,0
+9245,Puebla,Tulcingo,0,0,0,0,0,0,0,0,0
+5983,Puebla,Tuzamapan de Galeana,0,0,0,0,0,0,0,0,0
+6242,Puebla,Tzicatlacoyan,0,0,0,0,0,0,0,0,0
+27890,Puebla,Venustiano Carranza,0,0,0,0,0,0,0,1,5
+24217,Puebla,Vicente Guerrero,0,0,0,0,0,0,0,1,0
+1649,Puebla,Xayacatlán de Bravo,0,0,0,0,0,0,0,0,0
+75601,Puebla,Xicotepec,0,0,1,0,0,0,1,3,0
+1241,Puebla,Xicotlán,0,0,0,0,0,0,0,0,0
+37910,Puebla,Xiutetelco,0,0,0,0,0,2,0,0,0
+3911,Puebla,Xochiapulco,0,0,0,0,0,0,0,0,0
+3187,Puebla,Xochiltepec,0,0,0,0,0,0,0,0,0
+12249,Puebla,Xochitlán de Vicente Suárez,0,0,0,0,0,1,0,0,0
+6049,Puebla,Xochitlán Todos Santos,0,0,0,0,0,0,0,0,0
+7514,Puebla,Yaonáhuac,0,0,0,0,0,0,0,0,0
+22976,Puebla,Yehualtepec,0,0,0,0,0,0,0,0,0
+4224,Puebla,Zacapala,0,0,0,0,0,0,0,0,0
+53295,Puebla,Zacapoaxtla,0,0,0,0,0,1,2,1,0
+76296,Puebla,Zacatlán,0,0,1,0,0,2,2,2,7
+8220,Puebla,Zapotitlán,0,0,0,0,0,1,0,0,0
+5608,Puebla,Zapotitlán de Méndez,0,0,0,0,0,0,0,0,0
+15444,Puebla,Zaragoza,0,0,0,0,0,0,0,0,0
+19438,Puebla,Zautla,0,0,0,0,0,0,0,0,0
+12530,Puebla,Zihuateutla,0,0,0,0,0,0,0,0,0
+15690,Puebla,Zinacatepec,0,0,0,0,0,0,0,0,0
+4599,Puebla,Zongozotla,0,0,0,0,0,0,0,0,0
+2639,Puebla,Zoquiapan,0,0,0,0,0,0,0,0,0
+20529,Puebla,Zoquitlán,0,0,0,0,0,0,0,0,0
+9875,Tlaxcala,Amaxac de Guerrero,0,0,0,0,0,0,0,0,0
+13361,Tlaxcala,Apetatitlán de Antonio Carvajal,0,0,0,0,0,0,0,0,1
+6018,Tlaxcala,Atlangatepec,0,0,0,0,0,0,0,0,0
+15935,Tlaxcala,Altzayanca,0,0,0,0,0,0,0,0,0
+76492,Tlaxcala,Apizaco,0,0,0,0,0,0,0,2,2
+44807,Tlaxcala,Calpulalpan,0,0,0,0,0,0,0,0,0
+15368,Tlaxcala,El Carmen Tequexquitla,0,0,0,0,0,0,0,0,0
+13671,Tlaxcala,Cuapiaxtla,0,0,0,0,0,0,0,0,0
+5066,Tlaxcala,Cuaxomulco,0,0,0,0,0,0,0,0,0
+66149,Tlaxcala,Chiautempan,0,0,0,0,0,0,0,0,0
+4285,Tlaxcala,Muñoz de Domingo Arenas,0,0,0,0,0,0,0,0,0
+8399,Tlaxcala,Españita,0,0,0,0,0,0,0,0,0
+84979,Tlaxcala,Huamantla,0,0,0,0,0,0,0,0,0
+13879,Tlaxcala,Hueyotlipan,0,0,0,0,0,0,0,0,0
+35162,Tlaxcala,Ixtacuixtla de Mariano Matamoros,0,0,0,0,0,0,0,0,0
+6791,Tlaxcala,Ixtenco,0,0,0,0,0,0,0,0,0
+9740,Tlaxcala,Mazatecochco de José María Morelos,0,0,0,0,0,0,0,0,0
+35084,Tlaxcala,Contla de Juan Cuamatzi,0,0,0,1,0,0,0,0,0
+18725,Tlaxcala,Tepetitla de Lardizábal,0,0,0,0,0,0,0,0,0
+8474,Tlaxcala,Sanctórum de Lázaro Cárdenas,0,0,0,0,0,0,0,0,0
+16640,Tlaxcala,Nanacamilpa de Mariano Arista,0,0,0,0,0,1,1,0,0
+5711,Tlaxcala,Acuamanala de Miguel Hidalgo,0,0,0,0,0,0,0,0,0
+23621,Tlaxcala,Natívitas,0,0,0,0,0,0,0,0,0
+25128,Tlaxcala,Panotla,0,0,0,0,0,0,0,0,0
+69615,Tlaxcala,San Pablo del Monte,0,0,0,0,0,0,0,0,0
+17968,Tlaxcala,Santa Cruz Tlaxcala,0,0,0,0,0,0,0,0,0
+11763,Tlaxcala,Tenancingo,0,0,0,0,0,0,0,0,0
+21671,Tlaxcala,Teolocholco,0,0,0,0,0,0,1,0,0
+11048,Tlaxcala,Tepeyanco,0,0,0,0,0,0,0,0,0
+13775,Tlaxcala,Terrenate,0,0,0,0,0,0,0,0,0
+28760,Tlaxcala,Tetla de la Solidaridad,0,0,0,0,0,0,0,0,0
+12410,Tlaxcala,Tetlatlahuca,0,0,0,0,0,0,0,1,0
+89795,Tlaxcala,Tlaxcala,0,0,0,1,0,0,0,2,0
+39939,Tlaxcala,Tlaxco,0,0,0,0,0,0,0,0,0
+5589,Tlaxcala,Tocatlán,0,0,0,0,0,0,0,0,0
+20625,Tlaxcala,Totolac,0,0,0,0,0,0,0,0,0
+8224,Tlaxcala,Zitlaltepec de Trinidad Sánchez Sa,0,0,0,0,0,0,0,0,0
+14611,Tlaxcala,Tzompantepec,0,0,0,0,0,0,0,0,0
+21769,Tlaxcala,Xaloztoc,0,0,0,0,0,0,0,0,0
+9777,Tlaxcala,Xaltocan,0,0,0,0,0,0,0,0,0
+26997,Tlaxcala,Papalotla de Xicohténcatl,0,0,0,0,0,0,0,0,0
+12255,Tlaxcala,Xicohtzinco,0,0,0,0,0,0,0,0,0
+33081,Tlaxcala,Yauhquemecan,0,0,0,0,0,0,0,0,0
+38654,Tlaxcala,Zacatelco,0,0,0,0,0,0,0,0,0
+5687,Tlaxcala,Benito Juárez,0,0,0,0,0,0,0,0,0
+4146,Tlaxcala,Emiliano Zapata,0,0,0,0,0,0,0,0,0
+2769,Tlaxcala,Lázaro Cárdenas,0,0,0,0,0,0,0,0,0
+16834,Tlaxcala,La Magdalena Tlaltelulco,0,0,0,0,0,0,0,0,0
+5064,Tlaxcala,San Damián Texoloc,0,0,0,0,0,0,0,0,0
+9880,Tlaxcala,San Francisco Tetlanohcan,0,0,0,0,0,0,0,0,0
+3581,Tlaxcala,San Jerónimo Zacualpan,0,0,0,0,0,0,0,1,0
+5660,Tlaxcala,San José Teacalco,0,0,0,0,0,0,0,0,0
+6821,Tlaxcala,San Juan Huactzinco,0,0,0,0,0,0,0,0,0
+5045,Tlaxcala,San Lorenzo Axocomanitla,0,0,0,0,0,0,0,0,0
+2833,Tlaxcala,San Lucas Tecopilco,0,0,0,0,0,0,0,0,0
+6857,Tlaxcala,Santa Ana Nopalucan,0,0,0,0,0,0,0,0,0
+4349,Tlaxcala,Santa Apolonia Teacalco,0,0,0,0,0,0,0,0,0
+7992,Tlaxcala,Santa Catarina Ayometla,0,0,0,0,0,0,0,0,0
+6296,Tlaxcala,Santa Cruz Quilehtla,0,0,0,0,0,0,0,0,0
+4436,Tlaxcala,Santa Isabel Xiloxoxtla,0,0,0,0,0,0,0,0,0
+414711,Distrito Federal,Azcapotzalco,0,0,0,1,1,10,4,4,1
+620416,Distrito Federal,Coyoacán,0,0,0,5,2,11,5,4,1
+186391,Distrito Federal,Cuajimalpa de Morelos,0,0,0,2,1,1,2,2,0
+1185772,Distrito Federal,Gustavo A. Madero,0,0,0,7,4,28,18,18,3
+384326,Distrito Federal,Iztacalco,0,0,1,1,3,9,8,8,2
+1815786,Distrito Federal,Iztapalapa,0,0,0,14,5,30,23,24,3
+239086,Distrito Federal,La Magdalena Contreras,0,0,0,1,0,4,3,7,0
+130582,Distrito Federal,Milpa Alta,0,0,0,0,0,0,4,1,1
+727034,Distrito Federal,Álvaro Obregón,0,0,0,2,4,12,8,14,1
+360265,Distrito Federal,Tláhuac,0,0,0,1,0,5,4,4,1
+650567,Distrito Federal,Tlalpan,0,1,0,2,2,16,9,8,1
+415007,Distrito Federal,Xochimilco,0,0,0,0,0,9,5,2,1
+385439,Distrito Federal,Benito Juárez,0,0,0,5,0,1,3,7,0
+531831,Distrito Federal,Cuauhtémoc,0,0,0,2,8,21,10,23,4
+372889,Distrito Federal,Miguel Hidalgo,0,0,0,9,0,12,7,6,0
+430978,Distrito Federal,Venustiano Carranza,0,0,0,7,1,15,11,13,1

@@ -5,13 +5,14 @@
   <link rel="stylesheet" href="lib/d3.slider/d3.slider.css" />
   <style type="text/css">
 
-  #map-container{
+  #vis-container{
     float: left;
     width: 600px;
     height: 380px;
   }
-  #map {
-    height: 380px;
+  #maps {
+    width: 800px;
+    height: 700px;
     overflow: visible;
   }
   #controls {
@@ -30,8 +31,7 @@
     margin-left: 10%;
   }
   #options {
-      width: 600px;
-      margin: auto;
+      margin-left: 800px;
   }
   body {
     padding: 2em;
@@ -65,8 +65,8 @@
 </head>
 <body>
   <div id="wrapper">
-    <div id="map-container">
-      <svg id="map"></svg>
+    <div id="vis-container">
+      <div id="maps"></div>
       <div id="controls">
         <div id="play">Play</div>
         <div id="slider"></div>

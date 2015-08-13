@@ -1,0 +1,197 @@
+POB1,nom_estado,cve_mun,nom_mun,2006,2007,2008,2009,2010,2011,2012,2013,2014
+31401,Durango,10001,Canatlán,0,0,0,0,0,3,0,0,0
+4122,Durango,10002,Canelas,0,0,0,0,0,0,0,0,0
+4530,Durango,10003,Coneto de Comonfort,0,0,0,0,0,0,0,0,0
+33664,Durango,10004,Cuencamé,0,0,0,1,0,0,0,0,0
+582267,Durango,10005,Durango,2,11,18,30,141,51,39,18,19
+10629,Durango,10006,General Simón Bolívar,0,0,0,0,0,0,0,0,0
+327985,Durango,10007,Gómez Palacio,0,0,0,1,0,1,0,0,0
+34052,Durango,10008,Guadalupe Victoria,0,0,0,1,0,1,0,0,0
+10149,Durango,10009,Guanaceví,0,0,0,0,0,0,0,0,0
+4265,Durango,10010,Hidalgo,0,0,0,0,0,0,0,0,0
+5280,Durango,10011,Indé,0,0,0,0,0,0,0,0,0
+141043,Durango,10012,Lerdo,0,0,0,0,0,1,0,0,0
+25137,Durango,10013,Mapimí,0,0,0,0,0,0,0,0,0
+33396,Durango,10014,Mezquital,0,0,0,1,1,0,0,0,0
+12411,Durango,10015,Nazas,0,0,0,0,0,0,0,0,0
+18488,Durango,10016,Nombre de Dios,0,0,0,0,0,0,0,0,0
+9626,Durango,10017,Ocampo,0,0,0,0,0,0,0,0,0
+11320,Durango,10018,El Oro,0,0,0,0,0,1,0,0,0
+5208,Durango,10019,Otáez,0,0,0,0,0,0,0,0,0
+11927,Durango,10020,Pánuco de Coronado,0,0,0,0,0,0,1,0,0
+10473,Durango,10021,Peñón Blanco,0,0,0,0,0,0,1,0,0
+24918,Durango,10022,Poanas,0,0,0,0,0,0,0,0,0
+49162,Durango,10023,Pueblo Nuevo,0,2,0,3,1,0,2,0,0
+12788,Durango,10024,Rodeo,0,0,0,0,0,0,0,0,0
+3433,Durango,10025,San Bernardo,0,0,0,0,0,0,0,0,0
+19691,Durango,10026,San Dimas,0,0,1,0,2,0,2,1,0
+5947,Durango,10027,San Juan de Guadalupe,0,0,0,0,0,0,0,0,0
+11855,Durango,10028,San Juan del Río,0,0,0,1,0,0,0,0,0
+2181,Durango,10029,San Luis del Cordero,0,0,0,0,0,0,0,0,0
+1709,Durango,10030,San Pedro del Gallo,0,0,0,0,0,0,0,0,0
+7003,Durango,10031,Santa Clara,0,0,0,0,0,0,0,0,0
+44966,Durango,10032,Santiago Papasquiaro,0,0,0,0,4,0,0,0,0
+6761,Durango,10033,Súchil,0,0,0,0,0,0,0,0,0
+26368,Durango,10034,Tamazula,0,0,0,0,0,0,0,2,0
+10745,Durango,10035,Tepehuanes,0,0,0,1,0,1,0,0,0
+22244,Durango,10036,Tlahualilo,0,0,0,0,0,0,0,0,0
+8581,Durango,10037,Topia,0,0,0,0,0,0,0,0,0
+21117,Durango,10038,Vicente Guerrero,0,0,0,0,1,2,0,0,0
+26092,Durango,10039,Nuevo Ideal,0,0,0,0,1,0,0,0,0
+416299,Sinaloa,25001,Ahome,0,3,0,3,6,13,8,77,64
+44993,Sinaloa,25002,Angostura,0,0,0,0,1,6,5,9,9
+29999,Sinaloa,25003,Badiraguato,0,0,0,1,0,0,0,1,1
+28493,Sinaloa,25004,Concordia,0,0,0,1,1,3,2,0,0
+16697,Sinaloa,25005,Cosalá,0,0,1,0,1,2,1,0,0
+858638,Sinaloa,25006,Culiacán,2,40,54,25,86,66,102,97,69
+32998,Sinaloa,25007,Choix,0,0,0,0,0,4,5,5,1
+42907,Sinaloa,25008,Elota,1,2,3,6,9,0,3,4,1
+54131,Sinaloa,25009,Escuinapa,0,1,2,3,3,2,2,7,3
+97536,Sinaloa,25010,El Fuerte,0,0,0,0,2,6,2,16,22
+285912,Sinaloa,25011,Guasave,0,1,1,1,1,5,7,19,17
+438434,Sinaloa,25012,Mazatlán,0,2,10,2,62,59,27,64,37
+45847,Sinaloa,25013,Mocorito,0,0,0,3,9,6,2,1,4
+49380,Sinaloa,25014,Rosario,0,0,0,1,3,1,2,8,5
+79085,Sinaloa,25015,Salvador Alvarado,0,1,3,0,2,8,4,9,8
+22527,Sinaloa,25016,San Ignacio,0,0,0,6,4,2,2,0,4
+88282,Sinaloa,25017,Sinaloa,0,0,0,0,2,3,1,8,5
+135603,Sinaloa,25018,Navolato,0,1,2,0,11,26,15,9,13
+2637,Sonora,26001,Aconchi,0,0,0,0,0,0,0,0,0
+79138,Sonora,26002,Agua Prieta,0,1,7,16,13,7,28,20,45
+25848,Sonora,26003,Alamos,0,1,6,0,0,1,1,1,6
+9049,Sonora,26004,Altar,0,0,0,0,1,0,9,1,1
+1253,Sonora,26005,Arivechi,0,0,0,0,0,0,0,0,0
+3037,Sonora,26006,Arizpe,0,0,0,0,0,0,0,0,0
+625,Sonora,26007,Atil,0,0,0,0,1,0,0,0,0
+1252,Sonora,26008,Bacadéhuachi,0,0,0,0,0,0,0,0,0
+784,Sonora,26009,Bacanora,0,0,0,0,0,0,0,0,0
+1467,Sonora,26010,Bacerac,0,0,0,0,0,0,0,0,0
+1646,Sonora,26011,Bacoachi,0,0,0,0,0,0,0,0,0
+22821,Sonora,26012,Bácum,0,0,0,0,0,0,0,1,0
+1646,Sonora,26013,Banámichi,0,0,0,0,0,0,0,0,0
+3560,Sonora,26014,Baviácora,0,0,0,0,0,0,0,0,1
+1454,Sonora,26015,Bavispe,0,0,0,0,0,0,0,0,0
+5275,Sonora,26016,Benjamín Hill,0,0,0,0,0,0,0,0,0
+81309,Sonora,26017,Caborca,0,0,0,5,4,7,4,16,9
+409310,Sonora,26018,Cajeme,0,0,0,0,0,5,2,9,25
+32936,Sonora,26019,Cananea,0,0,9,3,1,2,10,7,12
+5347,Sonora,26020,Carbó,0,0,0,0,0,1,0,0,0
+1663,Sonora,26021,La Colorada,0,0,0,0,0,0,0,0,0
+958,Sonora,26022,Cucurpe,0,0,0,0,0,3,0,0,0
+6362,Sonora,26023,Cumpas,0,0,0,0,0,0,0,0,0
+813,Sonora,26024,Divisaderos,0,0,0,0,0,0,0,0,0
+54131,Sonora,26025,Empalme,0,0,0,0,0,3,3,0,1
+60717,Sonora,26026,Etchojoa,0,1,0,0,0,1,0,0,1
+8639,Sonora,26027,Fronteras,0,0,0,0,0,0,1,0,2
+1150,Sonora,26028,Granados,0,0,0,0,0,0,0,0,0
+149299,Sonora,26029,Guaymas,0,0,0,2,1,1,0,6,10
+784342,Sonora,26030,Hermosillo,1,4,7,12,3,6,7,17,39
+1350,Sonora,26031,Huachinera,0,0,0,0,0,0,0,0,0
+962,Sonora,26032,Huásabas,0,0,0,0,0,0,0,0,0
+79313,Sonora,26033,Huatabampo,0,0,0,0,0,0,0,4,6
+1154,Sonora,26034,Huépac,0,0,0,0,0,0,0,0,0
+12316,Sonora,26035,Imuris,0,0,0,0,4,1,0,4,2
+29707,Sonora,26036,Magdalena,0,0,0,0,0,0,1,3,3
+1350,Sonora,26037,Mazatán,0,0,0,0,0,0,0,0,0
+4680,Sonora,26038,Moctezuma,0,0,0,0,0,0,0,0,1
+6401,Sonora,26039,Naco,0,1,5,0,1,0,0,4,0
+2051,Sonora,26040,Nácori Chico,0,0,0,0,0,0,0,0,0
+12751,Sonora,26041,Nacozari de García,0,0,0,0,0,1,0,4,4
+157729,Sonora,26042,Navojoa,0,0,0,0,0,2,2,14,7
+220292,Sonora,26043,Nogales,0,2,0,0,2,5,9,23,43
+399,Sonora,26044,Onavas,0,0,1,0,0,0,0,0,0
+2878,Sonora,26045,Opodepe,0,0,0,0,0,0,0,0,0
+443,Sonora,26046,Oquitoa,0,0,0,0,0,0,0,0,0
+9468,Sonora,26047,Pitiquito,0,0,0,0,0,0,0,0,1
+57342,Sonora,26048,Puerto Peñasco,0,1,0,8,15,11,17,9,11
+3356,Sonora,26049,Quiriego,0,0,0,0,0,0,0,0,0
+1599,Sonora,26050,Rayón,0,0,0,0,0,0,0,0,0
+5226,Sonora,26051,Rosario,0,0,0,0,0,0,0,0,0
+6020,Sonora,26052,Sahuaripa,0,0,0,0,0,0,0,0,0
+396,Sonora,26053,San Felipe de Jesús,0,0,0,0,0,0,0,0,0
+492,Sonora,26054,San Javier,0,0,0,0,0,0,0,0,0
+178380,Sonora,26055,San Luis Río Colorado,0,1,0,0,7,4,22,13,7
+8382,Sonora,26056,San Miguel de Horcasitas,0,0,0,1,0,0,0,1,0
+1604,Sonora,26057,San Pedro de la Cueva,0,0,0,0,0,0,0,0,0
+16014,Sonora,26058,Santa Ana,0,1,0,0,0,0,3,4,1
+1998,Sonora,26059,Santa Cruz,0,0,0,0,0,1,0,0,1
+2703,Sonora,26060,Sáric,0,0,1,0,3,0,2,2,0
+1284,Sonora,26061,Soyopa,0,0,0,0,0,0,0,0,0
+1121,Sonora,26062,Suaqui Grande,0,0,0,0,0,0,0,0,0
+1365,Sonora,26063,Tepache,0,0,0,0,0,0,0,0,0
+1731,Sonora,26064,Trincheras,0,0,0,0,0,0,0,2,0
+1735,Sonora,26065,Tubutama,0,0,1,0,0,0,0,0,0
+9185,Sonora,26066,Ures,0,0,0,0,0,0,0,0,0
+1738,Sonora,26067,Villa Hidalgo,0,0,0,0,0,0,0,0,0
+1254,Sonora,26068,Villa Pesqueira,0,0,0,0,0,0,0,0,0
+6046,Sonora,26069,Yécora,0,0,0,0,0,0,0,0,0
+15652,Sonora,26070,General Plutarco Elías Cal,0,1,1,0,1,2,6,9,7
+22009,Sonora,26071,Benito Juárez,0,0,0,0,0,0,0,0,0
+14136,Sonora,26072,San Ignacio Río Muerto,0,0,0,0,0,0,0,0,1
+11457,Chihuahua,8001,Ahumada,0,1,0,0,1,0,0,0,0
+22302,Chihuahua,8002,Aldama,0,0,1,1,1,1,1,0,0
+8409,Chihuahua,8003,Allende,0,0,0,0,0,1,1,0,1
+10688,Chihuahua,8004,Aquiles Serdán,0,0,0,0,0,0,1,0,0
+23975,Chihuahua,8005,Ascensión,0,0,0,0,0,0,0,1,0
+6011,Chihuahua,8006,Bachíniva,0,0,0,1,0,0,0,0,0
+17672,Chihuahua,8007,Balleza,0,0,0,0,2,0,1,5,1
+14362,Chihuahua,8008,Batopilas,0,0,0,0,1,1,0,0,0
+28766,Chihuahua,8009,Bocoyna,0,0,0,0,0,0,0,0,0
+22378,Chihuahua,8010,Buenaventura,0,0,0,0,0,0,0,0,0
+48748,Chihuahua,8011,Camargo,0,1,1,0,3,6,2,0,1
+8795,Chihuahua,8012,Carichí,0,0,0,0,1,0,0,0,0
+10587,Chihuahua,8013,Casas Grandes,0,0,0,0,0,0,0,0,0
+2284,Chihuahua,8014,Coronado,0,0,0,0,0,0,0,0,0
+1681,Chihuahua,8015,Coyame del Sotol,0,0,0,0,0,0,0,0,0
+3982,Chihuahua,8016,La Cruz,0,0,0,0,0,0,0,0,0
+154639,Chihuahua,8017,Cuauhtémoc,0,3,20,11,19,51,44,7,5
+5414,Chihuahua,8018,Cusihuiriachi,0,0,0,0,0,0,0,0,0
+819543,Chihuahua,8019,Chihuahua,3,10,13,16,37,28,16,35,2
+8441,Chihuahua,8020,Chínipas,0,0,0,0,0,0,0,0,0
+137935,Chihuahua,8021,Delicias,0,0,0,9,9,11,3,14,2
+2911,Chihuahua,8022,Dr. Belisario Domínguez,0,0,0,0,0,0,0,0,0
+5892,Chihuahua,8023,Galeana,0,0,0,0,0,0,0,0,0
+3937,Chihuahua,8024,Santa Isabel,0,0,0,0,0,2,0,0,0
+8624,Chihuahua,8025,Gómez Farías,0,0,0,0,0,0,0,0,0
+3209,Chihuahua,8026,Gran Morelos,0,0,0,0,0,0,0,0,0
+49689,Chihuahua,8027,Guachochi,0,1,0,0,0,0,0,0,0
+6458,Chihuahua,8028,Guadalupe,0,0,0,0,0,0,0,0,0
+53499,Chihuahua,8029,Guadalupe y Calvo,0,0,0,0,1,2,0,1,0
+8998,Chihuahua,8030,Guazapares,0,0,0,0,0,0,0,0,0
+39626,Chihuahua,8031,Guerrero,0,0,0,0,0,0,1,1,0
+107061,Chihuahua,8032,Hidalgo del Parral,0,0,3,4,3,9,6,22,6
+1049,Chihuahua,8033,Huejotitán,0,0,0,0,0,0,0,0,0
+6934,Chihuahua,8034,Ignacio Zaragoza,0,0,0,0,0,0,0,0,0
+10953,Chihuahua,8035,Janos,0,0,0,0,0,0,0,2,0
+41265,Chihuahua,8036,Jiménez,0,0,0,0,1,0,0,1,0
+1332131,Chihuahua,8037,Juárez,10,69,52,62,67,79,46,64,94
+4953,Chihuahua,8038,Julimes,0,0,0,0,0,0,1,2,0
+4025,Chihuahua,8039,López,0,0,0,0,0,0,0,0,0
+29611,Chihuahua,8040,Madera,0,0,0,0,0,1,0,0,1
+1921,Chihuahua,8041,Maguarichi,0,0,0,0,0,0,0,0,0
+1601,Chihuahua,8042,Manuel Benavides,0,0,0,0,0,0,0,0,0
+3104,Chihuahua,8043,Matachí,0,0,0,0,0,0,0,0,0
+4499,Chihuahua,8044,Matamoros,0,0,0,0,0,0,1,1,0
+43833,Chihuahua,8045,Meoqui,0,0,0,3,1,6,3,0,0
+8343,Chihuahua,8046,Morelos,0,0,0,0,0,0,0,0,0
+5312,Chihuahua,8047,Moris,0,0,0,0,0,0,0,0,0
+22880,Chihuahua,8048,Namiquipa,0,0,1,0,2,0,0,0,0
+2849,Chihuahua,8049,Nonoava,0,0,0,0,0,0,0,0,0
+59337,Chihuahua,8050,Nuevo Casas Grandes,0,0,0,0,0,0,0,0,5
+7546,Chihuahua,8051,Ocampo,0,0,0,0,0,0,0,0,0
+26304,Chihuahua,8052,Ojinaga,0,1,2,0,9,18,14,6,0
+4799,Chihuahua,8053,Praxedis G. Guerrero,0,0,0,0,0,0,0,0,2
+8012,Chihuahua,8054,Riva Palacio,0,0,0,0,0,0,0,1,0
+16785,Chihuahua,8055,Rosales,0,0,0,0,0,0,2,3,0
+2235,Chihuahua,8056,Rosario,0,0,0,0,0,0,0,0,0
+2290,Chihuahua,8057,San Francisco de Borja,0,0,0,0,0,0,0,0,0
+2983,Chihuahua,8058,San Francisco de Conchos,0,0,0,0,0,0,0,3,0
+4753,Chihuahua,8059,San Francisco del Oro,0,0,0,0,1,0,0,0,0
+10427,Chihuahua,8060,Santa Bárbara,0,0,0,1,0,0,0,0,0
+3662,Chihuahua,8061,Satevó,0,0,1,0,0,0,0,0,0
+32325,Chihuahua,8062,Saucillo,0,0,0,0,0,2,0,2,0
+6211,Chihuahua,8063,Temósachi,0,0,0,0,0,1,0,0,0
+1869,Chihuahua,8064,El Tule,0,0,0,0,0,0,0,0,0
+20386,Chihuahua,8065,Urique,0,0,0,0,1,0,0,1,0
+8200,Chihuahua,8066,Uruachi,0,0,0,0,0,0,0,0,0
+5105,Chihuahua,8067,Valle de Zaragoza,0,0,0,0,0,0,0,0,0
