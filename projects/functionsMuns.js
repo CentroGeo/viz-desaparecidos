@@ -24,7 +24,9 @@ var topology,
     mySlider,
     cartoValue = 'cantidad',
     projections,
-    cartos;
+    cartos,
+    yearlyMaxs,
+    yearlyMaxRates;
 
 
 var quantize = d3.scale.quantize()
@@ -131,13 +133,22 @@ window.onload = main
 
 
 
-function ready(error,topoNE,csvNE,topoNO,csvNO){
-  //Compute max values for each year and store it in maxPerYear
+function ready(error,topos,csvs){
+  //Nota: en realidad la función recibe 8 argumento (4 topologías y 4 csv)
+  //no hay necesidad de nombrarlos porque abajo los vamos a utilizar con
+  //arguments, que nos regresa todos los argumentos de la función.
   if (error) {return error;}
-  //esta linea convierte al objeto arguments en un array normal
-  arguments = [].slice.call(arguments)
+
+  arguments = [].slice.call(arguments)//esta linea convierte al objeto arguments en un array normal
   topologies = arguments.slice(1,5)//aquí guardamos las topologías
   csvs = arguments.slice(5)//aquí guardamos los datos
+  yearlyMaxs = []
+  yearlyMaxRates = []
+  csvs.forEach(function(region){
+    var r = computeMax(region)
+    yearlyMaxs.push(r[0]);
+    yearlyMaxRates.push(r[1]);
+  });
   //make map
   makeMaps(topologies);
 
@@ -211,11 +222,12 @@ function makeMaps(data){
   var mapsWrapper = d3.select('#maps');
 
   data.forEach(function(topoJSON,i){
-    // mapsWrapper.append("div")
-    //   .style({
-    //     width: "300px",
-    //     heigth: "300px"
-    //   });
+
+    //TODO:cada región debería colorearse de acuerdo a su propio máximo de población
+    var quantize = d3.scale.quantize()
+      .domain([0, 1600000])
+      .range(d3.range(5).map(function(i) { return "q" + i; }));
+
     var svg = mapsWrapper.append('svg')
         .attr({
             width: "350px",
@@ -235,6 +247,9 @@ function makeMaps(data){
     muns.data(features)
         .enter()
         .append("path")
+        .attr("class", function(d) {
+          return quantize(d.properties['POB1']);
+        })
         .attr("d", path);
 
   });
@@ -261,7 +276,7 @@ function computeMax(data){
   years.forEach(function(y){
     thisYear = [];
     thisRate = [];
-    csv.forEach(function(element){
+    data.forEach(function(element){
       thisYear.push(parseInt(element[y]));
       var rate = (parseFloat(element[y])/parseFloat(element['POB1']))*100000;
       thisRate.push(rate);
