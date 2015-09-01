@@ -26,7 +26,8 @@ var topology,
     projections,
     cartos,
     yearlyMaxs,
-    yearlyMaxRates;
+    yearlyMaxRates,
+    cartograms = [];
 
 
 var quantize = d3.scale.quantize()
@@ -180,41 +181,59 @@ function doUpdate(year) {
     // mapped from 0 to max+1.
     // Otherwise I get an ERROR when the propertie has 0s...
 
-    carto.value(function (d) {
-      if (cartoValue === 'cantidad'){
-        var scale = d3.scale.linear()
-          .domain([0, maxPerYear[year]])
-          .range([1, 1000]);
-        return +scale(d.properties[year]);
-      }else{
-        var scale = d3.scale.linear()
-          .domain([0, maxRatePerYear[year]])
-          .range([1, 1000]);
-        var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
-        return +scale(rate);
-      }
+    carto_features = new Array(4);
+    cartos.forEach(function(carto,i){
+      carto.value(function (d) {
+        if (cartoValue === 'cantidad'){
+          var scale = d3.scale.linear()
+            .domain([0, maxPerYear[year]])
+            .range([1, 1000]);
+          return +scale(d.properties[year]);
+        }else{
+          var scale = d3.scale.linear()
+            .domain([0, maxRatePerYear[year]])
+            .range([1, 1000]);
+          var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
+          return +scale(rate);
+        }
+      });
+      if (carto_features[i] == undefined){
+        var layer = Object.keys(topologies[i].objects)[0]
+        carto_features[i] = carto(topologies[i], topologies[i].objects[layer].geometries).features;
+      };
     });
 
-    if (carto_features == undefined)
-        //this regenrates the topology features for the new map based on
-        carto_features = carto(topology, geometries).features;
+    // if (carto_features == undefined)
+    //     //this regenrates the topology features for the new map based on
+    //     carto_features = carto(topology, geometries).features;
 
     //update the map data
-    muns.data(carto_features)
-        .select("title")
-        .text(function (d) {
-          return d.properties.nom_mun+ ': '+d.properties[year];
-        });
+    //var cartograms = d3.selectAll(".mapa").selectAll("g").selectAll("path")
+    //console.log(cartograms);
+    // cartograms.each(function(e){
+    //   console.log(e);
+    // });
+    cartograms.forEach(function(region,i){
+      //var paths = region[0].selectAll("path");
+      // region = [region]
+      // console.log(JSON.stringify(region));
+      region.data(carto_features[i])
+          .select("title")
+          .text(function (d) {
+            return d.properties.nom_mun+ ': '+d.properties[year];
+          });
 
-    muns.transition()
-        .duration(900)
-        .each("end", function () {
-            d3.select("#click_to_run").text("Listo!")
-        })
-        .attr("d", carto.path)
-        .call(endAll, function () {
-          carto_features = undefined;
-        });
+      region.transition()
+          .duration(900)
+          .each("end", function () {
+              d3.select("#click_to_run").text("Listo!")
+          })
+          .attr("d", cartos[i].path)
+          .call(endAll, function () {
+            carto_features[i] = undefined;
+          });
+    })
+
 }
 
 //Draws original map
@@ -222,29 +241,33 @@ function makeMaps(data){
   var mapsWrapper = d3.select('#maps');
 
   data.forEach(function(topoJSON,i){
-
     //TODO:cada región debería colorearse de acuerdo a su propio máximo de población
     var quantize = d3.scale.quantize()
       .domain([0, 1600000])
       .range(d3.range(5).map(function(i) { return "q" + i; }));
 
+    var layer = Object.keys(topoJSON.objects)[0]
     var svg = mapsWrapper.append('svg')
+        .attr("class","mapa")
         .attr({
             width: "350px",
             height: "350px"
         });
+
     var muns = svg.append("g")
-        .attr("id", "muns")
+        .attr("class", "muns")
+        .attr("id",layer)
         .selectAll("path");
-    //var topology = topoJSON;
-    var layer = Object.keys(topoJSON.objects)[0]
+
+
+
     var geometry = topoJSON.objects[layer].geometries;
     var carto = cartos[i]
     var features = carto.features(topoJSON, geometry),
         path = d3.geo.path()
           .projection(projections[i]);
 
-    muns.data(features)
+    muns = muns.data(features)
         .enter()
         .append("path")
         .attr("class", function(d) {
@@ -252,6 +275,7 @@ function makeMaps(data){
         })
         .attr("d", path);
 
+    cartograms.push(muns)
   });
 }
 
