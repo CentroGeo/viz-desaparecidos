@@ -27,7 +27,9 @@ var topology,
     cartos,
     yearlyMaxs,
     yearlyMaxRates,
-    cartograms = [];
+    cartograms = [],
+    cartoVariables = {};
+    //carto_features = new Array(4);
 
 
 var quantize = d3.scale.quantize()
@@ -152,6 +154,7 @@ function ready(error,topos,csvs){
   });
   //make map
   makeMaps(topologies);
+  calculateCartograms(topologies)
 
 }
 
@@ -172,54 +175,53 @@ function endAll (transition, callback) {
         });
     }
 }
-
-//Computes updated features and draws the new cartogram
-function doUpdate(year) {
-    // this sets the value to use for scaling, per state.
-    // Here I used the total number of incidenes for 2012
-    // The scaling is stretched from 0 to the max of that year and
-    // mapped from 0 to max+1.
-    // Otherwise I get an ERROR when the propertie has 0s...
-
-    carto_features = new Array(4);
-    cartos.forEach(function(carto,i){
-      carto.value(function (d) {
-        if (cartoValue === 'cantidad'){
+function calculateCartograms(topo){
+  var cartoYears = {};
+  years.forEach(function(year){
+      carto_features = Array(4)
+      cartos.forEach(function(carto,i){
+        carto.value(function (d) {
           var scale = d3.scale.linear()
             .domain([0, maxPerYear[year]])
             .range([1, 1000]);
           return +scale(d.properties[year]);
-        }else{
+        });
+        if (carto_features[i] == undefined){
+          var layer = Object.keys(topologies[i].objects)[0]
+          carto_features[i] = carto(topologies[i], topologies[i].objects[layer].geometries).features;
+        };
+      });
+      cartoYears[year] = carto_features;
+  });
+  cartoVariables['cantidad'] = cartoYears
+  years.forEach(function(year){
+      carto_features = Array(4)
+      cartos.forEach(function(carto,i){
+        carto.value(function (d) {
           var scale = d3.scale.linear()
             .domain([0, maxRatePerYear[year]])
             .range([1, 1000]);
           var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
           return +scale(rate);
-        }
+        });
+        if (carto_features[i] == undefined){
+          var layer = Object.keys(topologies[i].objects)[0]
+          carto_features[i] = carto(topologies[i], topologies[i].objects[layer].geometries).features;
+        };
       });
-      if (carto_features[i] == undefined){
-        var layer = Object.keys(topologies[i].objects)[0]
-        carto_features[i] = carto(topologies[i], topologies[i].objects[layer].geometries).features;
-      };
-    });
+      cartoYears[year] = carto_features;
+  });
+  cartoVariables['tasa'] = cartoYears
 
-    // if (carto_features == undefined)
-    //     //this regenrates the topology features for the new map based on
-    //     carto_features = carto(topology, geometries).features;
+}
+//Computes updated features and draws the new cartogram
+function doUpdate(year) {
 
-    //update the map data
-    //var cartograms = d3.selectAll(".mapa").selectAll("g").selectAll("path")
-    //console.log(cartograms);
-    // cartograms.each(function(e){
-    //   console.log(e);
-    // });
     cartograms.forEach(function(region,i){
-      //var paths = region[0].selectAll("path");
-      // region = [region]
-      // console.log(JSON.stringify(region));
-      region.data(carto_features[i])
+      region.data(cartoVariables[cartoValue][year][i])
           .select("title")
           .text(function (d) {
+            console.log(d.properties[year]);
             return d.properties.nom_mun+ ': '+d.properties[year];
           });
 
@@ -228,10 +230,7 @@ function doUpdate(year) {
           .each("end", function () {
               d3.select("#click_to_run").text("Listo!")
           })
-          .attr("d", cartos[i].path)
-          .call(endAll, function () {
-            carto_features[i] = undefined;
-          });
+          .attr("d", cartos[i].path);
     })
 
 }
