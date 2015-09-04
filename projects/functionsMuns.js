@@ -24,7 +24,12 @@ var topology,
     mySlider,
     cartoValue = 'cantidad',
     projections,
-    cartos;
+    cartos,
+    yearlyMaxs,
+    yearlyMaxRates,
+    cartograms = [],
+    cartoVariables = {};
+    //carto_features = new Array(4);
 
 
 var quantize = d3.scale.quantize()
@@ -131,15 +136,25 @@ window.onload = main
 
 
 
-function ready(error,topoNE,csvNE,topoNO,csvNO){
-  //Compute max values for each year and store it in maxPerYear
+function ready(error,topos,csvs){
+  //Nota: en realidad la función recibe 8 argumento (4 topologías y 4 csv)
+  //no hay necesidad de nombrarlos porque abajo los vamos a utilizar con
+  //arguments, que nos regresa todos los argumentos de la función.
   if (error) {return error;}
-  //esta linea convierte al objeto arguments en un array normal
-  arguments = [].slice.call(arguments)
+
+  arguments = [].slice.call(arguments)//esta linea convierte al objeto arguments en un array normal
   topologies = arguments.slice(1,5)//aquí guardamos las topologías
   csvs = arguments.slice(5)//aquí guardamos los datos
+  yearlyMaxs = []
+  yearlyMaxRates = []
+  csvs.forEach(function(region){
+    var r = computeMax(region)
+    yearlyMaxs.push(r[0]);
+    yearlyMaxRates.push(r[1]);
+  });
   //make map
   makeMaps(topologies);
+  calculateCartograms(topologies)
 
 }
 
@@ -160,50 +175,64 @@ function endAll (transition, callback) {
         });
     }
 }
+function calculateCartograms(topo){
+  var cartoYears = {};
+  years.forEach(function(year){
+      carto_features = Array(4)
+      cartos.forEach(function(carto,i){
+        carto.value(function (d) {
+          var scale = d3.scale.linear()
+            .domain([0, maxPerYear[year]])
+            .range([1, 1000]);
+          return +scale(d.properties[year]);
+        });
+        if (carto_features[i] == undefined){
+          var layer = Object.keys(topologies[i].objects)[0]
+          carto_features[i] = carto(topologies[i], topologies[i].objects[layer].geometries).features;
+        };
+      });
+      cartoYears[year] = carto_features;
+  });
+  cartoVariables['cantidad'] = cartoYears
+  years.forEach(function(year){
+      carto_features = Array(4)
+      cartos.forEach(function(carto,i){
+        carto.value(function (d) {
+          var scale = d3.scale.linear()
+            .domain([0, maxRatePerYear[year]])
+            .range([1, 1000]);
+          var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
+          return +scale(rate);
+        });
+        if (carto_features[i] == undefined){
+          var layer = Object.keys(topologies[i].objects)[0]
+          carto_features[i] = carto(topologies[i], topologies[i].objects[layer].geometries).features;
+        };
+      });
+      cartoYears[year] = carto_features;
+  });
+  cartoVariables['tasa'] = cartoYears
 
+}
 //Computes updated features and draws the new cartogram
 function doUpdate(year) {
-    // this sets the value to use for scaling, per state.
-    // Here I used the total number of incidenes for 2012
-    // The scaling is stretched from 0 to the max of that year and
-    // mapped from 0 to max+1.
-    // Otherwise I get an ERROR when the propertie has 0s...
 
-    carto.value(function (d) {
-      if (cartoValue === 'cantidad'){
-        var scale = d3.scale.linear()
-          .domain([0, maxPerYear[year]])
-          .range([1, 1000]);
-        return +scale(d.properties[year]);
-      }else{
-        var scale = d3.scale.linear()
-          .domain([0, maxRatePerYear[year]])
-          .range([1, 1000]);
-        var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
-        return +scale(rate);
-      }
-    });
+    cartograms.forEach(function(region,i){
+      region.data(cartoVariables[cartoValue][year][i])
+          .select("title")
+          .text(function (d) {
+            console.log(d.properties[year]);
+            return d.properties.nom_mun+ ': '+d.properties[year];
+          });
 
-    if (carto_features == undefined)
-        //this regenrates the topology features for the new map based on
-        carto_features = carto(topology, geometries).features;
+      region.transition()
+          .duration(900)
+          .each("end", function () {
+              d3.select("#click_to_run").text("Listo!")
+          })
+          .attr("d", cartos[i].path);
+    })
 
-    //update the map data
-    muns.data(carto_features)
-        .select("title")
-        .text(function (d) {
-          return d.properties.nom_mun+ ': '+d.properties[year];
-        });
-
-    muns.transition()
-        .duration(900)
-        .each("end", function () {
-            d3.select("#click_to_run").text("Listo!")
-        })
-        .attr("d", carto.path)
-        .call(endAll, function () {
-          carto_features = undefined;
-        });
 }
 
 //Draws original map
@@ -211,32 +240,41 @@ function makeMaps(data){
   var mapsWrapper = d3.select('#maps');
 
   data.forEach(function(topoJSON,i){
-    // mapsWrapper.append("div")
-    //   .style({
-    //     width: "300px",
-    //     heigth: "300px"
-    //   });
+    //TODO:cada región debería colorearse de acuerdo a su propio máximo de población
+    var quantize = d3.scale.quantize()
+      .domain([0, 1600000])
+      .range(d3.range(5).map(function(i) { return "q" + i; }));
+
+    var layer = Object.keys(topoJSON.objects)[0]
     var svg = mapsWrapper.append('svg')
+        .attr("class","mapa")
         .attr({
             width: "350px",
             height: "350px"
         });
+
     var muns = svg.append("g")
-        .attr("id", "muns")
+        .attr("class", "muns")
+        .attr("id",layer)
         .selectAll("path");
-    //var topology = topoJSON;
-    var layer = Object.keys(topoJSON.objects)[0]
+
+
+
     var geometry = topoJSON.objects[layer].geometries;
     var carto = cartos[i]
     var features = carto.features(topoJSON, geometry),
         path = d3.geo.path()
           .projection(projections[i]);
 
-    muns.data(features)
+    muns = muns.data(features)
         .enter()
         .append("path")
+        .attr("class", function(d) {
+          return quantize(d.properties['POB1']);
+        })
         .attr("d", path);
 
+    cartograms.push(muns)
   });
 }
 
@@ -261,7 +299,7 @@ function computeMax(data){
   years.forEach(function(y){
     thisYear = [];
     thisRate = [];
-    csv.forEach(function(element){
+    data.forEach(function(element){
       thisYear.push(parseInt(element[y]));
       var rate = (parseFloat(element[y])/parseFloat(element['POB1']))*100000;
       thisRate.push(rate);
