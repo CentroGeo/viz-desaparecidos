@@ -4,15 +4,17 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="lib/d3.slider/d3.slider.css" />
   <link rel="stylesheet" href="lib/colorbrewer.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <style type="text/css">
 
   #map-container{
-    float: left;
-    width: 600px;
+    //margin-top: 100px;
+    width: 700px;
     height: 450px;
   }
   #map {
     height: 380px;
+    width: 700px;
     overflow: visible;
   }
   #controls {
@@ -22,18 +24,104 @@
     padding: 10px;
     margin-left: 5%;
   }
-  div#play {
-    width: 15%;
-    float: left;
-    cursor: -webkit-grab;
+  #play {
+    cursor: pointer;
+    bottom: 5px;
+    left: 7px;
+    color: #333333;
   }
+
+  .fa-stack-1x {
+    line-height: inherit;
+    left: 1.5;
+  }
+
   div#slider {
     margin-left: 10%;
   }
   #options {
-      width: 600px;
-      margin: auto;
+      margin-left: 125px;
   }
+
+  .d3-slider-horizontal {
+    height: .8em;
+    top: -2em;
+  }
+
+  .d3-slider-axis-bottom {
+    top: 1.5em;
+  }
+
+  label {
+    width: 230px;
+    border-radius: 3px;
+    border: 1px solid #D1D3D4
+  }
+
+  /* hide input */
+  input.radio:empty {
+  	margin-left: -999px;
+  }
+
+  /* style label */
+  input.radio:empty ~ label {
+  	position: relative;
+  	float: left;
+  	line-height: 2.5em;
+  	text-indent: 3.25em;
+  	//margin-top: 2em;
+    margin-left: 1em;
+  	cursor: pointer;
+  	-webkit-user-select: none;
+  	-moz-user-select: none;
+  	-ms-user-select: none;
+  	user-select: none;
+  }
+
+  input.radio:empty ~ label:before {
+  	position: absolute;
+  	display: block;
+  	top: 0;
+  	bottom: 0;
+  	left: 0;
+  	content: '';
+  	width: 2.5em;
+  	background: #D1D3D4;
+  	border-radius: 3px 0 0 3px;
+  }
+
+  /* toggle hover */
+  input.radio:hover:not(:checked) ~ label:before {
+  	content:'\2714';
+  	text-indent: .9em;
+  	color: #C2C2C2;
+  }
+
+  input.radio:hover:not(:checked) ~ label {
+  	color: #888;
+  }
+
+  /* toggle on */
+  input.radio:checked ~ label:before {
+  	content:'\2714';
+  	text-indent: .9em;
+  	color: #9CE2AE;
+  	background-color: #4DCB6D;
+  }
+
+  input.radio:checked ~ label {
+  	color: #777;
+  }
+
+  /* radio focus */
+  input.radio:focus ~ label:before {
+  	box-shadow: 0 0 0 3px #999;
+  }
+
+  .divRadio {
+	//clear: both;
+	margin: 0 0 -16 0px;
+}
 
   body {
     //padding: 2em;
@@ -67,22 +155,28 @@
   </style>
 </head>
 <body>
-  <div id="wrapper">
-    <div id="map-container">
-      <svg id="map"></svg>
-      <div id="controls">
-        <div id="play">Play</div>
-        <div id="slider"></div>
-      </div>
-    </div>
+  <div id="map-container">
     <div id="options">
-      Selecciona la variable
-      <form id="">
-        <input type="radio" name="cartogram-value" value="cantidad" checked>Cantidad de desaparecidos<br>
-        <input type="radio" name="cartogram-value" value="tasa">Tasa de desaparecidos
-      </form>
+        <div class="divRadio">
+          <input type="radio" name="cartogram-value" value="cantidad" class="radio" id="cantidad" checked/>
+          <label for="cantidad">Cantidad de desaparecidos</label>
+        </div>
+        <div class="divRadio">
+          <input type="radio" name="cartogram-value" value="tasa" class="radio" id="tasa"/>
+          <label for="tasa">Tasa de desaparecidos</label>
+        </div>
+    </div>
+    <svg id="map"></svg>
+    <div id="controls">
+      <!--<div id="play"><i class="fa fa-play fa-lg"></i></div>-->
+      <span id="play" class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-play fa-stack-1x"></i>
+      </span>
+      <div id="slider"></div>
     </div>
   </div>
+
 
   <script src="lib/d3.v3.min.js"></script>
   <script src="lib/queue.v1.min.js"></script>

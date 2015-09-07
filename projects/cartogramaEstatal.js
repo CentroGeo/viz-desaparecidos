@@ -235,6 +235,10 @@ function makeMap(data){
 }
 
 function doAnimation(startYear){
+
+  d3.select('#play').html('<i class="fa fa-play fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x"></i>')
+  .style({cursor: "not-allowed"});
+
   startIndex = years.indexOf(startYear.toString())
   if (startIndex !== 0){
     startIndex = startIndex +1;
@@ -242,7 +246,11 @@ function doAnimation(startYear){
   var frameCount = 0;
   for(i = startIndex; i < years.length; i++){
     window.setTimeout(function(step){
-      mySlider.value(parseInt(years[step]))
+      mySlider.value(parseInt(years[step]));
+      if (step == years.length-1){
+        d3.select('#play').html('<i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-play fa-stack-1x"></i>')
+        .style({cursor: "pointer"});
+      }
     },frameCount*1500,i);
     frameCount ++;
   }
