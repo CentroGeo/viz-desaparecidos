@@ -1,0 +1,94 @@
+<html>
+<head>
+  <title>Cartograms with d3 &amp; TopoJSON</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="lib/d3.slider/d3.slider.css" />
+  <link rel="stylesheet" href="lib/colorbrewer.css" />
+  <style type="text/css">
+
+  #map-container{
+    float: left;
+    width: 600px;
+    height: 450px;
+  }
+  #map {
+    height: 380px;
+    overflow: visible;
+  }
+  #controls {
+    margin-left: 600px;
+    height: 50px;
+    margin: auto;
+    padding: 10px;
+    margin-left: 5%;
+  }
+  div#play {
+    width: 15%;
+    float: left;
+    cursor: -webkit-grab;
+  }
+  div#slider {
+    margin-left: 10%;
+  }
+  #options {
+      width: 600px;
+      margin: auto;
+  }
+
+  body {
+    //padding: 2em;
+  }
+
+  /*Map style*/
+  path[class^="q"] {
+      stroke: #000000;
+      stroke-width: .5;
+  }
+  /*path[class^="q"]:hover {
+      stroke: #FFF;
+  }*/
+  .states {
+    fill: none;
+    stroke: grey;
+    stroke-linejoin: round;
+  }
+  /*Los colores para las clases de población*/
+  .q0 { fill:#fcc383; }
+  .q1 { fill:#fc9f67; }
+  .q2 { fill:#f4794e; }
+  .q3 { fill:#e65338; }
+  .q4 { fill:#ce2a1d; }
+  .q5 { fill:#b30000; }
+
+  svg {
+    font: 10px sans-serif;
+  }
+
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="map-container">
+      <svg id="map"></svg>
+      <div id="controls">
+        <div id="play">Play</div>
+        <div id="slider"></div>
+      </div>
+    </div>
+    <div id="options">
+      Selecciona la variable
+      <form id="">
+        <input type="radio" name="cartogram-value" value="cantidad" checked>Cantidad de desaparecidos<br>
+        <input type="radio" name="cartogram-value" value="tasa">Tasa de desaparecidos
+      </form>
+    </div>
+  </div>
+
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/queue.v1.min.js"></script>
+  <script src="lib/d3-cartogram/lib/colorbrewer.js"></script>
+  <script src="lib/d3-cartogram/lib/topojson.js"></script>
+  <script src="lib/d3-cartogram/cartogram.js"></script>
+  <script src="lib/d3.slider/d3.slider.js"></script>
+  <script src="cartogramaEstatal.js"></script>
+</body>
