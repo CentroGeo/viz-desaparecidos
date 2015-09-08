@@ -117,10 +117,8 @@ function main(){
     .on("click", function(evt) {
       doAnimation(mySlider.value());
     });
-
 }
 window.onload = main
-
 
 function ready(error,topo,csv){
   //Compute max values for each year and store it in maxPerYear
@@ -150,10 +148,75 @@ function ready(error,topo,csv){
   })
   cantidad = csv;
   //nest values under state key
-  byState = d3.nest().key(function(d){return d.estado}).map(csv);
-
+  byState = {};
+    var estado = d3.nest().key(function(d){return d.estado}).entries(csv);
+    //console.log(keys);
+    estado.forEach(function(d){
+      var byYear = [];
+      years.forEach(function(y){
+        byYear.push(d.values[0][y]);
+    });
+    byState[d.key] = byYear;
+  });
   //make map
   makeMap(topo);
+
+  //agregar grafica de barras dentro del svg del mapa de estados
+  var datos = byState["Tamaulipas"];
+  var barHeight = 20;
+
+  var x = d3.scale.linear()
+      .domain([0, d3.max(datos)])
+      .range([0, 190]);
+
+  var y = d3.scale.ordinal()
+      .domain(years)
+      .rangePoints([0,160]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+      .ticks(5);
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
+
+  var barG = map.append("g")
+      .attr("id", "barChart");
+
+  var chart = d3.select("#barChart")
+      .attr("width", 200)
+      .attr("height", barHeight * datos.length)
+    .append("g")
+      .attr("transform", "translate(90, 175)");
+
+  chart.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate(0, 10)")
+    .call(yAxis);
+
+  chart.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0, 179)")
+    .call(xAxis);
+
+  var bar = chart.selectAll(".bar")
+      .data(datos);
+
+  bar.enter().append("g")
+    .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; })
+    .append("rect")
+    .attr("class", "bar")
+    .attr("width", x)
+    .attr("height", barHeight - 2);
+
+  bar.append("text")
+    .attr("x", function(d) { return x(d) + 5; })
+    .attr("y", barHeight / 2)
+    .attr("dy", ".35em")
+    .text(function(d) { return d; });
+
 }
 
 //Computes updated features and draws the new cartogram
