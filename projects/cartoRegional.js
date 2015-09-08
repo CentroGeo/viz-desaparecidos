@@ -23,8 +23,7 @@ var quantize = d3.scale.quantize()
   .domain([0, 16000000])
   .range(d3.range(5).map(function(i) { return "q" + i; }));
 
-var topology,
-    geometries,
+var topologies,
     carto_features,
     yearlyMaxs,
     yearlyMaxRates,
@@ -87,6 +86,7 @@ function main(){
       .await(ready);
 
     //Add listener to radio buttons and set cartogram variable
+
     d3.selectAll('input[name="cartogram-value"]')
       .on("change", function(event,data){
           if (data === 0){
@@ -94,11 +94,12 @@ function main(){
           }else{
             cartoValue = 'tasa';
           }
-          doUpdate(mySlider.value());
+
+          doUpdate(mySlider.value(),visibleRegion);
         });
 
     //Add listener to radio buttons and set visibleRegion
-    d3.selectAll('input[name="cartogram-value"]')
+    d3.selectAll('input[name="cartogram-region"]')
       .on("change", function(event,data){
           if (data === 0){
             visibleRegion = 'noroeste';
@@ -109,6 +110,9 @@ function main(){
           }else{
             visibleRegion = 'pacifico';
           }
+          var topoIndex = mapRegions.indexOf(visibleRegion)
+          makeMap(topologies[topoIndex],visibleRegion);
+          //makeMap()
         });
 
     d3.select('#play')
@@ -121,7 +125,7 @@ window.onload = main
 
 
 function ready(error,topos,csvs){
-  //Nota: en realidad la función recibe 8 argumento (4 topologías y 4 csv)
+  //Nota: en realidad la función recibe 8 argumentos (4 topologías y 4 csvs)
   //no hay necesidad de nombrarlos porque abajo los vamos a utilizar con
   //arguments, que nos regresa todos los argumentos de la función.
   if (error) {return error;}
@@ -143,10 +147,9 @@ function ready(error,topos,csvs){
 
 //Computes updated features and draws the new cartogram
 function doUpdate(year,visibleRegion) {
+
     var regionIndex = mapRegions.indexOf(visibleRegion)
-    console.log(cartoValue);
-    carto.value(function (d) {
-      console.log('entre');
+      carto.value(function (d) {
       if (cartoValue === 'cantidad'){
         var scale = d3.scale.linear()
           .domain([0, yearlyMaxs[regionIndex][year]])
@@ -162,43 +165,46 @@ function doUpdate(year,visibleRegion) {
       }
     });
 
-    var topoIndex = mapRegions.indexOf(visibleRegion)
-    // if (carto_features == undefined)
-    //     //this regenrates the topology features for the new map based on
-    //     console.log(carto);
-    //     carto_features = carto(topologies[topoIndex], geometries).features;
+    if (carto_features == undefined)
+        //this regenrates the topology features for the new map based on
+        var layer = Object.keys(topologies[regionIndex].objects)[0]
+        carto_features = carto(topologies[regionIndex], topologies[regionIndex].objects[layer].geometries).features;
 
     //update the map data
-    // region.data(carto_features)
-    //     .select("title")
-    //     .text(function (d) {
-    //       return d.properties.estado+ ': '+d.properties[year];
-    //     });
+    region.data(carto_features)
+        .select("title")
+        .text(function (d) {
+          return 'algún título';
+        });
 
     region.transition()
         .duration(900)
         .attr("d", carto.path)
-        // .call(endAll, function () {
-        //   carto_features = undefined;
-        // });
+        .call(endAll, function () {
+          carto_features = undefined;
+        });
 }
 
 
 //Draws original map
 function makeMap(data,regionVisible){
+
   if(regionVisible === 'noroeste'){
     var center = [-107.1, 27.57];
     var scale = 1800;
-    var translate = [420,200]
+    var translate = [420,200];
   }else if (regionVisible === 'noreste') {
     var center = [-102.2, 25.75];
-    var scale = 1500;
+    var scale = 2200;
+    var translate = [380,200];
   }else if (regionVisible === 'centro') {
     var center = [-98.62, 19.42];
-    var scale = 4000;
+    var scale = 5000;
+    var translate = [420,200];
   }else {
     var center = [-102.11, 19.17];
-    var scale = 2400;
+    var scale = 3000;
+    var translate = [420,220];
   }
 
   proj =  d3.geo.mercator()
@@ -214,20 +220,23 @@ function makeMap(data,regionVisible){
       });
 
   var layer = Object.keys(data.objects)[0]
-  geometries = data.objects[layer].geometries;
+  var geometries = data.objects[layer].geometries;
 
   //these 2 below create the map and are based on the topojson implementation
   var features = carto.features(data, geometries),
       path = d3.geo.path()
           .projection(proj);
 
-  region = region.data(features)
-      .enter()
+  //Aquí hacemos el join usando cve_mun como llave para poder quitarlos en el update
+  region = region.data(features,function(d){return d.properties.cvegeo_x})
+  region.enter()
       .append("path")
       .attr("class", function(d) {
         return quantize(d.properties['POB1']);
       })
       .attr("d", path);
+
+  region.exit().remove();
 
   // darle a los estados borde de color on hover
   region.on('mouseover', function(d,i){
