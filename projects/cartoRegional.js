@@ -32,7 +32,8 @@ var topologies,
     cartoValue = 'cantidad',
     proj,
     visibleRegion = 'noroeste',
-    carto;
+    carto,
+    pause = false;
 
 //Triggers a callback at the end of the last transition
 function endAll (transition, callback) {
@@ -69,6 +70,7 @@ function main(){
     .max(2014)
     .step(1)
     .on("slide", function(evt, value) {
+      console.log(visibleRegion);
       doUpdate(value,visibleRegion);
     });
     d3.select('#slider').call(mySlider);
@@ -117,6 +119,8 @@ function main(){
 
     d3.select('#play')
     .on("click", function(evt) {
+      d3.select('#play').html('<i class="fa fa-play fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x"></i>')
+        .style({cursor: "not-allowed"});
       doAnimation(mySlider.value());
     });
 
@@ -259,9 +263,6 @@ function makeMap(data,regionVisible){
 
 function doAnimation(startYear){
 
-  d3.select('#play').html('<i class="fa fa-play fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x"></i>')
-  .style({cursor: "not-allowed"});
-
   startIndex = years.indexOf(startYear.toString())
   if (startIndex !== 0){
     startIndex = startIndex +1;
@@ -274,7 +275,7 @@ function doAnimation(startYear){
         d3.select('#play').html('<i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-play fa-stack-1x"></i>')
         .style({cursor: "pointer"});
       }
-    },frameCount*1500,i);
+    },frameCount*1800,i);
     frameCount ++;
   }
 }
