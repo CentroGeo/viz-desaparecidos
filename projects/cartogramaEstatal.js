@@ -124,6 +124,7 @@ function ready(error,topo,csv){
   //Compute max values for each year and store it in maxPerYear
   maxPerYear = {}
   maxRatePerYear = {}
+  sumPerYear = {}
   years.forEach(function(y){
     thisYear = [];
     thisRate = [];
@@ -134,6 +135,7 @@ function ready(error,topo,csv){
     })
     maxPerYear[y] = d3.max(thisYear);
     maxRatePerYear[y] = d3.max(thisRate);
+    sumPerYear[y] = d3.sum(thisYear);
   });
 
   rates = csv.map(function(obj){
@@ -162,7 +164,7 @@ function ready(error,topo,csv){
   makeMap(topo);
 
   //agregar grafica de barras dentro del svg del mapa de estados
-  var datos = byState["Tamaulipas"];
+  var datos = d3.values(sumPerYear);
   var barHeight = 20;
 
   var x = d3.scale.linear()
@@ -182,8 +184,13 @@ function ready(error,topo,csv){
       .scale(y)
       .orient("left");
 
-  var barG = map.append("g")
-      .attr("id", "barChart");
+  var barGroup = map.append("g")
+      .attr("id", "barChart")
+      .append("text")
+        .attr("class", "title")
+        .attr("x", 125)
+        .attr("y", 170)
+        .text("Totales");
 
   var chart = d3.select("#barChart")
       .attr("width", 200)
@@ -208,6 +215,7 @@ function ready(error,topo,csv){
     .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; })
     .append("rect")
     .attr("class", "bar")
+    .attr("id", function(d,i){ return "bar_"+years[i];})
     .attr("width", x)
     .attr("height", barHeight - 2);
 
@@ -254,6 +262,17 @@ function doUpdate(year) {
         .call(endAll, function () {
           carto_features = undefined;
         });
+
+    // estilar barras conforme avance el anho
+    d3.selectAll(".bar").each(function(d,i){
+
+        d3.select(this).attr("class", "bar");
+
+      if (this.id.split('_')[1] == year) {
+        d3.select(this).attr("class", "bar selected");
+      }
+    })
+
 }
 
 
