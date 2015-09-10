@@ -123,7 +123,7 @@ function main(){
           }
           var topoIndex = mapRegions.indexOf(visibleRegion)
           makeMap(topologies[topoIndex],visibleRegion);
-          //makeMap()
+          mySlider.value(2005)
         });
 
     d3.select('#play')
