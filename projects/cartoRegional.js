@@ -20,7 +20,7 @@ var region = map.append("g")
     .selectAll("path");
 
 var quantize = d3.scale.quantize()
-  .domain([0, 16000000])
+  .domain([0, 160000])
   .range(d3.range(5).map(function(i) { return "q" + i; }));
 
 var topologies,
