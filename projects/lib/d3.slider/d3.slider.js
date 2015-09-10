@@ -29,7 +29,7 @@ return function module() {
   var min = 0,
       max = 100,
       step = 0.01,
-      animate = true,
+      animate = false,
       orientation = "horizontal",
       axis = false,
       margin = 50,
@@ -409,7 +409,7 @@ return function module() {
     if (!arguments.length) return value;
     if (value) {
       moveHandle(stepValue(_));
-      dispatch.slide(d3.event,_);
+      dispatch.slide(d3.event,_,'prog');
     };
     value = _;
     return slider;

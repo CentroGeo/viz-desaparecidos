@@ -33,7 +33,9 @@ var topologies,
     proj,
     visibleRegion = 'noroeste',
     carto,
-    pause = false;
+    pause = false,
+    animating = false,
+    timer;
 
 //Triggers a callback at the end of the last transition
 function endAll (transition, callback) {
@@ -51,6 +53,7 @@ function endAll (transition, callback) {
         });
     }
 }
+
 //Insnantiate the cartogram with desired projection
 var carto = d3.cartogram()
     .projection(proj)
@@ -69,9 +72,10 @@ function main(){
     .min(2006)
     .max(2014)
     .step(1)
-    .on("slide", function(evt, value) {
-      console.log(visibleRegion);
-      doUpdate(value,visibleRegion);
+    .on("slide", function(evt, value,type) {
+      if(type == undefined){
+        doUpdate(value,visibleRegion);
+      }
     });
     d3.select('#slider').call(mySlider);
 
@@ -261,23 +265,51 @@ function makeMap(data,regionVisible){
     });
 }
 
-function doAnimation(startYear){
+function doAnimation(year){
+  //console.log(typeof(year));
+  var regionIndex = mapRegions.indexOf(visibleRegion)
+    carto.value(function (d) {
+    if (cartoValue === 'cantidad'){
+      var scale = d3.scale.linear()
+        .domain([0, yearlyMaxs[regionIndex][year]])
+        .range([1, 1000]);
 
-  startIndex = years.indexOf(startYear.toString())
-  if (startIndex !== 0){
-    startIndex = startIndex +1;
-  }
-  var frameCount = 0;
-  for(i = startIndex; i < years.length; i++){
-    window.setTimeout(function(step){
-      mySlider.value(parseInt(years[step]));
-      if (step == years.length-1){
-        d3.select('#play').html('<i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-play fa-stack-1x"></i>')
-        .style({cursor: "pointer"});
-      }
-    },frameCount*1800,i);
-    frameCount ++;
-  }
+      return +scale(d.properties[year]);
+    }else{
+      var scale = d3.scale.linear()
+        .domain([0, maxRatePerYear[year]])
+        .range([1, 1000]);
+      var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
+      return +scale(rate);
+    }
+  });
+
+  if (carto_features == undefined)
+      //this regenrates the topology features for the new map based on
+      var layer = Object.keys(topologies[regionIndex].objects)[0]
+      carto_features = carto(topologies[regionIndex], topologies[regionIndex].objects[layer].geometries).features;
+
+  //update the map data
+  region.data(carto_features)
+      .select("title")
+      .text(function (d) {
+        return 'algún título';
+      });
+
+  region.transition()
+      .duration(1500)
+      .attr("d", carto.path)
+      .call(endAll, function () {
+        carto_features = undefined;
+        var currentIndex = years.indexOf(String(year))
+        console.log(mySlider.value());
+        //console.log(currentIndex);
+        mySlider.value(year)
+        if(currentIndex < years.length-1){
+          // d3.event.preventDefault();
+          doAnimation(years[currentIndex + 1])
+        }
+      });
 }
 
 function computeMax(data){
