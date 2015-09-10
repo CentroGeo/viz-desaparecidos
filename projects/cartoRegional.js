@@ -295,16 +295,13 @@ function doAnimation(year){
       .text(function (d) {
         return 'algún título';
       });
-
+  mySlider.value(parseInt(year))
   region.transition()
       .duration(1500)
       .attr("d", carto.path)
       .call(endAll, function () {
         carto_features = undefined;
         var currentIndex = years.indexOf(String(year))
-        console.log(mySlider.value());
-        //console.log(currentIndex);
-        mySlider.value(year)
         if(currentIndex < years.length-1){
           // d3.event.preventDefault();
           doAnimation(years[currentIndex + 1])

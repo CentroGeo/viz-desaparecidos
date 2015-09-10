@@ -29,7 +29,7 @@ return function module() {
   var min = 0,
       max = 100,
       step = 0.01,
-      animate = false,
+      animate = true,
       orientation = "horizontal",
       axis = false,
       margin = 50,
@@ -261,7 +261,6 @@ return function module() {
 
   // Move slider handle on click/drag
   function moveHandle(newValue) {
-    //console.log(toType(value));
     var currentValue = toType(value) == "array"  && value.length == 2 ? value[active - 1]: value,
         oldPos = formatPercent(scale(stepValue(currentValue))),
         newPos = formatPercent(scale(stepValue(newValue))),
