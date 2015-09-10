@@ -207,7 +207,11 @@ function doUpdate(year,visibleRegion) {
     region.data(carto_features)
         .select("title")
         .text(function (d) {
-          return 'algún título';
+          if (year == 2005) {
+            return d.properties["NOMBRE"]
+          }else{
+            return d.properties["NOMBRE"] + ': ' + d.properties[String(year)];
+          }
         });
 
     region.transition()
@@ -286,17 +290,13 @@ function makeMap(data,regionVisible){
 
   region.append("title")
     .text(function (d) {
-      return d.properties.estado;
+      return d.properties["NOMBRE"];
     });
 }
 
 function doAnimation(year){
-  //console.log(typeof(year));
+
   var regionIndex = mapRegions.indexOf(visibleRegion)
-  // console.log(typeof(year));
-  //   if (year == 2005){
-  //     year = 2006;
-  //   }
     carto.value(function (d) {
       if (cartoValue === 'cantidad'){
         if(year === 2005){
@@ -331,7 +331,11 @@ function doAnimation(year){
   region.data(carto_features)
       .select("title")
       .text(function (d) {
-        return 'algún título';
+        if (year == 2005) {
+          return d.properties["NOMBRE"]
+        }else{
+          return d.properties["NOMBRE"] + ': ' + d.properties[String(year)];
+        }
       });
 
 
@@ -351,7 +355,7 @@ function doAnimation(year){
             d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",false);
             d3.select('#play-pause').classed("fa fa-play fa-stack-1x",true)
             mySlider.value(2005)
-            doUpdate(2005,visibleRegion)            
+            doUpdate(2005,visibleRegion)
           },1000)
 
         }
