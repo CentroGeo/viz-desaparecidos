@@ -63,12 +63,18 @@ var carto = d3.cartogram()
 
 function main(){
 
-    //Slider
     var axis = d3.svg.axis().orient("bottom").ticks(8)
-    axis.tickFormat(d3.format("d"))
+    var axisFormatter = function(d){
+      if(d === 2005){
+        return "Inicio"
+      }else{
+        return d
+      }
+    }
+    axis.tickFormat(axisFormatter)
     mySlider = d3.slider()
     .axis(axis)
-    .min(2006)
+    .min(2005)
     .max(2014)
     .step(1)
     .on("slide", function(evt, value,type) {
@@ -127,7 +133,7 @@ function main(){
         pause = false;
         d3.select('#play-pause').classed("fa fa-play fa-stack-1x",false);
         d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",true);
-        doAnimation(mySlider.value());
+        doAnimation(mySlider.value()+1);
       }else{
         animating = false;
         pause = true;
@@ -169,17 +175,26 @@ function doUpdate(year,visibleRegion) {
     var regionIndex = mapRegions.indexOf(visibleRegion)
       carto.value(function (d) {
       if (cartoValue === 'cantidad'){
-        var scale = d3.scale.linear()
-          .domain([0, yearlyMaxs[regionIndex][year]])
-          .range([1, 1000]);
+        if(year === 2005){
+          //escalamos por área, es decir, hacemos el mapa original
+          return d.properties["area"];
+        }else{
+          var scale = d3.scale.linear()
+            .domain([0, yearlyMaxs[regionIndex][year]])
+            .range([1, 1000]);
+            return +scale(d.properties[year]);
+        }
 
-        return +scale(d.properties[year]);
       }else{
-        var scale = d3.scale.linear()
-          .domain([0, maxRatePerYear[year]])
-          .range([1, 1000]);
-        var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
-        return +scale(rate);
+        if(year === 2005){
+          //escalamos por área, es decir, hacemos el mapa original
+          return d.properties["area"];
+        }else{
+          var scale = d3.scale.linear()
+            .domain([0, maxRatePerYear[year]])
+            .range([1, 1000]);
+          var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
+          return +scale(rate);        }
       }
     });
 
@@ -278,20 +293,33 @@ function makeMap(data,regionVisible){
 function doAnimation(year){
   //console.log(typeof(year));
   var regionIndex = mapRegions.indexOf(visibleRegion)
+  // console.log(typeof(year));
+  //   if (year == 2005){
+  //     year = 2006;
+  //   }
     carto.value(function (d) {
-    if (cartoValue === 'cantidad'){
-      var scale = d3.scale.linear()
-        .domain([0, yearlyMaxs[regionIndex][year]])
-        .range([1, 1000]);
+      if (cartoValue === 'cantidad'){
+        if(year === 2005){
+          //escalamos por área, es decir, hacemos el mapa original
+          return d.properties["area"];
+        }else{
+          var scale = d3.scale.linear()
+            .domain([0, yearlyMaxs[regionIndex][String(year)]])
+            .range([1, 1000]);
+            return +scale(d.properties[String(year)]);
+        }
 
-      return +scale(d.properties[year]);
-    }else{
-      var scale = d3.scale.linear()
-        .domain([0, maxRatePerYear[year]])
-        .range([1, 1000]);
-      var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
-      return +scale(rate);
-    }
+      }else{
+        if(year === 2005){
+          //escalamos por área, es decir, hacemos el mapa original
+          return d.properties["area"];
+        }else{
+          var scale = d3.scale.linear()
+            .domain([0, maxRatePerYear[String(year)]])
+            .range([1, 1000]);
+          var rate = 100000*(parseFloat(d.properties[String(year)])/parseFloat(d.properties["POB1"]));
+          return +scale(rate);        }
+      }
   });
 
   if (carto_features == undefined)
@@ -305,15 +333,27 @@ function doAnimation(year){
       .text(function (d) {
         return 'algún título';
       });
-  mySlider.value(parseInt(year))
+
+
   region.transition()
       .duration(1500)
       .attr("d", carto.path)
       .call(endAll, function () {
         carto_features = undefined;
         var currentIndex = years.indexOf(String(year))
+        mySlider.value(year)
         if(currentIndex < years.length-1 & pause == false){
-          doAnimation(years[currentIndex + 1])
+          doAnimation(parseInt(years[currentIndex + 1]))
+        }else{
+          animating = false;
+          pause = true;
+          window.setTimeout(function(){
+            d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",false);
+            d3.select('#play-pause').classed("fa fa-play fa-stack-1x",true)
+            mySlider.value(2005)
+            doUpdate(2005,visibleRegion)            
+          },1000)
+
         }
       });
 }
