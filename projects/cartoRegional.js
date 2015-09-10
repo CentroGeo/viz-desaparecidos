@@ -34,8 +34,7 @@ var topologies,
     visibleRegion = 'noroeste',
     carto,
     pause = false,
-    animating = false,
-    timer;
+    animating = false;
 
 //Triggers a callback at the end of the last transition
 function endAll (transition, callback) {
@@ -123,9 +122,20 @@ function main(){
 
     d3.select('#play')
     .on("click", function(evt) {
-      d3.select('#play').html('<i class="fa fa-play fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x"></i>')
-        .style({cursor: "not-allowed"});
-      doAnimation(mySlider.value());
+      if(animating == false){
+        animating = true;
+        pause = false;
+        d3.select('#play-pause').classed("fa fa-play fa-stack-1x",false);
+        d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",true);
+        doAnimation(mySlider.value());
+      }else{
+        animating = false;
+        pause = true;
+        d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",false);
+        d3.select('#play-pause').classed("fa fa-play fa-stack-1x",true);
+      }
+
+
     });
 
 }
@@ -302,8 +312,7 @@ function doAnimation(year){
       .call(endAll, function () {
         carto_features = undefined;
         var currentIndex = years.indexOf(String(year))
-        if(currentIndex < years.length-1){
-          // d3.event.preventDefault();
+        if(currentIndex < years.length-1 & pause == false){
           doAnimation(years[currentIndex + 1])
         }
       });
