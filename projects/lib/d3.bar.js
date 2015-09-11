@@ -53,35 +53,40 @@ function barChart(){
           .attr("class", "x axis")
           .attr("transform", "translate(0, 179)")
           .call(xAxis);
-      } else {
+      }/* else {
         var a = d3.selectAll(".x.axis")
         .each(function(d) {
           console.log(d);
             d3.select(this).call(xAxis.scale(x[d]));
         });
-      }
+      }*/
 
       var bar = barGroup.selectAll(".bar")
           .data(data);
 
-      bar.enter().append("g")
-        .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; })
+      bar.enter()//.append("g")
       .append("rect")
-        .attr("class", "bar")
-      .append("text")
-        .attr("y", barHeight / 2)
-        .attr("dy", ".35em")
-
+        .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; })
+      //.append("rect")
+        .attr("class", "bar");
 
       bar = barGroup.selectAll(".bar")
       .attr("id", function(d,i){ return "bar_"+years[i];})
       .attr("width", x)
       .attr("height", barHeight - 2);
 
-      barGroup.selectAll(".bar text")
-        .attr("x", function(d) { return x(d) + 5; })
-        .text(function(d) { return d; });
-
+      d3.selectAll(".bar")
+        .each(function(d,i) {
+          console.log(d);
+          //d3.select(this).call(axis.scale(y[d]));
+          d3.select("#barChart")
+          .append("text")
+            .attr("y", barHeight / 2)
+            .attr("dy", ".35em")
+              .attr("x", function(d,i) { return x(d[i]) + 5; })
+              .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; })
+              .text(function(d, i) { return d[i]; });
+        });
     })
   }
   return plot;
