@@ -35,7 +35,9 @@ var topology,
     maxRatePerYear,
     byState,
     mySlider,
-    cartoValue = 'cantidad';
+    cartoValue = 'cantidad',
+    pause = false,
+    animating = false;
 
 //Triggers a callback at the end of the last transition
 function endAll (transition, callback) {
@@ -65,10 +67,17 @@ function main(){
 
     //Slider
     var axis = d3.svg.axis().orient("bottom").ticks(8)
-    axis.tickFormat(d3.format("d"))
+    var axisFormatter = function(d){
+      if(d === 2005){
+        return "Inicio"
+      }else{
+        return d
+      }
+    }
+    axis.tickFormat(axisFormatter)
     mySlider = d3.slider()
     .axis(axis)
-    .min(2006)
+    .min(2005)
     .max(2014)
     .step(1)
     .on("slide", function(evt, value) {
@@ -78,7 +87,7 @@ function main(){
 
     //Build a queue to load all data files
     queue()
-    .defer(d3.json, 'data/des_estado_simple.json')
+    .defer(d3.json, 'data/des_estado.json')
     .defer(d3.csv, 'data/desaparecidos_estatal.csv', function(d) {
       if (d.estado === 'Baja California Sur'){
         d.estado = 'BCS';
@@ -115,7 +124,18 @@ function main(){
 
     d3.select('#play')
     .on("click", function(evt) {
-      doAnimation(mySlider.value());
+      if(animating == false){
+        animating = true;
+        pause = false;
+        d3.select('#play-pause').classed("fa fa-play fa-stack-1x",false);
+        d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",true);
+        doAnimation(mySlider.value()+1);
+      }else{
+        animating = false;
+        pause = true;
+        d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",false);
+        d3.select('#play-pause').classed("fa fa-play fa-stack-1x",true);
+      }
     });
 }
 window.onload = main
@@ -232,16 +252,26 @@ function doUpdate(year) {
 
     carto.value(function (d) {
       if (cartoValue === 'cantidad'){
-        var scale = d3.scale.linear()
-          .domain([0, maxPerYear[year]])
-          .range([1, 1000]);
-        return +scale(d.properties[year]);
+        if (year === 2005) {
+          //escalamos por área, es decir, hacemos el mapa original
+          return +d.properties["area"];
+        }else {
+          var scale = d3.scale.linear()
+            .domain([0, maxPerYear[year]])
+            .range([1, 1000]);
+          return +scale(d.properties[year]);
+        }
       }else{
-        var scale = d3.scale.linear()
-          .domain([0, maxRatePerYear[year]])
-          .range([1, 1000]);
-        var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
-        return +scale(rate);
+        if (year === 2005) {
+          //escalamos por área, es decir, hacemos el mapa original
+          return d.properties["area"];
+        }else{
+          var scale = d3.scale.linear()
+            .domain([0, maxRatePerYear[year]])
+            .range([1, 1000]);
+          var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
+          return +scale(rate);
+        }
       }
     });
 
@@ -253,7 +283,11 @@ function doUpdate(year) {
     edos.data(carto_features)
         .select("title")
         .text(function (d) {
-          return d.properties.estado+ ': '+d.properties[year];
+          if (year === 2005) {
+            return d.properties.estado
+          }else{
+            return d.properties.estado+ ': '+d.properties[year];
+          }
         });
 
     edos.transition()
@@ -265,9 +299,7 @@ function doUpdate(year) {
 
     // estilar barras conforme avance el anho
     d3.selectAll(".bar").each(function(d,i){
-
         d3.select(this).attr("class", "bar");
-
       if (this.id.split('_')[1] == year) {
         d3.select(this).attr("class", "bar selected");
       }
@@ -316,24 +348,76 @@ function makeMap(data){
     });
 }
 
-function doAnimation(startYear){
+function doAnimation(year){
 
-  d3.select('#play').html('<i class="fa fa-play fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x"></i>')
-  .style({cursor: "not-allowed"});
-
-  startIndex = years.indexOf(startYear.toString())
-  if (startIndex !== 0){
-    startIndex = startIndex +1;
-  }
-  var frameCount = 0;
-  for(i = startIndex; i < years.length; i++){
-    window.setTimeout(function(step){
-      mySlider.value(parseInt(years[step]));
-      if (step == years.length-1){
-        d3.select('#play').html('<i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-play fa-stack-1x"></i>')
-        .style({cursor: "pointer"});
+  carto.value(function (d) {
+    if (cartoValue === 'cantidad'){
+      if (year === 2005) {
+        //escalamos por área, es decir, hacemos el mapa original
+        return d.properties["area"];
+      }else {
+        var scale = d3.scale.linear()
+          .domain([0, maxPerYear[year]])
+          .range([1, 1000]);
+        return +scale(d.properties[year]);
       }
-    },frameCount*1500,i);
-    frameCount ++;
-  }
+    }else{
+      if (year === 2005) {
+        //escalamos por área, es decir, hacemos el mapa original
+        return d.properties["area"];
+      }else{
+        var scale = d3.scale.linear()
+          .domain([0, maxRatePerYear[year]])
+          .range([1, 1000]);
+        var rate = 100000*(parseFloat(d.properties[year])/parseFloat(d.properties["POB1"]));
+        return +scale(rate);
+      }
+    }
+  });
+
+  if (carto_features == undefined)
+      //this regenrates the topology features for the new map based on
+      carto_features = carto(topology, geometries).features;
+
+  //update the map data
+  edos.data(carto_features)
+      .select("title")
+      .text(function (d) {
+        if (year === 2005) {
+          return d.properties.estado
+        }else{
+          return d.properties.estado+ ': '+d.properties[year];
+        }
+      });
+
+  edos.transition()
+      .duration(900)
+      .attr("d", carto.path)
+      .call(endAll, function () {
+        carto_features = undefined;
+        var currentIndex = years.indexOf(String(year))
+        mySlider.value(year)
+        if(currentIndex < years.length-1 & pause == false){
+          doAnimation(parseInt(years[currentIndex + 1]))
+        }else{
+          window.setTimeout(function(){
+            d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",false);
+            d3.select('#play-pause').classed("fa fa-play fa-stack-1x",true)
+            if(pause === false){
+              mySlider.value(2005)
+              doUpdate(2005)
+            };
+            animating = false;
+            pause = true;
+          },1000)
+        }
+      });
+
+  // estilar barras conforme avance el anho
+  d3.selectAll(".bar").each(function(d,i){
+      d3.select(this).attr("class", "bar");
+    if (this.id.split('_')[1] == year) {
+      d3.select(this).attr("class", "bar selected");
+    }
+  })
 }
