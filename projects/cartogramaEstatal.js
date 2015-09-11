@@ -38,7 +38,8 @@ var topology,
     mySlider,
     cartoValue = 'cantidad',
     pause = false,
-    animating = false;
+    animating = false,
+    bar;
 
 //Triggers a callback at the end of the last transition
 function endAll (transition, callback) {
@@ -187,64 +188,11 @@ function ready(error,topo,csv){
   //agregar grafica de barras dentro del svg del mapa de estados
   var datos = d3.values(sumPerYear);
   var barHeight = 20;
-
-  var x = d3.scale.linear()
-      .domain([0, d3.max(datos)])
-      .range([0, 190]);
-
-  var y = d3.scale.ordinal()
-      .domain(years)
-      .rangePoints([0,160]);
-
-  var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom")
-      .ticks(5);
-
-  var yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left");
-
-  var barGroup = map.append("g")
-      .attr("id", "barChart")
-      .append("text")
-        .attr("class", "title")
-        .attr("x", 125)
-        .attr("y", 170)
-        .text("Totales");
-
-  var chart = d3.select("#barChart")
-      .attr("width", 200)
-      .attr("height", barHeight * datos.length)
-    .append("g")
-      .attr("transform", "translate(90, 175)");
-
-  chart.append("g")
-    .attr("class", "y axis")
-    .attr("transform", "translate(0, 10)")
-    .call(yAxis);
-
-  chart.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0, 179)")
-    .call(xAxis);
-
-  var bar = chart.selectAll(".bar")
-      .data(datos);
-
-  bar.enter().append("g")
-    .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; })
-    .append("rect")
-    .attr("class", "bar")
-    .attr("id", function(d,i){ return "bar_"+years[i];})
-    .attr("width", x)
-    .attr("height", barHeight - 2);
-
-  bar.append("text")
-    .attr("x", function(d) { return x(d) + 5; })
-    .attr("y", barHeight / 2)
-    .attr("dy", ".35em")
-    .text(function(d) { return d; });
+  bar = barChart();
+  map.datum(datos)
+    .call(bar)
+  // bar.datum(datos);
+  // map.call(bar)
 
 }
 
@@ -342,6 +290,30 @@ function makeMap(data){
     edos.style("stroke", "black")
     .style("stroke-width", ".5");
   });
+  edos.on('click',function(d){
+    console.log(byState[d.properties.estado]);
+    var x = d3.scale.linear()
+        .domain([0, d3.max(byState[d.properties.estado])])
+        .range([0, 190]);
+
+    var xAxis = d3.select(".x.axis")
+            .scale(x)
+            .orient("bottom")
+            .ticks(5);
+
+    d3.selectAll(".bar").data(byState[d.properties.estado])
+      .transition()
+      .attr("width", x)
+      .attr("height", 20 - 2);
+
+    bar.data(byState[d.properties.estado])
+        .select("text")
+        .transition()
+        .attr("x", function(d) { console.log(d); return x(d) + 5; })
+        .attr("y", 20 / 2)
+        .attr("dy", ".35em")
+        .text(function(d) { return d; });
+  })
 
   edos.append("title")
     .text(function (d) {
