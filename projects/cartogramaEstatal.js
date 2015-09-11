@@ -188,9 +188,9 @@ function ready(error,topo,csv){
   //agregar grafica de barras dentro del svg del mapa de estados
   var datos = d3.values(sumPerYear);
   var barHeight = 20;
-  bar = barChart();
+  barChart = barChart();
   map.datum(datos)
-    .call(bar)
+    .call(barChart);
   // bar.datum(datos);
   // map.call(bar)
 
@@ -291,28 +291,10 @@ function makeMap(data){
     .style("stroke-width", ".5");
   });
   edos.on('click',function(d){
-    console.log(byState[d.properties.estado]);
-    var x = d3.scale.linear()
-        .domain([0, d3.max(byState[d.properties.estado])])
-        .range([0, 190]);
-
-    var xAxis = d3.select(".x.axis")
-            .scale(x)
-            .orient("bottom")
-            .ticks(5);
-
-    d3.selectAll(".bar").data(byState[d.properties.estado])
-      .transition()
-      .attr("width", x)
-      .attr("height", 20 - 2);
-
-    bar.data(byState[d.properties.estado])
-        .select("text")
-        .transition()
-        .attr("x", function(d) { console.log(d); return x(d) + 5; })
-        .attr("y", 20 / 2)
-        .attr("dy", ".35em")
-        .text(function(d) { return d; });
+    //console.log(byState[d.properties.estado]);
+    map.datum(byState[d.properties.estado]);
+    map.transition()
+      .call(barChart);
   })
 
   edos.append("title")
