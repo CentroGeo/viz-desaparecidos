@@ -354,8 +354,12 @@ function doAnimation(year){
           window.setTimeout(function(){
             d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",false);
             d3.select('#play-pause').classed("fa fa-play fa-stack-1x",true)
-            mySlider.value(2005)
-            doUpdate(2005,visibleRegion)
+            if(pause === false){
+              mySlider.value(2005)
+              doUpdate(2005)
+            };
+            animating = false;
+            pause = true;
           },1000)
 
         }
