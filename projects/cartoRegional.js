@@ -12,8 +12,10 @@ d3.selection.prototype.moveToFront = function() {
 };
 
 //Every year
-var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"]
-var mapRegions = ['noroeste','noreste','centro','pacifico']
+var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"];
+var mapRegions = ['noroeste','noreste','centro','pacifico'];
+var legendColors = ["#fcc383","#fc9f67","#f4794e","#e65338","#ce2a1d","#b30000"];
+var legend_labels = ["< 32", "32-64", "64-96", "96-128", "128-160","> 160"];
 var map = d3.select("#map");
 var region = map.append("g")
     .attr("id", "region")
@@ -292,6 +294,34 @@ function makeMap(data,regionVisible){
     .text(function (d) {
       return d.properties["NOMBRE"];
     });
+
+  //leyenda
+  var legend = map.selectAll("g.legend")
+  .data(legendColors)
+  .enter().append("g")
+  .attr("class", "legend")
+  .attr("transform", "translate(" + 580 + "," + -200 + ")");
+
+  var ls_w = 20, ls_h = 20;
+  var height = 380;
+  var width = 700;
+  legend.append("rect")
+  .attr("x", 20)
+  .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
+  .attr("width", ls_w)
+  .attr("height", ls_h)
+  .style("fill", function(d, i) { return d; })
+  .style("opacity", 0.8);
+
+  legend.append("text")
+    .attr("x",20)
+    .attr("y",height - (ls_h + 4.5)*legendColors.length)
+    .text("Población (miles de habitantes)")
+
+  legend.append("text")
+  .attr("x", 50)
+  .attr("y", function(d, i){ return height - (i*ls_h) - ls_h - 4;})
+  .text(function(d, i){ return legend_labels[i]; });
 }
 
 function doAnimation(year){
