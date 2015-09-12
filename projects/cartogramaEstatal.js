@@ -188,7 +188,8 @@ function ready(error,topo,csv){
   //agregar grafica de barras dentro del svg del mapa de estados
   var datos = d3.values(sumPerYear);
   var barHeight = 20;
-  barChart = barChart();
+  barChart = barChart()
+    .yDomain(years);
   map.datum(datos)
     .call(barChart);
   // bar.datum(datos);
