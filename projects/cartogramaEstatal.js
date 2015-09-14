@@ -13,8 +13,8 @@ d3.selection.prototype.moveToFront = function() {
 
 //Every year
 var years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014"]
-var legendColors = ["#fcc383","#fc9f67","#f4794e","#e65338","#ce2a1d","#b30000"];
-var legend_labels = ["< 32", "32-64", "64-96", "96-128", "128-160","> 160"];
+var legendColors = ["#fcc383","#fc9f67","#f4794e","#e65338","#ce2a1d","#b30000","#7f2704"];
+var legend_labels = ["< 2.71", "2.71-4.79","4.79-6.87", "6.87-8.94", "8.94-11.02", "11.02-13.09","> 13.09"];
 var map = d3.select("#map");
 var edos = map.append("g")
     .attr("id", "edos")
@@ -27,7 +27,7 @@ var proj =  d3.geo.mercator()
 
 var quantize = d3.scale.quantize()
   .domain([0, 16000000])
-  .range(d3.range(5).map(function(i) { return "q" + i; }));
+  .range(d3.range(6).map(function(i) { return "q" + i; }));
 
 var topology,
     geometries,
@@ -308,7 +308,7 @@ function makeMap(data){
     .data(legendColors)
     .enter().append("g")
     .attr("class", "legend")
-    .attr("transform", "translate(" + 550 + "," + -200 + ")");
+    .attr("transform", "translate(" + 530 + "," + -175 + ")");
 
     var ls_w = 20, ls_h = 20;
     var height = 380;
@@ -324,7 +324,7 @@ function makeMap(data){
     legend.append("text")
       .attr("x",20)
       .attr("y",height - (ls_h + 4.5)*legendColors.length)
-      .text("Población (miles de habitantes)")
+      .text("Población (millones de habitantes)")
 
     legend.append("text")
     .attr("x", 50)
