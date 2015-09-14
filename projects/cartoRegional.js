@@ -316,24 +316,36 @@ function makeMap(data,regionVisible){
 
   // darle a los estados borde de color on hover
   region.on('mouseover', function(d,i){
-    region.style("stroke-width", function(d,j){
-      return j != i ? ".5" : 2.5;
+    region.classed("hover", function(d,j){
+      return j != i ? "" : "true";
     })
     var sel = d3.select(this);
     sel.moveToFront();
   });
   region.on('mouseout', function(d,i){
-    region.style("stroke", "black")
-    .style("stroke-width", ".5");
+    region.classed("hover",false)
   });
 
-  region.on('click',function(d){
-    //console.log(byState[d.properties.estado]);
+  region.on('click',function(d,i){
+    var sel = d3.select(this);
+    sel.moveToFront();
+    region.classed("selected", function(d,j){
+      if (j != i) {
+        return false;
+      }else{
+        if (sel.classed("selected")){
+          return false;
+        }else{
+          return true;
+        }
+      }
+    });
     barChart.title(d.properties["NOMBRE"])
     map.datum(byRegion[topoIndex][d.properties["NOMBRE"]]);
     map.transition()
       .call(barChart);
-  })
+  });
+
   region.append("title")
     .text(function (d) {
       return d.properties["NOMBRE"];
