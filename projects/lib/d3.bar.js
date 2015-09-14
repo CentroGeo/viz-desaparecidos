@@ -1,6 +1,8 @@
 function barChart(){
-  var barHeight = 20;
-  var yDomain;
+  var barHeight = 20,
+      yDomain,
+      title = "Agrega un título";
+
 
   function plot(selection){
 
@@ -35,14 +37,14 @@ function barChart(){
             .attr("id", "barChart");
         barGroup.append("text")
             .attr("class", "title")
-            .attr("x", 35)
+            .attr("x", 20)
             .attr("y", -10)
-            .text("Totales");
+            .text(title);
       } else {
         barGroup = d3.select("#barChart");
       }
 
-      //barGroup = d3.select("#barChart")
+      d3.select("#barChart").selectAll(".title").text(title)
       barGroup.attr("width", 200)
           .attr("height", barHeight * data.length)
           .attr("transform", "translate(90, 175)");
@@ -88,6 +90,13 @@ function barChart(){
     if (!arguments.length) return yDomain;
     yDomain = value;
     return plot;
-  }
+  };
+
+  plot.title = function(value) {
+      if (!arguments.length) return title;
+      title = value;
+      return plot;
+    };
+
   return plot;
 }

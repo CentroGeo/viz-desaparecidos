@@ -91,21 +91,6 @@ function main(){
     queue()
     .defer(d3.json, 'data/des_estado.json')
     .defer(d3.csv, 'data/desaparecidos_estatal.csv', function(d) {
-      if (d.estado === 'Baja California Sur'){
-        d.estado = 'BCS';
-      } else if (d.estado === 'Baja California'){
-        d.estado = 'BC';
-      } else if (d.estado === 'San Luis Potosí'){
-        d.estado = 'SLP';
-      } else if (d.estado === 'Distrito Federal'){
-        d.estado = 'DF';
-      } else if (d.estado === 'Nuevo León'){
-        d.estado = 'Nuevo León';
-      } else if (d.estado === 'Quintana Roo'){
-        d.estado = 'Quintana Roo';
-      } else {
-        d.estado = d.estado.split(' ')[0];
-      }
       years.forEach(function(y){
         d[y] = +d[y]
       })
@@ -189,7 +174,8 @@ function ready(error,topo,csv){
   var datos = d3.values(sumPerYear);
   var barHeight = 20;
   barChart = barChart()
-    .yDomain(years);
+    .yDomain(years)
+    .title("Totales por año");
   map.datum(datos)
     .call(barChart);
   // bar.datum(datos);
@@ -293,6 +279,7 @@ function makeMap(data){
   });
   edos.on('click',function(d){
     //console.log(byState[d.properties.estado]);
+    barChart.title(d.properties.estado)
     map.datum(byState[d.properties.estado]);
     map.transition()
       .call(barChart);
