@@ -267,18 +267,32 @@ function makeMap(data){
 
   // darle a los estados borde de color on hover
   edos.on('mouseover', function(d,i){
-    edos.style("stroke-width", function(d,j){
-      return j != i ? ".5" : 2.5;
+    edos.classed("hover", function(d,j){
+      return j != i ? "" : "true";
     })
     var sel = d3.select(this);
     sel.moveToFront();
   });
   edos.on('mouseout', function(d,i){
-    edos.style("stroke", "black")
-    .style("stroke-width", ".5");
+    edos.classed("hover",false)
   });
-  edos.on('click',function(d){
+  edos.on('click',function(d,i){
     //console.log(byState[d.properties.estado]);
+    console.log(d3.select(this));
+    edos.classed("selected", function(d,j){
+      if (j != i) {
+        return false;
+      }else{
+        if (d3.select(this).classed("selected")){
+          return false;
+        }else{
+          return true;
+        }
+      }
+      //return j != i ? "" : "true";
+    })
+    var sel = d3.select(this);
+    sel.moveToFront();
     barChart.title(d.properties.estado)
     map.datum(byState[d.properties.estado]);
     map.transition()
