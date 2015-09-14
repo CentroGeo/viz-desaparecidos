@@ -125,7 +125,11 @@ function main(){
           }
           var topoIndex = mapRegions.indexOf(visibleRegion)
           makeMap(topologies[topoIndex],visibleRegion);
-          mySlider.value(2005)
+          mySlider.value(2005);
+          map.datum(d3.values(yearlyTotals[topoIndex]));
+          barChart.title("Totales por año")
+          map.transition()
+            .call(barChart);
         });
 
     d3.select('#play')
@@ -156,19 +160,42 @@ function ready(error,topos,csvs){
   //arguments, que nos regresa todos los argumentos de la función.
   if (error) {return error;}
   //Compute max values for each year and store it in maxPerYear
-  arguments = [].slice.call(arguments)//esta linea convierte al objeto arguments en un array normal
-  topologies = arguments.slice(1,5)//aquí guardamos las topologías
-  csvs = arguments.slice(5)//aquí guardamos los datos
-  yearlyMaxs = []
-  yearlyMaxRates = []
+  arguments = [].slice.call(arguments);//esta linea convierte al objeto arguments en un array normal
+  topologies = arguments.slice(1,5);//aquí guardamos las topologías
+  csvs = arguments.slice(5);//aquí guardamos los datos
+  yearlyMaxs = [];
+  yearlyMaxRates = [];
+  yearlyTotals = [];
+  byRegion = [];
   csvs.forEach(function(region){
     var r = computeMax(region)
     yearlyMaxs.push(r[0]);
     yearlyMaxRates.push(r[1]);
+    yearlyTotals.push(r[2]);
+    //nest values under muns key
+    var byMun = {};
+    var mun = d3.nest().key(function(d){return d["nom_mun"]}).entries(region);
+    mun.forEach(function(d){
+      var byYear = [];
+      years.forEach(function(y){
+        byYear.push(+d.values[0][y]);
+      });
+      byMun[d.key] = byYear;
+    });
+    byRegion.push(byMun);
   });
+
   //make map
   var topoIndex = mapRegions.indexOf(visibleRegion)
   makeMap(topologies[topoIndex],visibleRegion);
+  //agregar grafica de barras dentro del svg del mapa:
+  var datos = d3.values(yearlyTotals[topoIndex]);
+  var barHeight = 20;
+  barChart = barChart()
+    .yDomain(years)
+    .title("Totales por año");
+  map.datum(datos)
+    .call(barChart);
 }
 
 //Computes updated features and draws the new cartogram
@@ -222,11 +249,21 @@ function doUpdate(year,visibleRegion) {
         .call(endAll, function () {
           carto_features = undefined;
         });
+
+    // estilar barras conforme avance el anho
+    d3.selectAll(".bar").each(function(d,i){
+        d3.select(this).attr("class", "bar");
+      if (this.id.split('_')[1] == year) {
+        d3.select(this).attr("class", "bar selected");
+      }
+    })
 }
 
 
 //Draws original map
 function makeMap(data,regionVisible){
+
+  var topoIndex = mapRegions.indexOf(visibleRegion)
 
   if(regionVisible === 'noroeste'){
     var center = [-107.1, 27.57];
@@ -290,6 +327,13 @@ function makeMap(data,regionVisible){
     .style("stroke-width", ".5");
   });
 
+  region.on('click',function(d){
+    //console.log(byState[d.properties.estado]);
+    barChart.title(d.properties["NOMBRE"])
+    map.datum(byRegion[topoIndex][d.properties["NOMBRE"]]);
+    map.transition()
+      .call(barChart);
+  })
   region.append("title")
     .text(function (d) {
       return d.properties["NOMBRE"];
@@ -393,12 +437,21 @@ function doAnimation(year){
           },1000)
 
         }
-      });
+    });
+    // estilar barras conforme avance el anho
+    d3.selectAll(".bar").each(function(d,i){
+        d3.select(this).attr("class", "bar");
+      if (this.id.split('_')[1] == year) {
+        d3.select(this).attr("class", "bar selected");
+      }
+    })
 }
 
 function computeMax(data){
-  maxPerYear = {}
-  maxRatePerYear = {}
+  //sumPerYear[y] = d3.sum(thisYear);
+  maxPerYear = {};
+  maxRatePerYear = {};
+  sumPerYear = {};
   years.forEach(function(y){
     thisYear = [];
     thisRate = [];
@@ -409,6 +462,7 @@ function computeMax(data){
     })
     maxPerYear[y] = d3.max(thisYear);
     maxRatePerYear[y] = d3.max(thisRate);
+    sumPerYear[y] = d3.sum(thisYear)
   });
-  return [maxPerYear,maxRatePerYear];
+  return [maxPerYear,maxRatePerYear,sumPerYear];
 }
