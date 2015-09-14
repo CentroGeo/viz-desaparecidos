@@ -276,7 +276,7 @@ function makeMap(data,regionVisible){
   }else if (regionVisible === 'centro') {
     var center = [-98.62, 19.42];
     var scale = 5000;
-    var translate = [420,200];
+    var translate = [400,150];
   }else {
     var center = [-102.11, 19.17];
     var scale = 3000;
