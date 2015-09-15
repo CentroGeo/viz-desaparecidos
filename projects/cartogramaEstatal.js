@@ -284,8 +284,16 @@ function makeMap(data){
         return false;
       }else{
         if (d3.select(this).classed("selected")){
+          barChart.title("Totales por año")
+          map.datum(d3.values(sumPerYear));
+          map.transition()
+            .call(barChart);
           return false;
         }else{
+          barChart.title(d.properties.estado)
+          map.datum(byState[d.properties.estado]);
+          map.transition()
+            .call(barChart);
           return true;
         }
       }
@@ -293,10 +301,6 @@ function makeMap(data){
     })
     var sel = d3.select(this);
     sel.moveToFront();
-    barChart.title(d.properties.estado)
-    map.datum(byState[d.properties.estado]);
-    map.transition()
-      .call(barChart);
   })
 
   edos.append("title")

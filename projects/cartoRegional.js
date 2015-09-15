@@ -334,16 +334,21 @@ function makeMap(data,regionVisible){
         return false;
       }else{
         if (sel.classed("selected")){
+          barChart.title("Totales por año");
+          console.log(d3.values(yearlyTotals[topoIndex]));
+          map.datum(d3.values(yearlyTotals[topoIndex]));
+          map.transition()
+            .call(barChart);
           return false;
         }else{
+          barChart.title(d.properties["NOMBRE"])
+          map.datum(byRegion[topoIndex][d.properties["NOMBRE"]]);
+          map.transition()
+            .call(barChart);
           return true;
         }
       }
     });
-    barChart.title(d.properties["NOMBRE"])
-    map.datum(byRegion[topoIndex][d.properties["NOMBRE"]]);
-    map.transition()
-      .call(barChart);
   });
 
   region.append("title")
