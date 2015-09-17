@@ -277,8 +277,6 @@ function makeMap(data){
     edos.classed("hover",false)
   });
   edos.on('click',function(d,i){
-    //console.log(byState[d.properties.estado]);
-    console.log(d3.select(this));
     edos.classed("selected", function(d,j){
       if (j != i) {
         return false;
@@ -309,6 +307,12 @@ function makeMap(data){
     });
 
     //leyenda
+    map.append("text")
+      .attr("x", 515)
+      .attr("y", 35)
+      .attr("class", "title")
+      .text("Población (millones de habitantes)");
+
     var legend = map.selectAll("g.legend")
     .data(legendColors)
     .enter().append("g")
@@ -318,6 +322,7 @@ function makeMap(data){
     var ls_w = 20, ls_h = 20;
     var height = 380;
     var width = 700;
+
     legend.append("rect")
     .attr("x", 20)
     .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
@@ -325,11 +330,6 @@ function makeMap(data){
     .attr("height", ls_h)
     .style("fill", function(d, i) { return d; })
     .style("opacity", 0.8);
-
-    legend.append("text")
-      .attr("x",20)
-      .attr("y",height - (ls_h + 4.5)*legendColors.length)
-      .text("Población (millones de habitantes)")
 
     legend.append("text")
     .attr("x", 50)
