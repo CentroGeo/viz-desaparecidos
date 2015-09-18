@@ -1,4 +1,11 @@
 /*
+    Copyright (c) 2015, Pablo López, Rodrigo Tapia CentroGeo
+    centrogeo.org.mx
+    Código: https://github.com/CentroGeo/viz-desaparecidos
+    GPL license: https://github.com/CentroGeo/viz-desaparecidos/blob/master/LICENSE
+*/
+
+/*
 ##############################
 Variables y funciones globales
 ##############################
