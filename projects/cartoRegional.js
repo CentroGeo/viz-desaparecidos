@@ -364,6 +364,12 @@ function makeMap(data,regionVisible){
     });
 
   //leyenda
+  map.append("text")
+    .attr("x", 540)
+    .attr("y", 30)
+    .attr("class", "title")
+    .text("Población (miles de habitantes)");
+
   var legend = map.selectAll("g.legend")
   .data(legendColors)
   .enter().append("g")
@@ -380,11 +386,6 @@ function makeMap(data,regionVisible){
   .attr("height", ls_h)
   .style("fill", function(d, i) { return d; })
   .style("opacity", 0.8);
-
-  legend.append("text")
-    .attr("x",20)
-    .attr("y",height - (ls_h + 4.5)*legendColors.length)
-    .text("Población (miles de habitantes)")
 
   legend.append("text")
   .attr("x", 50)
