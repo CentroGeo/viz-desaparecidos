@@ -1,6 +1,6 @@
 
 /*
-    Copyright (c) 2015, Pablo López, Rodrigo Tapia CentroGeo
+    Copyright (c) 2015, Pablo Lopez, Rodrigo Tapia CentroGeo
     centrogeo.org.mx
     Código: https://github.com/CentroGeo/viz-desaparecidos
     GPL license: https://github.com/CentroGeo/viz-desaparecidos/blob/master/LICENSE
@@ -130,6 +130,17 @@ function main(){
         d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",false);
         d3.select('#play-pause').classed("fa fa-play fa-stack-1x",true);
       }
+    });
+
+    $( "#clickme" ).click(function() {
+      $( "#help" ).show( "slow", function() {
+        // Animation complete.
+      });
+    });
+    $("#close").click(function() {
+      $( "#help" ).hide( "slow", function() {
+        // Animation complete.
+      });
     });
 }
 window.onload = main

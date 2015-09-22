@@ -188,6 +188,32 @@
   .x.axis path, .y.axis path{
     display: none;
   }
+  #clickme{
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  #help{
+    display: none;
+    position: relative;
+    top: -475px;
+    height: 600px;
+    width: 720px;
+    background: rgba(31, 31, 46, .8);
+    color:#E6E6E6;
+  }
+  #help > p{
+    padding-left: 30;
+    padding-top: 25;
+  }
+  #close {
+      float:right;
+      display:inline-block;
+      padding:2px 5px;
+      background:#ccc;
+      cursor: pointer;
+  }
+
   </style>
 </head>
 <body>
@@ -201,6 +227,7 @@
           <input type="radio" name="cartogram-value" value="tasa" class="radio" id="tasa"/>
           <label for="tasa">Tasa de desaparecidos</label>
         </div>
+        <i class="fa fa-question-circle fa-2x" id="clickme"></i>
         <br>
         <div class="region-radio">
           <div class="divRadio">
@@ -230,8 +257,27 @@
       <div id="slider"></div>
     </div>
   </div>
+  <div id="help">
+    <span id="close">x</span>
+    <p>
+      Los botones de la barra superior controlan la variable que se usa para
+      hacer los cartogramas: cantidad para usar el total de desaparecidos por municipio y tasa para usar
+      la tasa de desaparecidos por cada 100,000 habitantes.
 
-
+      Abajo de ellos están los botones para controlar la región que se despliega
+    </p>
+    <p>
+      Si pones el cursor sobre un municipio se desplegará el nombre del mismo y, en caso de que estés en el cartograma para un año en particular, se desplegará también el valor de la variable.
+    </p>
+    <p>
+      Al hacer click sobre un municipio, la gráfica de barras se actualiza con los datos para ese municipio en específico, al volver a hacer click sobre el estado, la gráfica regresa a mostrar los totales.
+    </p>
+    <p>
+      En la barra de abajo, puedes deslizar el indicador de año a la posición que desees para desplegar el cartograma del año que selecciones. El botón de play inicia una animación a partir de la posición del
+      indicador de año.
+    </p>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="lib/d3.v3.min.js"></script>
   <script src="lib/queue.v1.min.js"></script>
   <script src="lib/d3-cartogram/lib/colorbrewer.js"></script>

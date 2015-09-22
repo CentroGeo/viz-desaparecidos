@@ -153,10 +153,17 @@ function main(){
         d3.select('#play-pause').classed("fa fa-pause fa-stack-1x",false);
         d3.select('#play-pause').classed("fa fa-play fa-stack-1x",true);
       }
-
-
     });
-
+    $( "#clickme" ).click(function() {
+      $( "#help" ).show( "slow", function() {
+        // Animation complete.
+      });
+    });
+    $("#close").click(function() {
+      $( "#help" ).hide( "slow", function() {
+        // Animation complete.
+      });
+    });
 }
 window.onload = main
 
